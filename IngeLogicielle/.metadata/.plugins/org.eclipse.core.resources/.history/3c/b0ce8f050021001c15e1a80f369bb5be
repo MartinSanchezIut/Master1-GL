@@ -1,0 +1,27 @@
+package main.dico;
+
+public class UtilisationDictionaire {
+
+	public static void main(String[] args) {
+
+		IDictionary dic = new OrderedDictionary();
+		
+		System.out.println("main: " + dic.isEmpty());
+		System.out.println("main: " + dic.size());
+		
+		dic.put(new String("popo"), new String("caca"));
+		dic.put(new String("pipi"), new String("cccc"));
+		
+		System.out.println("main: " + dic.isEmpty());
+		System.out.println("main: " + dic.size());
+		
+		try {
+			System.out.println("main: " + dic.get("popo"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		System.out.println("main: " + dic.size());
+		
+	}
+
+}

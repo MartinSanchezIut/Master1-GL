@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.rmi.registry.Registry"/>
+<fullyQualifiedTypeName name="java.rmi.registry.LocateRegistry"/>
+<fullyQualifiedTypeName name="server.classes.AnimalImpl"/>
+<fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+<fullyQualifiedTypeName name="server.classes.DossierSuiviImpl"/>
+<fullyQualifiedTypeName name="server.common.DossierSuivi"/>
+<fullyQualifiedTypeName name="javax.lang.model.type.UnionType"/>
+<fullyQualifiedTypeName name="server.classes.EspeceImpl"/>
+<fullyQualifiedTypeName name="server.common.Espece"/>
+<fullyQualifiedTypeName name="java.rmi.Remote"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
+<fullyQualifiedTypeName name="server.common.Animal"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="server.classes.CabinetVetoImpl"/>
+<fullyQualifiedTypeName name="server.common.CabinetVeto"/>
+<fullyQualifiedTypeName name="java.rmi.RMISecurityManager"/>
+<fullyQualifiedTypeName name="java.security.Policy"/>
+</qualifiedTypeNameHistroy>

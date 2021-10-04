@@ -1,0 +1,28 @@
+package server.classes;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+import server.common.Espece;
+
+public class EspeceImpl extends UnicastRemoteObject implements Espece{
+
+	private int age;
+	private String name;
+	protected EspeceImpl() throws RemoteException {
+		super();
+		age = a;
+		name = n;
+	}
+
+	@Override
+	public int getAgeMoy() {
+		return 0;
+	}
+
+	@Override
+	public String label() {
+		return null;
+	}
+
+}

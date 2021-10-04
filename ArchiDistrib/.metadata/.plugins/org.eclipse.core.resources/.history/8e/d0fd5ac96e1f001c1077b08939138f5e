@@ -1,0 +1,27 @@
+package server.classes;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
+import server.common.DossierSuivi;
+
+public class DossierSuiviImpl extends UnicastRemoteObject implements DossierSuivi{
+
+	private String s;
+	private String sa;
+	protected DossierSuiviImpl() throws RemoteException {
+		super();
+	}
+
+	@Override
+	public DossierSuivi getDossierSuivi() {
+		System.out.println("Envoie du dossier");
+		return this;
+	}
+
+	@Override
+	public DossierSuivi modify(String s, String sa) {
+		System.out.println("Modif du dossier " + s + "  " + sa);
+		return this;
+	}
+}

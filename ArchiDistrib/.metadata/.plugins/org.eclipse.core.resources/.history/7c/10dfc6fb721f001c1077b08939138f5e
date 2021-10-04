@@ -1,0 +1,30 @@
+package server.classes;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
+
+import server.common.Animal;
+import server.common.CabinetVeto;
+
+public class CabinetVetoImpl extends UnicastRemoteObject implements CabinetVeto{
+
+	protected CabinetVetoImpl() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public List<Animal> getPatients() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Animal get(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+
+}

@@ -1,0 +1,16 @@
+package main.dico;
+
+public class UtilisationDictionaire {
+
+	public static void main(String[] args) {
+
+		IDictionary dic = new OrderedDictionary();
+		
+		System.out.println(dic.isEmpty());
+		System.out.println(dic.size());
+		
+		dic.put(new String("popo"), new String("caca"));
+		
+	}
+
+}

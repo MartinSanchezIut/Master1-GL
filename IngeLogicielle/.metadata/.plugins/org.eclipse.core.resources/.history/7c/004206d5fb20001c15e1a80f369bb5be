@@ -1,0 +1,47 @@
+package main.dico;
+
+
+public abstract class AbstractDictionary implements IDictionary{
+	
+	Object[] keys; 
+	Object[] values;
+	
+	public IDictionary put(Object key, Object value) {
+		if (this.containsKey(key)) {
+			values[this.indexOf(key)] = value;
+		}else {
+			values[this.newIndexOf(key)] = value;
+		}
+		return this;
+	}
+	
+	public Object get(Object key) {
+		int i = this.indexOf(key);
+		if (i != -1) {
+			return values[i];
+		}else {
+			throw new Exception("Cette clé n'est pas dans le dico");
+		}
+		
+		/*if (containsKey(key)) {
+			return values[indexOf(key)];
+		}else {
+			return null;
+		}*/
+	}
+
+	public boolean isEmpty() {
+		return keys.length == 0;
+	}
+	
+	public boolean containsKey(Object key) {
+		return indexOf(key) > 0;
+	}
+
+	public int size() {
+		return keys.length;
+	}
+	
+	abstract int indexOf(Object key) ;
+	abstract int newIndexOf(Object key) ;
+}

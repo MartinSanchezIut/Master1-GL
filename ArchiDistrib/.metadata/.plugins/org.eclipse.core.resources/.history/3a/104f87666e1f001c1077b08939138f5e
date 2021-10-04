@@ -1,0 +1,10 @@
+package server.common;
+
+import java.rmi.Remote;
+
+public interface DossierSuivi extends Remote{
+	
+	
+	DossierSuivi getDossierSuivi();
+
+}

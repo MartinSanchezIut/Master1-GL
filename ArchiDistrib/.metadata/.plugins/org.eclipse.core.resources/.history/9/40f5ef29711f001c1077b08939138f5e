@@ -1,0 +1,9 @@
+package server.common;
+
+import java.rmi.Remote;
+
+public interface Espece extends Remote{
+	
+	int getAgeMoy();
+	String label();
+}

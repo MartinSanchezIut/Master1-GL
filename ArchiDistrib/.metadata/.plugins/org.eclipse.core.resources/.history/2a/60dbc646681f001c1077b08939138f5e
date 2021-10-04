@@ -1,0 +1,6 @@
+package server.common;
+
+public interface Animal {
+
+	int getAge();
+}

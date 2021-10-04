@@ -1,0 +1,11 @@
+package server.common;
+
+public interface Animal implements Remote{
+
+	String getNom();
+	String getNomMaitre();
+	String getEspece();
+	String getRace();
+	
+	String toString();
+}

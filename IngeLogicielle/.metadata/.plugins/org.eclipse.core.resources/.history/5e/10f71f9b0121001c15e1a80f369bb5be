@@ -1,0 +1,24 @@
+package main.dico;
+
+public class FastDictionary extends AbstractDictionary{
+
+	public FastDictionary() {
+		keys = new Object[0];
+		values = new Object[0];
+	}
+	
+	@Override
+	int indexOf(Object key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	int newIndexOf(Object key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
+}

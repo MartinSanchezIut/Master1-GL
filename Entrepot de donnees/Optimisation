@@ -1,0 +1,97 @@
+TP Entrepôt de données
+
+1-
+
+1. Recupérer le nom des étudiants inscrit pédagogiquement a "EDBD"
+2. 
+
+SELECT NOM
+FROM ETUDIANTS E ,MODULES M ,IP I
+
+WHERE E.IDE = I.IDE 
+AND M.IDM=I.IDM
+AND INTITULE = “EDBD” ;
+
+
+20 Blocks EDUTIANT
+8  Blocks Modules
+450Blocks IP
+6  Blocks formations
+25 Blocks IA
+
+10% IP -> EDBD
+
+1) (8 * 450)E + 450S + (450E * 20E) + 450S + 450E + 45S = 13995
+2) 8E + 1S + 450E + 450S + 9000E + 450S = 10359
+3) 160E + 20S + 9000E + 450S + 450E + 45S = 10125
+
+
+3. Le n° 3 car moins couteux
+
+2- 
+1. Le responsable d'un module auquel un DUPOND est inscrit et don't l'intitulé commence par HMIN%
+(Mail virgile)
+3e car selection plus basse dans l'arbre
+
+
+2. Le nom des etudiants en MASTER AIGLE et qui suivent "EDBD"
+
+
+
+3. L'intitulé des module ou le plus jeune etudiant est inscrit
+
+
+Partie 2:
+set autotrace on
+q2: select nom from ville where insee = '34172';
+
+
+q3:
+ALTER TABLE ville
+ADD PRIMARY KEY (insee); 
+
+q4:
+Au lieu de faire toute la table il passe que les clé primaires
+
+
+q5:
+select d.nom from departement d, ville v where v.dep = d.id and v.insee = '34172';
+
+q6:
+select v.nom, d.nom from departement d, ville v where v.dep = d.id;
+//select d.nom from departement d, ville v where v.dep = d.id group by d.nom ;
+
+q7:
+select v.nom, d.nom from ville v, departement d where v.dep = d.id and d.id = 91;   // MARCHE PAS ?
+select v.nom, d.nom from ville v, departement d where v.dep = d.id and d.id = '91';
+
+q8:
+select /*+ use_nl(ville departement)*/ v.nom ,d.nom from ville v , departement d where v.dep = d.id; 
+
+Il a fait des hash join puis 2 acces complet au table
+
+q9:
+create index idx_dep_ville on ville (dep);
+select /*+ use_nl(ville departement)*/ v.nom ,d.nom from ville v , departement d where v.dep = d.id; 
+
+
+q10:
+select /*+ use_nl(ville departement)*/ v.nom ,d.nom , r.nom from ville v , departement d , region r where v.dep = d.id and d.reg = r.id; 
+
+q11:
+create index idx_dep_reg on departement (reg);
+
+Departement n'est pas parcouru entierement
+
+q12:
+select v.nom ,d.nom , r.nom from ville v , departement d , region r where v.dep = d.id and d.reg = r.id and r.id='91'; 
+
+
+
+
+
+
+
+
+
+

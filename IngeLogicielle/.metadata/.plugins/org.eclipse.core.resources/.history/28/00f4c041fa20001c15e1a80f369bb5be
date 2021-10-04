@@ -1,0 +1,44 @@
+package main.dico;
+
+public class OrderedDictionary extends AbstractDictionary{
+	
+	
+	public OrderedDictionary() {
+		keys = new Object[0];
+		values = new Object[0];
+		System.out.println(keys.length);
+		System.out.println(values.length);
+	}
+	
+	@Override
+	int indexOf(Object key) {
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i].equals(key)) {
+				System.out.println(i);
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	@Override
+	int newIndexOf(Object key) {
+		Object[] newKeys = new Object[keys.length+1] ; 
+		Object[] newValues = new Object[values.length+1] ; 
+
+		for (int i = 0; i < keys.length; i++) {
+			newKeys[i] = keys[i];
+		}
+		for (int i = 0; i < values.length; i++) {
+			newValues[i] = values[i];
+		}
+			
+		keys = newKeys;
+		values = newValues;
+		
+		System.out.println("ef" + keys.length);
+		System.out.println("is" + values.length);
+		return newKeys.length-1;
+	}
+
+}

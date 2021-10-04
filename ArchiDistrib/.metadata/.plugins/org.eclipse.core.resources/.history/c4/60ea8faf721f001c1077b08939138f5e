@@ -1,0 +1,10 @@
+package server.common;
+
+import java.awt.List;
+import java.rmi.Remote;
+
+public interface CabinetVeto extends Remote{
+	
+	List<> getPatients() ;
+
+}

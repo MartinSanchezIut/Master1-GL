@@ -1,0 +1,79 @@
+Partie 1:
+
+I-
+1) Transactionelle, ces données ne servirons pas a augmenter les nombre de séances pour logan par exemple.
+2) Analytique, cette information peut servir a ameiliorer l'expérience des clients.
+3) Analitique, On peut reperer des tendances, des films les plus vues
+4) Analytique, on va voir quels craineaux sont les plus afluents
+5) Analytique, car va permettre de faire des analyses
+
+II-
+1) IMAGE
+2) On pourrai ajouter une table "Commentaires" relié a produit, date et utilisateurs pour former une constélation
+3)
+SELECT Date.jour, COUNT(ventes.id)
+FROM Ventes, Date
+WHERE Ventes.dateID = date.tempsID
+GROUP BY Date.jour
+
+select produit.nom count(ventes.id) 
+from vente , produit 
+where produit.id = ventes.id_produit
+group by produit.nom
+
+
+INSERT INTO Ventes
+VALUES (‘utilisateur1’,‘produit1’,‘date1’,‘promo1’)
+
+III-
+1) 
+select id_produit, sum(montant_journalier)
+from ventes_monoprix
+group by id_produit;
+
+select id_produit, sum(montant_journalier)
+from ventes_monoprix
+group by ROLLUP(id_produit) ;
+
+select id_produit, sum(montant_journalier)
+from ventes_monoprix
+group by cube(id_produit);
+
+
+2)
+select id_ville, id_produit, sum(montant_journalier)
+from ventes_monoprix
+group by id_ville, id_produit;
+
+3)
+select id_date, id_produit, sum(montant_journalier)
+from ventes_monoprix
+group by id_date, id_produit;
+
+4)
+
+select id_date, id_magasin, avg(montant_journalier)
+from ventes_monoprix
+group by id_date, id_magasin;
+
+5)
+select id_ville, id_date, sum(montant_journalier)
+from ventes_monoprix
+group by id_ville, id_date;
+
+6)
+
+select id_produit, id_ville,id_date, sum(montant_journalier)
+from ventes_monoprix
+group by id_produit, id_ville,id_date;
+
+
+
+
+
+
+
+
+
+
+
