@@ -13,6 +13,9 @@ public class Client {
 	
 	public static void main(String[] args) {
 
+		ObjectInCodebase o = new ObjectInCodebase();
+		
+		
 		String host = (args.length < 1) ? null : args[0];
 		try {
 			Registry registry = LocateRegistry.getRegistry(host);

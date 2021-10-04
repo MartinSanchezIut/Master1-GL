@@ -3,6 +3,7 @@ package server;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import client.ObjectInCodebase;
 import server.classes.AnimalImpl;
 import server.classes.CabinetVetoImpl;
 import server.classes.EspeceImpl;
@@ -13,12 +14,16 @@ public class Server {
 	
 	public static void main(String args[]) {
 		try {
-			
-			 if (System.getSecurityManager() == null) {
+	        System.setProperty("java.rmi.server.codebase", "file:/home/e20180002097/Bureau/Master/ArchiDistrib/TP1-RMI/bin");
+
+	        //System.setProperty("java.security.Policy", "prop.policy");
+	        
+/*			 if (System.getSecurityManager() == null) {
 			        System.setSecurityManager(new SecurityManager());
-			        System.setProperty("java.security.Policy", "prop.policy");
-			 }
+			 }*/
 			 
+	        ObjectInCodebase o = new ObjectInCodebase();
+	        
 			 
 			CabinetVetoImpl vet = new CabinetVetoImpl();
 			
