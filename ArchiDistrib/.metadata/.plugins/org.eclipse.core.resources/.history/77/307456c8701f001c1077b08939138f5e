@@ -1,5 +1,0 @@
-package server.classes;
-
-public class EspeceImpl extends Unicast{
-
-}

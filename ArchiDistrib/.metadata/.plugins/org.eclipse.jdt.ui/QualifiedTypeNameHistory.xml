@@ -19,4 +19,6 @@
 <fullyQualifiedTypeName name="server.common.CabinetVeto"/>
 <fullyQualifiedTypeName name="java.rmi.RMISecurityManager"/>
 <fullyQualifiedTypeName name="java.security.Policy"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="client.ObjectInCodebase"/>
 </qualifiedTypeNameHistroy>

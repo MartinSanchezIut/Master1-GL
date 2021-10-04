@@ -1,5 +1,0 @@
-package server.common;
-
-public interface CabinetVeto extends Remote{
-
-}

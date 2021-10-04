@@ -1,5 +1,0 @@
-package server.common;
-
-public interface Espece {
-
-}

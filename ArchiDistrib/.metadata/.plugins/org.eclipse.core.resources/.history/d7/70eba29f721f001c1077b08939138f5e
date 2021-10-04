@@ -1,9 +1,0 @@
-package server.common;
-
-import java.rmi.Remote;
-
-public interface CabinetVeto extends Remote{
-	
-	
-
-}
