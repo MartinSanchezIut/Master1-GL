@@ -1,0 +1,11 @@
+T__0=1
+T__1=2
+Integer=3
+Bool=4
+Number=5
+Alphabet=6
+WS=7
+'-'=1
+'array of'=2
+'integer'=3
+'boolean'=4
