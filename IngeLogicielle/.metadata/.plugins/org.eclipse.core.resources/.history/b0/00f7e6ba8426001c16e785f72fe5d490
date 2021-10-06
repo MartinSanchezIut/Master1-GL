@@ -1,0 +1,65 @@
+package main.dico;
+
+public class FastDictionary extends AbstractDictionary{
+
+	public FastDictionary() {
+		keys = new Object[0];
+		values = new Object[0];
+	}
+	public FastDictionary(int n) {
+		keys = new Object[n];
+		values = new Object[n];
+	}
+	
+	@Override
+	public int size() {
+		int taille = 0;
+		for (int i = 0; i < keys.length; i++) {
+			if (keys[i] != null) {
+				taille++;
+			}
+		}
+		return taille;
+	}
+	
+	boolean mustGrow() {
+		float i = this.size();
+		float j = keys.length;
+		if (j == 0)
+			return true;
+		else
+			return ((i / j) > 0.7);
+	}
+
+	public void grow() {
+		Object[] oldKeys = keys;
+		Object[] oldValues = values;
+		keys = new Object[oldKeys.length + 5];
+		values = new Object[oldKeys.length + 5];
+		
+		for (int i = 0; i < oldKeys.length; i++) {
+			if (oldKeys[i] != null) {
+				keys[i] = oldKeys[i];
+				values[i] = oldValues[i];
+			}
+		}
+		
+		System.out.println("taille du tableau: " + keys.length + "\n");
+	}
+	
+	
+	@Override
+	public int indexOf(Object key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int newIndexOf(Object key) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
+
+}

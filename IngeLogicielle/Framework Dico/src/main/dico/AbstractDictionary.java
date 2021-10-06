@@ -28,17 +28,18 @@ public abstract class AbstractDictionary implements IDictionary{
 	}
 
 	public boolean isEmpty() {
-		return keys.length == 0;
+		return this.size() > 0;
+		//return keys.length == 0;
 	}
 	
 	public boolean containsKey(Object key) {
-		return this.indexOf(key) > 0;
+		return this.indexOf(key) >= 0;
 	}
 
 	public int size() {
 		return keys.length;
 	}
 	
-	abstract int indexOf(Object key) ;
-	abstract int newIndexOf(Object key) ;
+	public abstract int indexOf(Object key) ;
+	public abstract int newIndexOf(Object key) ;
 }

@@ -22,48 +22,60 @@ public class FastDictionary extends AbstractDictionary{
 		return taille;
 	}
 	
-	public boolean mustGrow() {
+	boolean mustGrow() {
 		float i = this.size();
-		float j = keys.length ;
-		if (j == 0) { return true; }
-	
-		if (i > (3/4) * j) {
+		float j = keys.length;
+		if (j == 0)
 			return true;
+		else
+			return ((i / j) > 0.7);
+	}
+
+	public void grow() {
+		Object[] oldKeys = keys;
+		Object[] oldValues = values;
+		keys = new Object[oldKeys.length + 5];
+		values = new Object[oldKeys.length + 5];
+		
+		for (int i = 0; i < oldKeys.length; i++) {
+			if (oldKeys[i] != null) {
+				keys[i] = oldKeys[i];
+				values[i] = oldValues[i];
+			}
 		}
 		
-		return false;
+		System.out.println("taille du tableau: " + keys.length + "\n");
 	}
 	
-	public void grow() {
-		while(mustGrow()) {
-			Object[] newKeys = new Object[keys.length+1] ; 
-			Object[] newValues = new Object[values.length+1] ; 
+	@Override
+	public int indexOf(Object key) {
+		if (this.mustGrow()) this.grow();
 
-			for (int i = 0; i < keys.length; i++) {
-				newKeys[i] = keys[i];
-			}
-			for (int i = 0; i < values.length; i++) {
-				newValues[i] = values[i];
-			}
-				
-			keys = newKeys;
-			values = newValues;
+		int hash = key.hashCode();
+		if (hash < 0) hash = -1 * hash;
+		int i = hash % keys.length;
+		while ((!(key.equals(keys[i]))) && (keys[i] != null)) {
+			i = (i + 1) % keys.length;
+		}
+		if (keys[i] == null) return -1;
+		else return i;
+	}
+
+	@Override
+	public int newIndexOf(Object key) {
+		if (this.mustGrow()) this.grow();
+		int hash = key.hashCode();
+		if (hash < 0) hash = -1 * hash;
+		int i = hash % keys.length;
+		if (keys[i] == null) return i;
+		else {
+			do {
+				if (i + 1 < keys.length)
+					i++;
+				else
+					i = 0;
+			} while (keys[i] != null);
+			return i;
 		}
 	}
-	
-	
-	@Override
-	int indexOf(Object key) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	int newIndexOf(Object key) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	
-
 }

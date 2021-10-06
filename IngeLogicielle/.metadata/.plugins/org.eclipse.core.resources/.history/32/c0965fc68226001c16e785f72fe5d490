@@ -1,0 +1,5 @@
+package testCroise;
+
+public interface IDico {
+
+}
