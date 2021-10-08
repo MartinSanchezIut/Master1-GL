@@ -69,6 +69,72 @@ group by id_produit, id_ville,id_date;
 
 
 
+Partie 2:
+IV-
+
+1. Transactionelle car evenement 	    					    additif
+2. Transactionnel  car chiffre d'affaire chaque jour, aucun lien avec precedent	    Additif
+3. Snapshot : état des lieux du stock							semi additif
+4. Snapshot : état des lieux des ventes cumul ventes  			semi additif
+5. Transactionnel car action régulière  				non additif
+6. Transactionnel action régulière					non additif
+7. Transactionnel action régulière					additif
+8. Transactionnel							additif
+9. Snapshot état des lieux 						non-additif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
