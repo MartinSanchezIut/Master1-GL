@@ -31,9 +31,11 @@ void * participant (void * p){
 
   // RdV 
   pthread_mutex_lock(&predicat->mutex);
+
   while (predicat->x < predicat->seuil) {  // attention : le dernier arriv� ne doit pas attendre. Il doit r�veiller tous les autres.
     pthread_cond_wait(&predicat->cond, &predicat->mutex);
   }
+// prevenir les autres
 
   calcul(2); // reprise et poursuite de l'execution.
 
@@ -54,17 +56,15 @@ int main(int argc, char * argv[]){
   pthread_t threads[atoi(argv[1])];
   struct params tabParams[atoi(argv[1])];
 
-  pthread_mutex_t verrou;
-  pthread_cond_t condi ;
 
-  pthread_mutex_init(&verrou, NULL);
-  pthread_cond_init( &condi, NULL);
+
 
   struct predicatRdv var;
   var.x = 15;
   var.seuil = 20;
-  var.mutex = verrou;
-  var.cond = condi;
+  pthread_mutex_init(&var.mutex, NULL);
+  pthread_cond_init(&var.cond, NULL);
+
 
   srand(atoi(argv[1]));  // initialisation de rand pour la simulation de longs calculs
 
@@ -86,6 +86,6 @@ int main(int argc, char * argv[]){
 
   // terminer "proprement". 
   // destroy mutex et nanani
-  
+
 }
  
