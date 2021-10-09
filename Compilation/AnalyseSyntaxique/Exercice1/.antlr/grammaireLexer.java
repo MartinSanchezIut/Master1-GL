@@ -1,4 +1,4 @@
-// Generated from ANTLRPP.g4 by ANTLR 4.9.2
+// Generated from /home/martin/Desktop/Master1-GL/Compilation/AnalyseSyntaxique/Exercice1/ANTLRPP.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,8 +9,8 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class ANTLRPPLexer extends Lexer {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+public class grammaireLexer extends Lexer {
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -92,7 +92,7 @@ public class ANTLRPPLexer extends Lexer {
 	}
 
 
-	public ANTLRPPLexer(CharStream input) {
+	public grammaireLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}

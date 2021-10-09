@@ -15,18 +15,6 @@ public class ANTLRPPBaseListener implements ANTLRPPListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBinExpr(ANTLRPPParser.BinExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitBinExpr(ANTLRPPParser.BinExprContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAtomExpr(ANTLRPPParser.AtomExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -39,25 +27,73 @@ public class ANTLRPPBaseListener implements ANTLRPPListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInsExpr(ANTLRPPParser.InsExprContext ctx) { }
+	@Override public void enterFun(ANTLRPPParser.FunContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInsExpr(ANTLRPPParser.InsExprContext ctx) { }
+	@Override public void exitFun(ANTLRPPParser.FunContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunc(ANTLRPPParser.FuncContext ctx) { }
+	@Override public void enterUnOperation(ANTLRPPParser.UnOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunc(ANTLRPPParser.FuncContext ctx) { }
+	@Override public void exitUnOperation(ANTLRPPParser.UnOperationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterVar(ANTLRPPParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitVar(ANTLRPPParser.VarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinExpr(ANTLRPPParser.BinExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinExpr(ANTLRPPParser.BinExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterListExpr(ANTLRPPParser.ListExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListExpr(ANTLRPPParser.ListExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBincond(ANTLRPPParser.BincondContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBincond(ANTLRPPParser.BincondContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -75,6 +111,30 @@ public class ANTLRPPBaseListener implements ANTLRPPListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInsExpr(ANTLRPPParser.InsExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInsExpr(ANTLRPPParser.InsExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunproc(ANTLRPPParser.FunprocContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunproc(ANTLRPPParser.FunprocContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterType(ANTLRPPParser.TypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -87,6 +147,18 @@ public class ANTLRPPBaseListener implements ANTLRPPListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterEntier(ANTLRPPParser.EntierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEntier(ANTLRPPParser.EntierContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArray(ANTLRPPParser.ArrayContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -94,6 +166,18 @@ public class ANTLRPPBaseListener implements ANTLRPPListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArray(ANTLRPPParser.ArrayContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunc(ANTLRPPParser.FuncContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunc(ANTLRPPParser.FuncContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

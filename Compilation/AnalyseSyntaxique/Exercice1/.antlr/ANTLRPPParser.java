@@ -1,4 +1,4 @@
-// Generated from ANTLRPP.g4 by ANTLR 4.9.2
+// Generated from /home/martin/Desktop/Master1-GL/Compilation/AnalyseSyntaxique/Exercice1/ANTLRPP.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class ANTLRPPParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -109,14 +109,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_atomExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterAtomExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitAtomExpr(this);
-		}
 	}
 
 	public final AtomExprContext atomExpr() throws RecognitionException {
@@ -187,14 +179,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fun; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterFun(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitFun(this);
-		}
 	}
 
 	public final FunContext fun() throws RecognitionException {
@@ -258,14 +242,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unOperation; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterUnOperation(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitUnOperation(this);
-		}
 	}
 
 	public final UnOperationContext unOperation() throws RecognitionException {
@@ -323,14 +299,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_var; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterVar(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitVar(this);
-		}
 	}
 
 	public final VarContext var() throws RecognitionException {
@@ -375,14 +343,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_binExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterBinExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitBinExpr(this);
-		}
 	}
 
 	public final BinExprContext binExpr() throws RecognitionException {
@@ -463,14 +423,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_listExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterListExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitListExpr(this);
-		}
 	}
 
 	public final ListExprContext listExpr() throws RecognitionException {
@@ -526,14 +478,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_bincond; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterBincond(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitBincond(this);
-		}
 	}
 
 	public final BincondContext bincond() throws RecognitionException {
@@ -667,14 +611,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_calleeExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterCalleeExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitCalleeExpr(this);
-		}
 	}
 
 	public final CalleeExprContext calleeExpr() throws RecognitionException {
@@ -765,14 +701,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_insExpr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterInsExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitInsExpr(this);
-		}
 	}
 
 	public final InsExprContext insExpr() throws RecognitionException {
@@ -906,14 +834,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_funproc; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterFunproc(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitFunproc(this);
-		}
 	}
 
 	public final FunprocContext funproc() throws RecognitionException {
@@ -947,14 +867,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_type; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterType(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitType(this);
-		}
 	}
 
 	public final TypeContext type() throws RecognitionException {
@@ -1005,14 +917,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_entier; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterEntier(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitEntier(this);
-		}
 	}
 
 	public final EntierContext entier() throws RecognitionException {
@@ -1044,14 +948,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_array; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterArray(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitArray(this);
-		}
 	}
 
 	public final ArrayContext array() throws RecognitionException {
@@ -1082,14 +978,6 @@ public class ANTLRPPParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_func; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).enterFunc(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof ANTLRPPListener ) ((ANTLRPPListener)listener).exitFunc(this);
-		}
 	}
 
 	public final FuncContext func() throws RecognitionException {

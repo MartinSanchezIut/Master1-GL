@@ -1,5 +1,5 @@
 
-grammar ANTLRPP;
+grammar grammaire;
 
 atomExpr returns [ PPExpr value ] :
 c = Number { $value = new PPCte(Integer.parseInt($c.text));}
