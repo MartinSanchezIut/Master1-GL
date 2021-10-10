@@ -17,6 +17,16 @@ public interface grammaireListener extends ParseTreeListener {
 	 */
 	void exitEvaluableExpr(grammaireParser.EvaluableExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link grammaireParser#funcParamsExpr}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncParamsExpr(grammaireParser.FuncParamsExprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link grammaireParser#funcParamsExpr}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncParamsExpr(grammaireParser.FuncParamsExprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link grammaireParser#atomExpr}.
 	 * @param ctx the parse tree
 	 */

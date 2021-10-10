@@ -1,5 +1,6 @@
 grammar grammaire;
-
+// Petit bug pour reconnaitre la dernière instruction d'une fonction si il
+// n'y as pas de ';'
 /*
 boolExpr returns [ PPExpr value ] :
 | 'true' { $value = new PPTrue(); }
@@ -18,6 +19,9 @@ boolExpr | cteExpr | varExpr* ; */
 
 evaluableExpr returns [ PPExpr value] :
     atomExpr | binOpExpr | calleeExpr | funCallExpr;
+
+funcParamsExpr returns [ PPExpr value] :
+    atomExpr |  calleeExpr | funCallExpr;
 
 atomExpr returns [ PPExpr value ] :
 x = Number { $value = new PPCte(Integer.parseInt($x.text));}
@@ -61,7 +65,7 @@ calleeExpr returns [Callee value]:
 
 listExpr returns [ArrayList<PPExpr> value]
     @init{$value = new ArrayList<PPExpr>();} : 
-(e = atomExpr {$value.add($e.value);})*
+(e = funcParamsExpr {$value.add($e.value);})*
 //| (f = varExpr {$value.add($f.value);})+
 ;
 
@@ -88,7 +92,7 @@ pairExpr returns [Pair<String,Type> value ]:
 ;
 pairArrayExpr returns [ArrayList <Pair<String,Type>> value ]
     @init { $value = new ArrayList<Pair<String,Type>>() ;} :
-(e = pairExpr {$value.add($e.value);})
+(e = pairExpr {$value.add($e.value);})*
 ;
 
 funcExpr returns [ PPDef value ]:

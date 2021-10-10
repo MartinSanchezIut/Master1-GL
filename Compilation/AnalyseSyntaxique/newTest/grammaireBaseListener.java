@@ -27,6 +27,18 @@ public class grammaireBaseListener implements grammaireListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFuncParamsExpr(grammaireParser.FuncParamsExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncParamsExpr(grammaireParser.FuncParamsExprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAtomExpr(grammaireParser.AtomExprContext ctx) { }
 	/**
 	 * {@inheritDoc}
