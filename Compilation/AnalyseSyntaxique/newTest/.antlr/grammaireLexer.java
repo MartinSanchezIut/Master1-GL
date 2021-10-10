@@ -1,4 +1,4 @@
-// Generated from /home/martin/Desktop/Master1-GL/Compilation/AnalyseSyntaxique/newTest/newTest.g4 by ANTLR 4.8
+// Generated from /home/martin/Desktop/Master1-GL/Compilation/AnalyseSyntaxique/newTest/grammaire.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
@@ -9,7 +9,7 @@ import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class newTestLexer extends Lexer {
+public class grammaireLexer extends Lexer {
 	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -45,8 +45,8 @@ public class newTestLexer extends Lexer {
 		return new String[] {
 			null, "'true'", "'false'", "'-'", "'not'", "'integer'", "'bool'", "'array of '", 
 			"'+'", "'*'", "'/'", "'AND'", "'OR'", "'<'", "'<='", "'='", "'!='", "'>='", 
-			"'>'", "'Read'", "'Write'", "'('", "')'", "'['", "']'", "'new array of '", 
-			"':='", "'if'", "'then'", "'else'", "'While'", "'do'", "'skip'", "';'", 
+			"'>'", "'read'", "'write'", "'('", "')'", "'['", "']'", "'new array of '", 
+			"':='", "'if'", "'then'", "'else'", "'while'", "'do'", "'skip'", "';'", 
 			"':'", "'var'"
 		};
 	}
@@ -94,13 +94,13 @@ public class newTestLexer extends Lexer {
 	}
 
 
-	public newTestLexer(CharStream input) {
+	public grammaireLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
 	@Override
-	public String getGrammarFileName() { return "newTest.g4"; }
+	public String getGrammarFileName() { return "grammaire.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -164,8 +164,8 @@ public class newTestLexer extends Lexer {
 		"\u0089\7>\2\2\u0089\u008a\7?\2\2\u008a\36\3\2\2\2\u008b\u008c\7?\2\2\u008c"+
 		" \3\2\2\2\u008d\u008e\7#\2\2\u008e\u008f\7?\2\2\u008f\"\3\2\2\2\u0090"+
 		"\u0091\7@\2\2\u0091\u0092\7?\2\2\u0092$\3\2\2\2\u0093\u0094\7@\2\2\u0094"+
-		"&\3\2\2\2\u0095\u0096\7T\2\2\u0096\u0097\7g\2\2\u0097\u0098\7c\2\2\u0098"+
-		"\u0099\7f\2\2\u0099(\3\2\2\2\u009a\u009b\7Y\2\2\u009b\u009c\7t\2\2\u009c"+
+		"&\3\2\2\2\u0095\u0096\7t\2\2\u0096\u0097\7g\2\2\u0097\u0098\7c\2\2\u0098"+
+		"\u0099\7f\2\2\u0099(\3\2\2\2\u009a\u009b\7y\2\2\u009b\u009c\7t\2\2\u009c"+
 		"\u009d\7k\2\2\u009d\u009e\7v\2\2\u009e\u009f\7g\2\2\u009f*\3\2\2\2\u00a0"+
 		"\u00a1\7*\2\2\u00a1,\3\2\2\2\u00a2\u00a3\7+\2\2\u00a3.\3\2\2\2\u00a4\u00a5"+
 		"\7]\2\2\u00a5\60\3\2\2\2\u00a6\u00a7\7_\2\2\u00a7\62\3\2\2\2\u00a8\u00a9"+
@@ -176,7 +176,7 @@ public class newTestLexer extends Lexer {
 		"\u00b8\7?\2\2\u00b8\66\3\2\2\2\u00b9\u00ba\7k\2\2\u00ba\u00bb\7h\2\2\u00bb"+
 		"8\3\2\2\2\u00bc\u00bd\7v\2\2\u00bd\u00be\7j\2\2\u00be\u00bf\7g\2\2\u00bf"+
 		"\u00c0\7p\2\2\u00c0:\3\2\2\2\u00c1\u00c2\7g\2\2\u00c2\u00c3\7n\2\2\u00c3"+
-		"\u00c4\7u\2\2\u00c4\u00c5\7g\2\2\u00c5<\3\2\2\2\u00c6\u00c7\7Y\2\2\u00c7"+
+		"\u00c4\7u\2\2\u00c4\u00c5\7g\2\2\u00c5<\3\2\2\2\u00c6\u00c7\7y\2\2\u00c7"+
 		"\u00c8\7j\2\2\u00c8\u00c9\7k\2\2\u00c9\u00ca\7n\2\2\u00ca\u00cb\7g\2\2"+
 		"\u00cb>\3\2\2\2\u00cc\u00cd\7f\2\2\u00cd\u00ce\7q\2\2\u00ce@\3\2\2\2\u00cf"+
 		"\u00d0\7u\2\2\u00d0\u00d1\7m\2\2\u00d1\u00d2\7k\2\2\u00d2\u00d3\7r\2\2"+

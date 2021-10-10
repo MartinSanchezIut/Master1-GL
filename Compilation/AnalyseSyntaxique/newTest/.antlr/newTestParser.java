@@ -20,8 +20,8 @@ public class newTestParser extends Parser {
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, T__20=21, T__21=22, T__22=23, T__23=24, 
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
-		T__31=32, T__32=33, T__33=34, T__34=35, VarFormat=36, FunFormat=37, Alphabet=38, 
-		Number=39, WS=40;
+		T__31=32, T__32=33, T__33=34, T__34=35, VarFormat=36, Alphabet=37, Number=38, 
+		WS=39;
 	public static final int
 		RULE_evaluableExpr = 0, RULE_atomExpr = 1, RULE_unOpExpr = 2, RULE_typeExpr = 3, 
 		RULE_binOpExpr = 4, RULE_calleeExpr = 5, RULE_listExpr = 6, RULE_funCallExpr = 7, 
@@ -51,7 +51,7 @@ public class newTestParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"VarFormat", "FunFormat", "Alphabet", "Number", "WS"
+			"VarFormat", "Alphabet", "Number", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -543,7 +543,7 @@ public class newTestParser extends Parser {
 	public static class CalleeExprContext extends ParserRuleContext {
 		public Callee value;
 		public Token x;
-		public TerminalNode FunFormat() { return getToken(newTestParser.FunFormat, 0); }
+		public TerminalNode VarFormat() { return getToken(newTestParser.VarFormat, 0); }
 		public CalleeExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -573,11 +573,11 @@ public class newTestParser extends Parser {
 				 ((CalleeExprContext)_localctx).value =  new Write(); 
 				}
 				break;
-			case FunFormat:
+			case VarFormat:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(129);
-				((CalleeExprContext)_localctx).x = match(FunFormat);
+				((CalleeExprContext)_localctx).x = match(VarFormat);
 				 ((CalleeExprContext)_localctx).value =  new User((((CalleeExprContext)_localctx).x!=null?((CalleeExprContext)_localctx).x.getText():null)); 
 				}
 				break;
@@ -682,10 +682,8 @@ public class newTestParser extends Parser {
 		try {
 			setState(159);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case T__18:
-			case T__19:
-			case FunFormat:
+			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
 				setState(140);
@@ -699,10 +697,7 @@ public class newTestParser extends Parser {
 				 ((FunCallExprContext)_localctx).value =  new PPFunCall(((FunCallExprContext)_localctx).a.value,((FunCallExprContext)_localctx).b.value);
 				}
 				break;
-			case T__0:
-			case T__1:
-			case VarFormat:
-			case Number:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
 				setState(146);
@@ -716,7 +711,7 @@ public class newTestParser extends Parser {
 				 ((FunCallExprContext)_localctx).value =  new PPArrayGet(((FunCallExprContext)_localctx).x.value,((FunCallExprContext)_localctx).y.value);
 				}
 				break;
-			case T__24:
+			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(152);
@@ -732,8 +727,6 @@ public class newTestParser extends Parser {
 				 ((FunCallExprContext)_localctx).value =  new PPArrayAlloc(((FunCallExprContext)_localctx).t8.value, ((FunCallExprContext)_localctx).t9.value );
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1051,9 +1044,9 @@ public class newTestParser extends Parser {
 		public TypeExprContext e5;
 		public PairArrayExprContext e3;
 		public InsExprContext e4;
-		public List<TerminalNode> FunFormat() { return getTokens(newTestParser.FunFormat); }
-		public TerminalNode FunFormat(int i) {
-			return getToken(newTestParser.FunFormat, i);
+		public List<TerminalNode> VarFormat() { return getTokens(newTestParser.VarFormat); }
+		public TerminalNode VarFormat(int i) {
+			return getToken(newTestParser.VarFormat, i);
 		}
 		public List<PairArrayExprContext> pairArrayExpr() {
 			return getRuleContexts(PairArrayExprContext.class);
@@ -1083,7 +1076,7 @@ public class newTestParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(230);
-			((FuncExprContext)_localctx).e1 = match(FunFormat);
+			((FuncExprContext)_localctx).e1 = match(VarFormat);
 			setState(231);
 			match(T__20);
 			setState(232);
@@ -1100,7 +1093,7 @@ public class newTestParser extends Parser {
 			((FuncExprContext)_localctx).e4 = insExpr(0);
 			 ((FuncExprContext)_localctx).value =  new PPFun((((FuncExprContext)_localctx).e1!=null?((FuncExprContext)_localctx).e1.getText():null), ((FuncExprContext)_localctx).e2.value ,((FuncExprContext)_localctx).e3.value , ((FuncExprContext)_localctx).e4.value, ((FuncExprContext)_localctx).e5.value ); 
 			setState(239);
-			((FuncExprContext)_localctx).e1 = match(FunFormat);
+			((FuncExprContext)_localctx).e1 = match(VarFormat);
 			setState(240);
 			match(T__20);
 			setState(241);
@@ -1240,7 +1233,7 @@ public class newTestParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3*\u0107\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3)\u0107\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\3\2\3\2\5\2!\n\2\3\3\3\3\3\3\3"+
 		"\3\3\3\3\3\3\3\3\3\5\3+\n\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4\66"+
@@ -1262,7 +1255,7 @@ public class newTestParser extends Parser {
 		"\n}\3\2\2\2\f\u0085\3\2\2\2\16\u008a\3\2\2\2\20\u00a1\3\2\2\2\22\u00c7"+
 		"\3\2\2\2\24\u00de\3\2\2\2\26\u00e5\3\2\2\2\30\u00e8\3\2\2\2\32\u00fe\3"+
 		"\2\2\2\34\u0101\3\2\2\2\36!\5\4\3\2\37!\5\n\6\2 \36\3\2\2\2 \37\3\2\2"+
-		"\2!\3\3\2\2\2\"#\7)\2\2#+\b\3\1\2$%\7\3\2\2%+\b\3\1\2&\'\7\4\2\2\'+\b"+
+		"\2!\3\3\2\2\2\"#\7(\2\2#+\b\3\1\2$%\7\3\2\2%+\b\3\1\2&\'\7\4\2\2\'+\b"+
 		"\3\1\2()\7&\2\2)+\b\3\1\2*\"\3\2\2\2*$\3\2\2\2*&\3\2\2\2*(\3\2\2\2+\5"+
 		"\3\2\2\2,\66\3\2\2\2-.\7\5\2\2./\5\4\3\2/\60\b\4\1\2\60\66\3\2\2\2\61"+
 		"\62\7\6\2\2\62\63\5\4\3\2\63\64\b\4\1\2\64\66\3\2\2\2\65,\3\2\2\2\65-"+
@@ -1280,7 +1273,7 @@ public class newTestParser extends Parser {
 		"\2\2\2}A\3\2\2\2}F\3\2\2\2}K\3\2\2\2}P\3\2\2\2}U\3\2\2\2}Z\3\2\2\2}_\3"+
 		"\2\2\2}d\3\2\2\2}i\3\2\2\2}n\3\2\2\2}s\3\2\2\2}x\3\2\2\2~\13\3\2\2\2\177"+
 		"\u0080\7\25\2\2\u0080\u0086\b\7\1\2\u0081\u0082\7\26\2\2\u0082\u0086\b"+
-		"\7\1\2\u0083\u0084\7\'\2\2\u0084\u0086\b\7\1\2\u0085\177\3\2\2\2\u0085"+
+		"\7\1\2\u0083\u0084\7&\2\2\u0084\u0086\b\7\1\2\u0085\177\3\2\2\2\u0085"+
 		"\u0081\3\2\2\2\u0085\u0083\3\2\2\2\u0086\r\3\2\2\2\u0087\u0088\5\4\3\2"+
 		"\u0088\u0089\b\b\1\2\u0089\u008b\3\2\2\2\u008a\u0087\3\2\2\2\u008b\u008c"+
 		"\3\2\2\2\u008c\u008a\3\2\2\2\u008c\u008d\3\2\2\2\u008d\17\3\2\2\2\u008e"+
@@ -1312,16 +1305,16 @@ public class newTestParser extends Parser {
 		"\u00d3\3\2\2\2\u00de\u00d8\3\2\2\2\u00df\25\3\2\2\2\u00e0\u00e1\5\24\13"+
 		"\2\u00e1\u00e2\b\f\1\2\u00e2\u00e4\3\2\2\2\u00e3\u00e0\3\2\2\2\u00e4\u00e7"+
 		"\3\2\2\2\u00e5\u00e3\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\27\3\2\2\2\u00e7"+
-		"\u00e5\3\2\2\2\u00e8\u00e9\7\'\2\2\u00e9\u00ea\7\27\2\2\u00ea\u00eb\5"+
-		"\26\f\2\u00eb\u00ec\7\30\2\2\u00ec\u00ed\7$\2\2\u00ed\u00ee\5\b\5\2\u00ee"+
+		"\u00e5\3\2\2\2\u00e8\u00e9\7&\2\2\u00e9\u00ea\7\27\2\2\u00ea\u00eb\5\26"+
+		"\f\2\u00eb\u00ec\7\30\2\2\u00ec\u00ed\7$\2\2\u00ed\u00ee\5\b\5\2\u00ee"+
 		"\u00ef\5\26\f\2\u00ef\u00f0\5\22\n\2\u00f0\u00f1\b\r\1\2\u00f1\u00f2\7"+
-		"\'\2\2\u00f2\u00f3\7\27\2\2\u00f3\u00f4\5\26\f\2\u00f4\u00f5\7\30\2\2"+
-		"\u00f5\u00f6\5\26\f\2\u00f6\u00f7\5\22\n\2\u00f7\u00f8\b\r\1\2\u00f8\31"+
-		"\3\2\2\2\u00f9\u00fa\5\30\r\2\u00fa\u00fb\b\16\1\2\u00fb\u00fd\3\2\2\2"+
-		"\u00fc\u00f9\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe\u00fc\3\2\2\2\u00fe\u00ff"+
-		"\3\2\2\2\u00ff\33\3\2\2\2\u0100\u00fe\3\2\2\2\u0101\u0102\5\26\f\2\u0102"+
-		"\u0103\5\32\16\2\u0103\u0104\5\22\n\2\u0104\u0105\b\17\1\2\u0105\35\3"+
-		"\2\2\2\17 *\65?}\u0085\u008c\u00a1\u00c7\u00d0\u00de\u00e5\u00fe";
+		"&\2\2\u00f2\u00f3\7\27\2\2\u00f3\u00f4\5\26\f\2\u00f4\u00f5\7\30\2\2\u00f5"+
+		"\u00f6\5\26\f\2\u00f6\u00f7\5\22\n\2\u00f7\u00f8\b\r\1\2\u00f8\31\3\2"+
+		"\2\2\u00f9\u00fa\5\30\r\2\u00fa\u00fb\b\16\1\2\u00fb\u00fd\3\2\2\2\u00fc"+
+		"\u00f9\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe\u00fc\3\2\2\2\u00fe\u00ff\3\2"+
+		"\2\2\u00ff\33\3\2\2\2\u0100\u00fe\3\2\2\2\u0101\u0102\5\26\f\2\u0102\u0103"+
+		"\5\32\16\2\u0103\u0104\5\22\n\2\u0104\u0105\b\17\1\2\u0105\35\3\2\2\2"+
+		"\17 *\65?}\u0085\u008c\u00a1\u00c7\u00d0\u00de\u00e5\u00fe";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

@@ -1,6 +1,6 @@
 var n : integer
 
-f(n : integer) : integer
+f (n : integer) : integer
 var i : integer
 if n = 0 then
     f := 1

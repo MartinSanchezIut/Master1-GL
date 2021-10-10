@@ -1,4 +1,4 @@
-grammar newTest;
+grammar grammaire;
 
 /*
 boolExpr returns [ PPExpr value ] :
@@ -17,14 +17,14 @@ atomExpr returns [ PPExpr value ] :
 boolExpr | cteExpr | varExpr* ; */
 
 evaluableExpr returns [ PPExpr value] :
-    atomExpr | binOpExpr;
+    atomExpr | binOpExpr | calleeExpr | funCallExpr;
 
 atomExpr returns [ PPExpr value ] :
 x = Number { $value = new PPCte(Integer.parseInt($x.text));}
 | 'true' { $value = new PPTrue(); }
 | 'false' { $value = new PPFalse(); }
 //| 'var' x = VarFormat { $value = new PPVar($x.text);}
-| x = VarFormat { $value = new PPVar($x.text);}
+| c = VarFormat { $value = new PPVar($c.text);}
 ;
 
 unOpExpr returns [ PPUnOp value ] :
@@ -54,14 +54,14 @@ e1 = atomExpr '+' e2 = atomExpr { $value = new PPAdd($e1.value, $e2.value); }
 ;
 
 calleeExpr returns [Callee value]:
-'Read' { $value = new Read(); }
-|'Write' { $value = new Write(); }
+'read' { $value = new Read(); }
+|'write' { $value = new Write(); }
 | x = VarFormat { $value = new User($x.text); }
 ;
 
 listExpr returns [ArrayList<PPExpr> value]
     @init{$value = new ArrayList<PPExpr>();} : 
-(e = atomExpr {$value.add($e.value);})+
+(e = atomExpr {$value.add($e.value);})*
 //| (f = varExpr {$value.add($f.value);})+
 ;
 
@@ -73,10 +73,10 @@ a = calleeExpr '(' b = listExpr ')'{ $value = new PPFunCall($a.value,$b.value);}
 ;
 
 insExpr returns [ PPInst value ]:
-e1 = VarFormat ':=' e2 = atomExpr { $value = new PPAssign($e1.text, $e2.value); }
-| e11 = atomExpr '['e12 = atomExpr ']' ':=' e13 = atomExpr { $value = new PPArraySet($e11.value, $e12.value ,$e13.value);}
+e1 = VarFormat ':=' e2 = evaluableExpr { $value = new PPAssign($e1.text, $e2.value); }
+| e11 = atomExpr '['e12 = atomExpr ']' ':=' e13 = evaluableExpr { $value = new PPArraySet($e11.value, $e12.value ,$e13.value);}
 | 'if' e6 = evaluableExpr 'then' e7 = insExpr 'else' e8 = insExpr { $value = new PPCond($e6.value, $e7.value, $e8.value); }
-| 'While' e9 = evaluableExpr 'do' e10 = insExpr { $value = new PPWhile($e9.value, $e10.value); }
+| 'while' e9 = evaluableExpr 'do' e10 = insExpr { $value = new PPWhile($e9.value, $e10.value); }
 | e14 = calleeExpr '('e15 = listExpr')'{$value = new PPProcCall($e14.value, $e15.value );}
 | 'skip'{new PPSkip();}
 | e16 = insExpr ';' e17 = insExpr{$value = new PPSeq($e16.value, $e17.value );}
@@ -88,7 +88,7 @@ pairExpr returns [Pair<String,Type> value ]:
 ;
 pairArrayExpr returns [ArrayList <Pair<String,Type>> value ]
     @init { $value = new ArrayList<Pair<String,Type>>() ;} :
-(e = pairExpr {$value.add($e.value);})*
+(e = pairExpr {$value.add($e.value);})
 ;
 
 funcExpr returns [ PPDef value ]:
@@ -102,7 +102,7 @@ e1 = VarFormat '(' e2 = pairArrayExpr ')' e3 = pairArrayExpr e4= insExpr
 
 listDefExpr returns [ArrayList <PPDef> value ]
     @init { $value = new ArrayList<PPDef>() ;} :
-(e = funcExpr {$value.add($e.value);})*
+(e = funcExpr {$value.add($e.value);})+
 ;
 
 progExpr returns [ PPProg value ]:
@@ -112,6 +112,7 @@ e1 = pairArrayExpr e2 = listDefExpr e3 = insExpr
 
 //VarFormat: ('a'..'z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
 VarFormat: ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
+//FunFormat: ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
 //FunFormat: ('a'..'z' | 'A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
 //FunFormat: ('A'..'Z')('a'..'z' | 'A'..'Z' | '0'..'9')*;
 Alphabet: ('a'..'z' | 'A'..'Z')+;
