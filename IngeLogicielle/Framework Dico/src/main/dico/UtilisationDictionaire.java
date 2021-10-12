@@ -25,7 +25,7 @@ public class UtilisationDictionaire {
 		System.out.println("main: " + dic.containsKey("z"));
 		*/
 		
-		IDictionary dic = new FastDictionary();
+		FastDictionary dic = new FastDictionary();
 		
 		System.out.println("Empty?: " + dic.isEmpty());
 		System.out.println("Size: " + dic.size());

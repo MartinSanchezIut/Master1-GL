@@ -1,6 +1,10 @@
 grammar grammaire;
+// Matthieu et Martin
+
 // Petit bug pour reconnaitre la dernière instruction d'une fonction si il
 // n'y as pas de ';'
+
+
 /*
 boolExpr returns [ PPExpr value ] :
 | 'true' { $value = new PPTrue(); }
@@ -16,6 +20,7 @@ varExpr returns [ PPExpr value ] :
 ;
 atomExpr returns [ PPExpr value ] :
 boolExpr | cteExpr | varExpr* ; */
+
 
 evaluableExpr returns [ PPExpr value] :
     atomExpr | binOpExpr | calleeExpr | funCallExpr;

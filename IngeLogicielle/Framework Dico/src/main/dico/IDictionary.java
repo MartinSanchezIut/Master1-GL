@@ -1,12 +1,12 @@
 package main.dico;
 
-public interface IDictionary {
+public interface IDictionary<T> {
 	
 	
-	IDictionary put(Object key, Object value);
-	Object get(Object key) throws Exception;
+	IDictionary<T> put(T key, Object value);
+	Object get(T key) throws Exception;
 	boolean isEmpty();
-	boolean containsKey(Object key);
+	boolean containsKey(T key);
 	int size();
 
 }

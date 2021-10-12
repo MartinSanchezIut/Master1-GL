@@ -1,6 +1,6 @@
 package main.dico;
 
-public class FastDictionary extends AbstractDictionary{
+public class FastDictionary extends AbstractDictionary<Object>{
 
 	public FastDictionary() {
 		keys = new Object[0];
