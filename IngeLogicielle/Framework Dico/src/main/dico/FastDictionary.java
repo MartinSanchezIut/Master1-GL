@@ -1,6 +1,6 @@
 package main.dico;
 
-public class FastDictionary extends AbstractDictionary<Object>{
+public class FastDictionary extends AbstractDictionary{
 
 	public FastDictionary() {
 		keys = new Object[0];
@@ -39,8 +39,9 @@ public class FastDictionary extends AbstractDictionary<Object>{
 		
 		for (int i = 0; i < oldKeys.length; i++) {
 			if (oldKeys[i] != null) {
-				keys[i] = oldKeys[i];
-				values[i] = oldValues[i];
+				this.put(oldKeys[i], oldValues[i]);
+				//keys[i] = oldKeys[i];
+				//values[i] = oldValues[i];
 			}
 		}
 		

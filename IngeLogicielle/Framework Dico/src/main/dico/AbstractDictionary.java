@@ -1,12 +1,12 @@
 package main.dico;
 
 
-public abstract class AbstractDictionary<T> implements IDictionary<T>{
+public abstract class AbstractDictionary implements IDictionary{
 	
-	T[] keys; 
+	Object[] keys; 
 	Object[] values;
 	
-	public IDictionary<T> put(T key, Object value) {
+	public IDictionary put(Object key, Object value) {
 		int i = this.indexOf(key);
 		if (i != -1) {
 			values[i] = value;
@@ -18,7 +18,7 @@ public abstract class AbstractDictionary<T> implements IDictionary<T>{
 		return this;
 	}
 	
-	public Object get(T key) throws Exception {
+	public Object get(Object key) throws Exception {
 		int i = this.indexOf(key);
 		if (i != -1) {
 			return values[i];
@@ -32,7 +32,7 @@ public abstract class AbstractDictionary<T> implements IDictionary<T>{
 		//return keys.length == 0;
 	}
 	
-	public boolean containsKey(T key) {
+	public boolean containsKey(Object key) {
 		return this.indexOf(key) >= 0;
 	}
 
@@ -40,6 +40,6 @@ public abstract class AbstractDictionary<T> implements IDictionary<T>{
 		return keys.length;
 	}
 	
-	public abstract int indexOf(T key) ;
-	public abstract int newIndexOf(T key) ;
+	public abstract int indexOf(Object key) ;
+	public abstract int newIndexOf(Object key) ;
 }

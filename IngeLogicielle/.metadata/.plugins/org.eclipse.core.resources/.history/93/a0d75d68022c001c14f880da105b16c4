@@ -1,0 +1,15 @@
+package main.dico;
+
+public class SortedDictionary extends OrderedDictionary{
+	
+	
+	public SortedDictionary() {
+//		keys = new ;
+//		values = new Object[0];
+	}
+	public SortedDictionary(int n) {
+//		keys = new Comparable<Object>[n];
+//		values = new Object[n];
+	}
+
+}

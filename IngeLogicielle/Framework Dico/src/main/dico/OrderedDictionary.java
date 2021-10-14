@@ -1,6 +1,6 @@
 package main.dico;
 
-public class OrderedDictionary extends AbstractDictionary<Object>{
+public class OrderedDictionary extends AbstractDictionary{
 	
 	
 	public OrderedDictionary() {

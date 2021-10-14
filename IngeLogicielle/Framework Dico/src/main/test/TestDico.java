@@ -5,8 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import testCroise.AbstractDictionary;
-import testCroise.OrderedDictionary;
+import main.dico.AbstractDictionary;
 
 
 class TestDico {
@@ -16,7 +15,7 @@ class TestDico {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		dico = new OrderedDictionary();
+		// Subclass
 	}
 
 	
@@ -25,7 +24,6 @@ class TestDico {
 	void testAddOneElementToEmptyDico() throws Exception {
 		dico.put(new String("a"), new String("b"));
 		assertEquals(1, dico.size());
-		assertEquals("b", dico.get("a")) ;
 	}
 
 	@Test
