@@ -89,7 +89,7 @@ class UPPGVar extends UPPExpr {
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
         //To do
         return new RTLGetGVar(reg, name, succ);
-
+// NUL MATTHIEU A RAISON
     }//toRTL
 
 }//UPPGVar
@@ -475,7 +475,15 @@ class UPPCond extends UPPInst {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, RTLInst succ) {
         //To do
-        
+
+        PRegister regCond = cond.getPRegister(locals);
+        RTLGtz gtz = new RTLGtz(regCond,null,succ);
+        RTLInst ncond = cond.toRTL(locals,globals,regCond,gtz);
+        RTLInst ni = i.toRTL(locals,globals,ncond);
+        gtz.succ1 = ni;
+        return ncond;
+    // A matthieu                 
+
     }//toRTL
 
 }//UPPCond
@@ -515,6 +523,15 @@ class UPPProcCall extends UPPInst {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, RTLInst succ) {
         //To do
+        ArrayList<PRegister> regs = new ArrayList<PRegister>();
+        for (UPPExpr e : args)
+            regs.add(e.getPRegister(locals));
+
+        RTLInst proc = new RTLProcCall(callee,regs,succ);
+        RTLInst acc = proc;
+        for (int i = args.size() - 1; i >= 0; i--)
+            acc = args.get(i).toRTL(locals,globals,regs.get(i),acc);
+        return acc;
     }//toRTL
 
 }//UPPProcCall
