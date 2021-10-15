@@ -109,7 +109,11 @@ class UPPNot extends UPPUnOp {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
         //To do
-        return new RTLXOri();
+        PRegister regE1 = e.getPRegister(locals);
+        RTLInst xor = new RTLXOri(regE1,reg,succ);
+        RTLInst ne2 = e.toRTL(locals,globals,regE1,xor);
+        return e.toRTL(locals,globals,regE1,ne2);
+        // C'est bancal a revoir,
     }//toRTL
 
 }//UPPNot
@@ -202,6 +206,11 @@ class UPPAnd extends UPPBinOp {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
         //To do
+        PRegister regE1 = e1.getPRegister(locals);
+        PRegister regE2 = e2.getPRegister(locals);
+        RTLInst and = new RTLAnd(regE1,regE2,reg,succ);
+        RTLInst ne2 = e2.toRTL(locals,globals,regE2,and);
+        return e1.toRTL(locals,globals,regE1,ne2);
     }//toRTL
 
 }//UPPAnd
@@ -216,6 +225,11 @@ class UPPOr extends UPPBinOp {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
         //To do
+        PRegister regE1 = e1.getPRegister(locals);
+        PRegister regE2 = e2.getPRegister(locals);
+        RTLInst or = new RTLOr(regE1,regE2,reg,succ);
+        RTLInst ne2 = e2.toRTL(locals,globals,regE2,or);
+        return e1.toRTL(locals,globals,regE1,ne2);
     }//toRTL
 
 }//UPPOr
@@ -377,6 +391,8 @@ class UPPLoad extends UPPExpr {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, PRegister reg, RTLInst succ) {
         //To do
+        return new RTLLoad(addr.getPRegister(locals), reg, succ) ;
+        // A revoir
     }//toRTL
 
 }//UPPLoad
@@ -459,6 +475,7 @@ class UPPCond extends UPPInst {
     RTLInst toRTL (ArrayList<Pair<String,PRegister>> locals,
                    ArrayList<String> globals, RTLInst succ) {
         //To do
+        
     }//toRTL
 
 }//UPPCond

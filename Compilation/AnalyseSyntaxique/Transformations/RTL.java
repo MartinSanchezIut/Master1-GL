@@ -261,7 +261,7 @@ class RTLProcCall extends RTLCall {
 /* For arrays, the address is computed with the offset.
    Therefore, there is no offset variable. */
 abstract class RTLArray extends RTLInst {
-
+    // Offset = 4
     PRegister addr;
     RTLInst succ;
 
