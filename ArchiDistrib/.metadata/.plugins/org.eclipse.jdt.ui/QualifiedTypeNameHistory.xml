@@ -14,11 +14,15 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.rmi.server.UnicastRemoteObject"/>
 <fullyQualifiedTypeName name="server.common.Animal"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="server.classes.CabinetVetoImpl"/>
 <fullyQualifiedTypeName name="server.common.CabinetVeto"/>
 <fullyQualifiedTypeName name="java.rmi.RMISecurityManager"/>
 <fullyQualifiedTypeName name="java.security.Policy"/>
 <fullyQualifiedTypeName name="java.lang.Object"/>
 <fullyQualifiedTypeName name="client.ObjectInCodebase"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="server.classes.ObserverImpl"/>
+<fullyQualifiedTypeName name="server.common.DistributedObserver"/>
+<fullyQualifiedTypeName name="client.Client"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
 </qualifiedTypeNameHistroy>

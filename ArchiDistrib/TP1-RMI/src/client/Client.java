@@ -1,26 +1,29 @@
 package client;
 
+import java.io.Serializable;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import server.classes.DossierSuiviImpl;
 import server.common.Animal;
 import server.common.CabinetVeto;
+import server.common.DistributedObserver;
 import server.common.DossierSuivi;
 import server.common.Espece;
 
-public class Client {
+public class Client implements Serializable{
 	
-	public static void main(String[] args) {
-
+	public void init(String[] args) {
 		ObjectInCodebase o = new ObjectInCodebase();
-		
 		
 		String host = (args.length < 1) ? null : args[0];
 		try {
 			Registry registry = LocateRegistry.getRegistry(host);
 			
 			CabinetVeto stub = (CabinetVeto) registry.lookup("Cabinet");
+			DistributedObserver observer = (DistributedObserver) registry.lookup("Observer");
+			observer.addClient(this);
+			
 			
 			stub.add("Jeannot", "Pierro", 15, "Coucou", "salope du biff");
 			Animal gustave = stub.get("Gustave");
@@ -47,7 +50,18 @@ public class Client {
 			*/
 		} catch (Exception e) {
 			System.err.println("Client exception: " + e.toString());
+
 			e.printStackTrace();
 		}
+	}
+	
+	public void notify(String text) {
+		System.out.println("Client : " + text);
+	}
+	
+	
+	public static void main(String[] args) {
+		Client c = new Client(); 
+		c.init(args);
 	}
 }
