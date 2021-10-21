@@ -29,18 +29,24 @@ class Graphe{
 
 
     public Graphe colorier(int nbCoul) {
-    	Stack<Sommet> pile1 = new Stack<Sommet> ();
-    	
+    	Stack<Sommet> somettrivial = new Stack<Sommet> ();
     	Stack<Sommet> spile = new Stack<Sommet> ();
-    	
-    	
+
     	for(Sommet x : sommets) {
-    		
-    		if(x.nbVoisin > )
-    		
-    		
-    		
+    		if(x.nbVoisin <= nbCoul ) {
+    			somettrivial.push(x);
+    			//retirer x du graphe
+    			x.color = 
+ 
+    		}
     	}
+    	for(Sommet x : sommets) {
+		 {
+			if(sommets.containt(x)) {
+				
+				
+			}
+		}
     	/*
     	 pile<Sommet> sommetsTrivialementColoriable
     	 
