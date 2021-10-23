@@ -1,43 +1,24 @@
 package graphe;
 
 class Arrete{
-
-	public enum Type {
-		INT, 
-		PREF;
-	}
 	
     public Sommet a;
-    public Sommet b;
-    public Type t;
-    
+    public Sommet b;  
     
     public Arrete(Sommet x, Sommet y) {
-        a = x; a.nbVoisin++;
-        b = y; b.nbVoisin++;
-        t = Type.INT;
+        a = x; 
+        b = y; 
     }
-
-    public Arrete(Sommet x, Sommet y, String type) {
-        a = x; a.nbVoisin++;
-        b = y; b.nbVoisin++;
-        t = Type.PREF;
-    }
-    
     public Arrete(String x, String y) {
-        a = new Sommet(x); a.nbVoisin++;
-        b = new Sommet(y); b.nbVoisin++;
+        a = new Sommet(x); 
+        b = new Sommet(y);
     }
     
-    public Arrete(String x, String y, String type) {
-        a = new Sommet(x); a.nbVoisin++;
-        b = new Sommet(y); b.nbVoisin++;
-        t = Type.PREF;
+    public boolean estVoisin(Sommet z) {
+        return (a.equals(z)|| b.equals(z));
     }
-    
-
     public String toString(){
-        String ret = a.name + "  ---  " + b.name   + "    (" + t + ")" ;
+        String ret = a.name + "  ---  " + b.name ;
         return ret;
     }
 }

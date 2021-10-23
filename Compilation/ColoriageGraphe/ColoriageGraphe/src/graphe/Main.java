@@ -3,7 +3,7 @@ package graphe;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class main{
+class Main{
 
 
     public static void main(String[] args){
@@ -25,12 +25,13 @@ class main{
         arretes.add(bc);
         arretes.add(cd);
         arretes.add(da);
-        Graphe g = new Graphe(arretes);
+        Graphe g = new Graphe(arretes, new ArrayList<>());
         System.out.println(g.toString());
         
         System.out.println("Entrez le nombre de couleur pour le graphe diamant: ");
         Scanner in = new Scanner(System.in);
         int num = in.nextInt();
+        in.close();
         g.colorier(num);
         System.out.println(g.toString());
         
