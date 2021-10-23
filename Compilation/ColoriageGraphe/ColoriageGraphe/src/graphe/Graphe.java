@@ -76,7 +76,22 @@ class Graphe{
 	}
 
     public Graphe colorier(int nbCoul) {
-    	   	
+    	   	/*
+			   Pour chaque sommet (Est trivial?)
+			   		Oui: 
+					   new graphe copie
+					   supprimer
+
+					   colorier(sommet)
+					
+		
+
+				Pour tout sommet:
+					nouveau graphe
+					supprimer
+					spiller
+
+			   */
     	
     	
     	return this;
