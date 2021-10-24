@@ -11,7 +11,9 @@ import server.common.DistributedObserver;
 import server.common.DossierSuivi;
 import server.common.Espece;
 
-public class Client implements Serializable{
+// Lien pour le truc https://homepage.univie.ac.at/peter.brezany/teach/01WS-sweng/RMI-slides1.pdf
+
+public class Client implements Notifiable{
 	
 	public void init(String[] args) {
 		ObjectInCodebase o = new ObjectInCodebase();
