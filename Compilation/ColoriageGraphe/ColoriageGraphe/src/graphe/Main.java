@@ -4,12 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Main{
-
-
     public static void main(String[] args){
-
         ArrayList<Arrete> arretes = new ArrayList<>();
-
         // Diamant
         Sommet a = new Sommet("A");
         Sommet b = new Sommet("B");
@@ -26,7 +22,7 @@ class Main{
         arretes.add(cd);
         arretes.add(da);
         Graphe g = new Graphe(arretes, new ArrayList<>());
-        System.out.println(g.toString());
+        System.out.println(g.toString());     
         
         System.out.println("Entrez le nombre de couleur pour le graphe diamant: ");
         Scanner in = new Scanner(System.in);
@@ -34,8 +30,5 @@ class Main{
         in.close();
         g.colorier(num);
         System.out.println(g.toString());
-        
-
     }
-
 }

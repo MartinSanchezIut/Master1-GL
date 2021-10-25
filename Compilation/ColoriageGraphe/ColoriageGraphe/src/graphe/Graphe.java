@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 class Graphe{
-
 	public ArrayList<Sommet> sommets;
 
     public ArrayList<Arrete> interferances;
@@ -15,6 +14,7 @@ class Graphe{
 		this.interferances = new ArrayList<>(g.interferances) ;
 		this.preferences = new ArrayList<>(g.preferences) ;
 	}
+	
     public Graphe(ArrayList<Arrete> inter, ArrayList<Arrete> pref) {
         interferances = inter;
 		preferences = pref;
@@ -39,6 +39,10 @@ class Graphe{
     }
 
 	public boolean canBeColored(Sommet sommet, int couleur){
+		if (sommet.color != -1) {
+			return false;
+		}
+		
         for(Arrete arr : interferances){
             if(arr.estVoisin(sommet)){
                 if(arr.a.color == couleur || arr.b.color == couleur){
@@ -77,7 +81,7 @@ class Graphe{
 	}
 
 	public void colorierSommet(Sommet s, int nbCoul) {
-		for (int i = 0; i < nbCoul; i++) {
+		for (int i = 1; i <= nbCoul; i++) {
 			if (this.canBeColored(s, i)) {
 				s.color = i;
 				break;
@@ -87,20 +91,17 @@ class Graphe{
 
     public Graphe colorier(int nbCoul) {
 		Stack<Sommet> spille = new Stack<>();
-		// A revoir avec l'idée de matthieu
 		for (Sommet s : sommets) {
 			if (this.estTrivial(s, nbCoul)) {
-				Graphe g = new Graphe(this);
-				g.supprimerSommet(s) ;
+				Graphe g = this.supprimerSommet(s) ;
 				g.colorier(nbCoul) ;
 
 				this.colorierSommet(s, nbCoul) ;
-				break; // A voir
+				break;
 			}
 		}
 		for (Sommet s : sommets) {
-			Graphe g = new Graphe(this) ;
-			g.supprimerSommet(s) ;
+			Graphe g = this.supprimerSommet(s) ;
 			g.colorier(nbCoul);
 
 			spille.push(s) ;
