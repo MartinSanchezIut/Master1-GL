@@ -1,6 +1,7 @@
 package graphe;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 class Graphe{
 
@@ -75,25 +76,50 @@ class Graphe{
 		return ret;
 	}
 
+	public void colorierSommet(Sommet s, int nbCoul) {
+		for (int i = 0; i < nbCoul; i++) {
+			if (this.canBeColored(s, i)) {
+				s.color = i;
+				break;
+			}
+		}
+	}
+
     public Graphe colorier(int nbCoul) {
-    	   	/*
-			   Pour chaque sommet (Est trivial?)
+		Stack<Sommet> spille = new Stack<>();
+		// A revoir avec l'idée de matthieu
+		for (Sommet s : sommets) {
+			if (this.estTrivial(s, nbCoul)) {
+				Graphe g = new Graphe(this);
+				g.supprimerSommet(s) ;
+				g.colorier(nbCoul) ;
+
+				this.colorierSommet(s, nbCoul) ;
+				break; // A voir
+			}
+		}
+		for (Sommet s : sommets) {
+			Graphe g = new Graphe(this) ;
+			g.supprimerSommet(s) ;
+			g.colorier(nbCoul);
+
+			spille.push(s) ;
+
+		}
+    	   	/*  Pour chaque sommet (Est trivial?)
 			   		Oui: 
 					   new graphe copie
 					   supprimer
+					   recursif
 
 					   colorier(sommet)
-					
-		
-
 				Pour tout sommet:
 					nouveau graphe
 					supprimer
-					spiller
+					recursif
 
+					spiller
 			   */
-    	
-    	
     	return this;
     }
 
