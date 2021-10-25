@@ -1,0 +1,33 @@
+Ex1:
+> n <- 15
+> 5 -> 5
+Erreur dans 5 <- 5 : membre gauche de l'assignation (do_set) incorrect
+> x <- 1
+> X <- 10
+> n
+[1] 15
+> x
+[1] 1
+> X
+[1] 10
+> n <- 10 + 2
+> n
+[1] 12
+> n <- 3+ rnorm(1)
+> (10 + 2) * 5
+[1] 60
+> name <- "Carmen"; n1 <- 10; n2 <- 100; m <- 0.5; 
+> ls()
+[1] "m"    "n"    "n1"   "n2"   "name" "x"    "X" 
+> ls.str()
+m :  num 0.5
+n :  num 3.29
+n1 :  num 10
+n2 :  num 100
+name :  chr "Carmen"
+x :  num 1
+X :  num 10
+
+
+Ex2:
+
