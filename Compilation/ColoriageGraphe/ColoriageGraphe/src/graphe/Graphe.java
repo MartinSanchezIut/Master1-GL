@@ -37,12 +37,36 @@ class Graphe{
         	}
         }
     }
-
+    // Ce truc est pété
+    /*
+     Si deja colorer : NON
+     Si arrete de preferance: 
+         oui si est coloriable par cette couleur dans le graphe qui contient pas 
+         cette arete
+         
+     Si interférance
+     */
 	public boolean canBeColored(Sommet sommet, int couleur){
 		if (sommet.color != -1) {
 			return false;
 		}
-		
+		for (Arrete arr : preferences) {
+			if (arr.estVoisin(sommet))  {
+				System.out.println(sommet.name + " est une arrete de pref");
+				int coul1 = arr.a.color;
+				int coul2 = arr.b.color;
+
+				// C'est ici que ca merde
+				Graphe g = new Graphe(this);
+				g.preferences.remove(arr);
+				System.out.println(g.toString());
+
+				if (g.canBeColored(sommet, coul1) || g.canBeColored(sommet, coul2)) {
+					System.out.println("Satisfait");
+					return true;
+				}
+			}
+		}
         for(Arrete arr : interferances){
             if(arr.estVoisin(sommet)){
                 if(arr.a.color == couleur || arr.b.color == couleur){
@@ -91,8 +115,11 @@ class Graphe{
 
     public Graphe colorier(int nbCoul) {
 		Stack<Sommet> spille = new Stack<>();
+		
+		boolean hasFound = false;
 		for (Sommet s : sommets) {
 			if (this.estTrivial(s, nbCoul)) {
+				hasFound = true;
 				Graphe g = this.supprimerSommet(s) ;
 				g.colorier(nbCoul) ;
 
@@ -100,12 +127,13 @@ class Graphe{
 				break;
 			}
 		}
-		for (Sommet s : sommets) {
-			Graphe g = this.supprimerSommet(s) ;
-			g.colorier(nbCoul);
-
-			spille.push(s) ;
-
+		if (!hasFound) {
+			for (Sommet s : sommets) {
+				Graphe g = this.supprimerSommet(s) ;
+				g.colorier(nbCoul);
+	
+				spille.push(s) ;
+			}
 		}
     	   	/*  Pour chaque sommet (Est trivial?)
 			   		Oui: 
@@ -121,6 +149,11 @@ class Graphe{
 
 					spiller
 			   */
+		String sp = "Spille : " ;
+		for (Sommet s : spille) {
+			sp += s.name + " - " ;
+		}
+		System.out.println(sp);
     	return this;
     }
 
