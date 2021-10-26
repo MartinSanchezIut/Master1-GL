@@ -20,7 +20,7 @@ class Graphe{
 		preferences = pref;
 
         sommets = new ArrayList<>();
-        for (Arrete x : inter) {
+        for (Arrete x : pref) {
         	if (! sommets.contains(x.a)) {
         		sommets.add(x.a);
         	}
@@ -28,7 +28,7 @@ class Graphe{
         		sommets.add(x.b);
         	}
         }
-		for (Arrete x : pref) {
+		for (Arrete x : inter) {
         	if (! sommets.contains(x.a)) {
         		sommets.add(x.a);
         	}
@@ -52,17 +52,14 @@ class Graphe{
 		}
 		for (Arrete arr : preferences) {
 			if (arr.estVoisin(sommet))  {
-				System.out.println(sommet.name + " est une arrete de pref");
 				int coul1 = arr.a.color;
 				int coul2 = arr.b.color;
 
 				// C'est ici que ca merde
 				Graphe g = new Graphe(this);
 				g.preferences.remove(arr);
-				System.out.println(g.toString());
 
 				if (g.canBeColored(sommet, coul1) || g.canBeColored(sommet, coul2)) {
-					System.out.println("Satisfait");
 					return true;
 				}
 			}
@@ -116,23 +113,26 @@ class Graphe{
     public Graphe colorier(int nbCoul) {
 		Stack<Sommet> spille = new Stack<>();
 		
-		boolean hasFound = false;
+		Sommet trivial = null;
 		for (Sommet s : sommets) {
 			if (this.estTrivial(s, nbCoul)) {
-				hasFound = true;
-				Graphe g = this.supprimerSommet(s) ;
-				g.colorier(nbCoul) ;
-
-				this.colorierSommet(s, nbCoul) ;
-				break;
+				trivial = s;
 			}
 		}
-		if (!hasFound) {
-			for (Sommet s : sommets) {
-				Graphe g = this.supprimerSommet(s) ;
+		
+		if (trivial != null) {	
+			Graphe g = this.supprimerSommet(trivial) ;
+			g.colorier(nbCoul) ;
+			this.colorierSommet(trivial, nbCoul) ;
+
+		}else {
+			if (!sommets.isEmpty()) {
+				Sommet first = sommets.get(0);
+				
+				Graphe g = this.supprimerSommet(first) ;
 				g.colorier(nbCoul);
 	
-				spille.push(s) ;
+				spille.push(first) ;
 			}
 		}
     	   	/*  Pour chaque sommet (Est trivial?)
@@ -153,7 +153,7 @@ class Graphe{
 		for (Sommet s : spille) {
 			sp += s.name + " - " ;
 		}
-		System.out.println(sp);
+		//System.out.println(sp);
     	return this;
     }
 
@@ -173,5 +173,4 @@ class Graphe{
         }
         return ret;
     }
-
 }
