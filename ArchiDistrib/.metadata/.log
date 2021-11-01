@@ -1310,3 +1310,23 @@ org.eclipse.core.runtime.CoreException: Cannot determine URI for '/TP1-RMI/src/s
 	at org.eclipse.equinox.launcher.Main.main(Main.java:1438)
 !SUBENTRY 2 org.eclipse.core.filebuffers 4 0 2021-10-24 18:07:02.383
 !MESSAGE Cannot determine URI for '/TP1-RMI/src/server/classes/CabinetVetoImpl.java'.
+!SESSION 2021-11-01 10:22:58.351 -----------------------------------------------
+eclipse.buildId=4.14.0.I20191210-0610
+java.version=11.0.11
+java.vendor=Ubuntu
+BootLoader constants: OS=linux, ARCH=x86_64, WS=gtk, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os linux -ws gtk -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.jobs 4 2 2021-11-01 10:23:32.291
+!MESSAGE An internal error occurred during: "Deferred Early Start".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.core.internal.runtime.InternalPlatform.getLog(InternalPlatform.java:361)
+	at org.eclipse.core.runtime.Plugin.getLog(Plugin.java:237)
+	at org.eclipse.oomph.util.OomphPlugin.getLog(OomphPlugin.java:210)
+	at org.eclipse.oomph.util.OomphPlugin.log(OomphPlugin.java:225)
+	at org.eclipse.oomph.util.OomphPlugin.log(OomphPlugin.java:236)
+	at org.eclipse.oomph.internal.ui.EarlyStart.run(EarlyStart.java:116)
+	at org.eclipse.oomph.internal.ui.EarlyStart$1.run(EarlyStart.java:91)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
