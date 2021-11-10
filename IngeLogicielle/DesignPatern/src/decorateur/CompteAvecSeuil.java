@@ -2,9 +2,17 @@ package decorateur;
 
 public class CompteAvecSeuil extends Compte {
 
-	public CompteAvecSeuil(Client cli) {
+	private int seuil;
+	public CompteAvecSeuil(Client cli, int s) {
 		super(cli);
-		// TODO Auto-generated constructor stub
+		seuil = s;
+	}
+	
+	public double prixLocation(Produit p) {
+		if (p.getPrix() > seuil) {
+			return -1;
+		}
+		return p.getPrix();
 	}
 
 }

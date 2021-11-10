@@ -11,12 +11,12 @@ public class Compte {
 	public double prixLocation(Produit p) {
 		return p.getPrix();
 	}
-	
+	/*
 	public Compte addReduction(int red) {
-		return new CompteAvecReduction(c);
+		return new CompteAvecReduction(c, red);
 	}
 	
 	public Compte addSeuil(int seuil) {
-		return new CompteAvecSeuil(c);
-	}
+		return new CompteAvecSeuil(c, seuil);
+	}*/
 }

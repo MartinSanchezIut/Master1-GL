@@ -2,9 +2,13 @@ package decorateur;
 
 public class CompteAvecReduction extends Compte {
 
-	public CompteAvecReduction(Client cli) {
+	private int red;
+	public CompteAvecReduction(Client cli, int reduction) {
 		super(cli);
-		// TODO Auto-generated constructor stub
+		red = reduction;
 	}
-
+	
+	public double prixLocation(Produit p) {
+		return p.getPrix() * (red / 100);
+	}
 }
