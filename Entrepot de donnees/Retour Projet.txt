@@ -1,0 +1,43 @@
+Parler plus des ameilliorations 
+ Detailler le but avant (but de l'entrepot)
+
+
+Q2 detailler + lien plus haut
+
+
+Prix ? pas de requette ,???? bizzare
+
+
+Qu-es ce un trajet ?? /!\
+Occupations ?? Ligne ? 
+
+
+
++ de detail sur les datamart (uml)
+
+Pas de lien entre les dimentions /!\
+
+
+Fait : regroupe tt les dimentions 
+Mesure: ce qu'on vient enregister
+
+c et d) truc bizzare
+
+Vente ?
+Date / Time séparer J m A et H M S
+
+
+Ville relié a table de fait : depart arrive (VENTES)
+
+
+
+
+OCCUPATION prix ? nul
+
+
+Hierarchie trajet ?
+
+Table de fait: clé etrangere et mesures
+
+Reprendre occupation
+
