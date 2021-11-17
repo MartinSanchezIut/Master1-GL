@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Map"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.lang.Object"/>
-<fullyQualifiedTypeName name="main.dico.IDictionary"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="testCroise.AbstractDictionary"/>
-<fullyQualifiedTypeName name="testCroise.OrderedDictionary"/>
-<fullyQualifiedTypeName name="java.lang.Override"/>
-<fullyQualifiedTypeName name="java.lang.Comparable"/>
-<fullyQualifiedTypeName name="main.dico.OrderedDictionary"/>
-<fullyQualifiedTypeName name="main.dico.AbstractDictionary"/>
-<fullyQualifiedTypeName name="main.dico.FastDictionary"/>
-<fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.lang.Object"/>
+    <fullyQualifiedTypeName name="main.dico.IDictionary"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="testCroise.AbstractDictionary"/>
+    <fullyQualifiedTypeName name="testCroise.OrderedDictionary"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="java.lang.Comparable"/>
+    <fullyQualifiedTypeName name="main.dico.OrderedDictionary"/>
+    <fullyQualifiedTypeName name="main.dico.AbstractDictionary"/>
+    <fullyQualifiedTypeName name="main.dico.FastDictionary"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
+    <fullyQualifiedTypeName name="jeubidon.Partie"/>
+    <fullyQualifiedTypeName name="jeubidon.command.RemplirBidon"/>
 </qualifiedTypeNameHistroy>

@@ -6,10 +6,12 @@ public class CompteDecorateur extends Compte{
 		super(c);
 	}
 	public Compte setClient(Client c) {
+		return null;
 	//	this.client =c ;
 	}
 	
 	public Compte setReduction(int red) {
+		return null;
 	//	return ret;
 	}
 	
