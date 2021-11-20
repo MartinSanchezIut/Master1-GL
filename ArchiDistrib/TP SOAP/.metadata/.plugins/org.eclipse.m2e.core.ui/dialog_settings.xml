@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectWizardLocationPage">
 		<list key="location">
+			<item value="/home/martin/Desktop/Master1-GL/ArchiDistrib/TP SOAP/useCambio"/>
 		</list>
 		<list key="projectNameTemplate">
 			<item value="[artifactId]"/>
@@ -43,6 +44,7 @@
 	</section>
 	<section name="MavenProjectWizardArtifactPage">
 		<list key="groupId">
+			<item value="my"/>
 			<item value="TP-SOAP"/>
 			<item value="martin-TP-SOAP"/>
 		</list>
