@@ -354,7 +354,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SIPrIB9cEeyluKlcQmaLsQ" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_xGkrYEoYEeyFdvL4yGvBAA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_RwXW-h9cEeyluKlcQmaLsQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_VmNccEtyEeyspPkYRRLOzA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_RwXW-h9cEeyluKlcQmaLsQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SIPrIR9cEeyluKlcQmaLsQ" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -385,7 +385,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_SIQSNR9cEeyluKlcQmaLsQ" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_xGqK8EoYEeyFdvL4yGvBAA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_RwWvwh9cEeyluKlcQmaLsQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_VmP4sEtyEeyspPkYRRLOzA" elementId="org.eclipse.ui.window.pinEditor" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" enabled="false" type="Check" command="_RwWvwh9cEeyluKlcQmaLsQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_aMCMwDTkEeyJvKBpns-Gig" elementId="org.eclipse.jdt.ui.CompilationUnitEditor" visible="false">
         <tags>Draggable</tags>
@@ -661,6 +661,10 @@
     <bindings xmi:id="_qsMB4EoYEey7AphWBKP9fw" keySequence="CTRL+K" command="_RwWIkx9cEeyluKlcQmaLsQ"/>
     <bindings xmi:id="_qsPFMEoYEey7AphWBKP9fw" keySequence="ALT+CTRL+ARROW_LEFT" command="_RwXXER9cEeyluKlcQmaLsQ"/>
     <bindings xmi:id="_qsPsQEoYEey7AphWBKP9fw" keySequence="ALT+CTRL+ARROW_RIGHT" command="_qr2qsEoYEey7AphWBKP9fw"/>
+    <bindings xmi:id="_VUhPgUtyEeyspPkYRRLOzA" keySequence="CTRL+&#xc8;" command="_RwWv7B9cEeyluKlcQmaLsQ">
+      <tags>locale:fr</tags>
+      <parameters xmi:id="_VUhPgktyEeyspPkYRRLOzA" elementId="Splitter.isHorizontal" name="Splitter.isHorizontal" value="false"/>
+    </bindings>
   </bindingTables>
   <bindingTables xmi:id="_RwqRkR9cEeyluKlcQmaLsQ" elementId="org.eclipse.jdt.ui.javaEditorScope" bindingContext="_RwbBDx9cEeyluKlcQmaLsQ">
     <bindings xmi:id="_RwqRkh9cEeyluKlcQmaLsQ" keySequence="CTRL+SHIFT+P" command="_RwWItR9cEeyluKlcQmaLsQ"/>
@@ -1283,6 +1287,30 @@
     <persistedState key="originalCompatibilityViewBundle" value="org.eclipse.tm.terminal.view.ui"/>
     <tags>View</tags>
     <tags>categoryTag:Other</tags>
+  </descriptors>
+  <descriptors xmi:id="_VkygIEtyEeyspPkYRRLOzA" elementId="net.sourceforge.plantuml.eclipse.views.PlantUmlView" label="PlantUML" iconURI="platform:/plugin/net.sourceforge.plantuml.eclipse/icons/p5.gif" tooltip="" allowMultiple="true" category="PlantUml" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <persistedState key="originalCompatibilityViewClass" value="net.sourceforge.plantuml.eclipse.views.PlantUmlView"/>
+    <persistedState key="originalCompatibilityViewBundle" value="net.sourceforge.plantuml.eclipse"/>
+    <tags>View</tags>
+    <tags>categoryTag:PlantUml</tags>
+  </descriptors>
+  <descriptors xmi:id="_VkzHMEtyEeyspPkYRRLOzA" elementId="net.sourceforge.plantuml.eclipse.views.DiagramSourceView" label="PlantUML Source" iconURI="platform:/plugin/net.sourceforge.plantuml.eclipse/icons/p5.gif" tooltip="" allowMultiple="true" category="PlantUml" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <persistedState key="originalCompatibilityViewClass" value="net.sourceforge.plantuml.eclipse.views.DiagramSourceView"/>
+    <persistedState key="originalCompatibilityViewBundle" value="net.sourceforge.plantuml.eclipse"/>
+    <tags>View</tags>
+    <tags>categoryTag:PlantUml</tags>
+  </descriptors>
+  <descriptors xmi:id="_VkzuQEtyEeyspPkYRRLOzA" elementId="net.sourceforge.plantuml.jdt.ui.JdtPlantUmlView" label="PlantUML Project Class Diagram" iconURI="platform:/plugin/net.sourceforge.plantuml.eclipse/icons/p5.gif" tooltip="" category="PlantUml" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <persistedState key="originalCompatibilityViewClass" value="net.sourceforge.plantuml.jdt.ui.JdtPlantUmlView"/>
+    <persistedState key="originalCompatibilityViewBundle" value="net.sourceforge.plantuml.jdt"/>
+    <tags>View</tags>
+    <tags>categoryTag:PlantUml</tags>
+  </descriptors>
+  <descriptors xmi:id="_Vk0VUEtyEeyspPkYRRLOzA" elementId="net.sourceforge.plantuml.eclipse.views.PlantUmlSvgView" label="PlantUML Svg" iconURI="platform:/plugin/net.sourceforge.plantuml.eclipse/icons/p5.gif" tooltip="" allowMultiple="true" category="PlantUml" closeable="true" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView">
+    <persistedState key="originalCompatibilityViewClass" value="net.sourceforge.plantuml.eclipse.svg.PlantUmlSvgView"/>
+    <persistedState key="originalCompatibilityViewBundle" value="net.sourceforge.plantuml.svg"/>
+    <tags>View</tags>
+    <tags>categoryTag:PlantUml</tags>
   </descriptors>
   <trimContributions xmi:id="_2r10UF9tEeO-yojH_y4TJA" elementId="org.eclipse.ui.ide.application.trimcontribution.QuickAccess" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" toBeRendered="false" parentId="org.eclipse.ui.main.toolbar" positionInParent="last">
     <children xsi:type="menu:ToolControl" xmi:id="_76uUAF9tEeO-yojH_y4TJA" elementId="Spacer Glue" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
@@ -2313,7 +2341,7 @@
   <addons xmi:id="_RvtPYB9cEeyluKlcQmaLsQ" elementId="MinMax Addon" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.minmax.MinMaxAddon"/>
   <addons xmi:id="_RvtPYR9cEeyluKlcQmaLsQ" elementId="org.eclipse.ui.workbench.addon.0" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_Rv0kEB9cEeyluKlcQmaLsQ" elementId="SplitterAddon" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.addons.swt/org.eclipse.e4.ui.workbench.addons.splitteraddon.SplitterAddon"/>
-  <addons xmi:id="_IYS0IKimEeS11vbz3f9ezw" elementId="org.eclipse.ui.ide.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
+  <addons xmi:id="_VcFQEEtyEeyspPkYRRLOzA" elementId="org.eclipse.ui.ide.addon.0" contributionURI="bundleclass://org.eclipse.ui.ide/org.eclipse.ui.internal.ide.addons.SaveAllDirtyPartsAddon"/>
   <addons xmi:id="_dz0JgGOlEeSMMaPQU2nlzw" elementId="org.eclipse.ui.ide.application.addon.0" contributorURI="platform:/plugin/org.eclipse.ui.ide.application" contributionURI="bundleclass://org.eclipse.ui.ide.application/org.eclipse.ui.internal.ide.application.addons.ModelCleanupAddon"/>
   <categories xmi:id="_RwR3EB9cEeyluKlcQmaLsQ" elementId="org.eclipse.team.ui.category.team" name="Team" description="Actions that apply when working with a Team"/>
   <categories xmi:id="_RwR3ER9cEeyluKlcQmaLsQ" elementId="org.eclipse.ui.category.views" name="Views" description="Commands for opening views"/>

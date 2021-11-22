@@ -1,9 +1,11 @@
 package agenceNonDistrib.hotel;
 
+import java.util.ArrayList;
+
 public class Chambre {
 	
 	private Hotel hotel;
-	private Reservation reservation;
+	private ArrayList<Reservation> reservation;
 	private String nom;
 	private int lits;
 	
@@ -14,10 +16,21 @@ public class Chambre {
 		nom = n;
 		lits = l;
 		prix = p;
-		reservation = null;
+		reservation = new ArrayList<>();
 	}
 	
-	
+	public ArrayList<Reservation> getReservation() {
+		return reservation;
+	}
+	public int getLits() {
+		return lits;
+	}
+	public int getPrix() {
+		return prix;
+	}
+	public Hotel getHotel() {
+		return hotel;
+	}
 	
 	@Override
 	public String toString() {

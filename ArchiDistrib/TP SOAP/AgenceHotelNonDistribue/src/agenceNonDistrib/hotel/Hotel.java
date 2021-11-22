@@ -25,7 +25,27 @@ public class Hotel {
 	public int getEtoiles() {
 		return etoiles;
 	}
-	public ArrayList<Chambre> getChambres() {
-		return chambres;
+	
+	//Date au format aaaa/mm/jj
+	public ArrayList<Chambre> lookup(String date, String date1, int prixMin, int prixMax, int lits) {
+		ArrayList<Chambre> ret = new ArrayList<>();
+		for (Chambre c : chambres) {
+			if ((c.getPrix() >= prixMin) && (c.getPrix() <= prixMax) && (c.getLits() >= lits)) {
+				int d = Integer.parseInt(date.replace("/", ""));
+				int d1 = Integer.parseInt(date1.replace("/", ""));
+				boolean valid = true;
+				for (int i = 0; i < c.getReservation().size(); i++) {
+					int cd = Integer.parseInt(c.getReservation().get(i).getDebut().replace("/", ""));
+					int cd1 = Integer.parseInt(c.getReservation().get(i).getFin().replace("/", ""));
+					if ((d > cd && d < cd1) || (d1 < cd1 && d1 > cd)) {
+						valid = false;
+					}
+				}
+				if (valid) {
+					ret.add(c);
+				}
+			}
+		}		
+		return ret;
 	}
 }

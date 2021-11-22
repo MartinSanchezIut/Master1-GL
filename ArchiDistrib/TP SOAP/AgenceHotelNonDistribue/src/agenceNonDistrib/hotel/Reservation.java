@@ -12,11 +12,19 @@ public class Reservation {
 	
 	public Reservation(Chambre cham, Client cli, String d, String f) {
 		chambre = cham;
+		cham.getReservation().add(this);
 		client = cli;
 		debut = d;
 		fin = f;
 		System.out.println("Le client " + cli + " reserve la chambre " + cham + " de " + debut.toString() 
 		+ " a " + fin.toString() + ".");
+	}
+	
+	public String getDebut() {
+		return debut;
+	}
+	public String getFin() {
+		return fin;
 	}
 	
 }

@@ -3433,3 +3433,5 @@ org.eclipse.core.runtime.CoreException: Could not resolve artifact org.glassfish
 2021-11-20 16:50:24,127 [Worker-8: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-20 16:50:24,128 [Worker-8: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory /home/martin/Desktop/Master1-GL/ArchiDistrib/TP SOAP/TP-SOAP/src/test/resources
 2021-11-20 19:58:18,611 [Worker-4: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2021-11-22 09:57:52,103 [Worker-6: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is not available. Remote download required.
+2021-11-22 09:58:45,154 [Worker-8: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.

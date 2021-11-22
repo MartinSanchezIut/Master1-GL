@@ -6,5 +6,9 @@
 		<item key="DIALOG_WIDTH" value="318"/>
 		<item key="DIALOG_HEIGHT" value="444"/>
 		<item key="DIALOG_FONT_NAME" value="1|Noto Sans|9.0|0|GTK|1|"/>
+		<item key="ShowViewDialog.STORE_SELECTED_VIEW_ID" value="net.sourceforge.plantuml.eclipse.views.PlantUmlSvgView"/>
+		<list key="ShowViewDialog.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="PlantUml"/>
+		</list>
 	</section>
 </section>
