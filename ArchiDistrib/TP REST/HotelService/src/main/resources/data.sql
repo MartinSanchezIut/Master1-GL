@@ -1,0 +1,13 @@
+insert into chambre(id, name, lits, prix) values (1, 'Chambre 1', 2, 44);
+insert into chambre(id, name, lits, prix) values (2, 'Chambre 2', 4, 55);
+insert into chambre(id, name, lits, prix) values (3, 'Chambre 3', 5, 64);
+insert into chambre(id, name, lits, prix) values (4, 'Chambre 4', 1, 22);
+insert into chambre(id, name, lits, prix) values (5, 'Chambre 5', 3, 41);
+insert into chambre(id, name, lits, prix) values (6, 'Chambre 6', 2, 34);
+insert into chambre(id, name, lits, prix) values (7, 'Chambre 7', 4, 48);
+insert into chambre(id, name, lits, prix) values (8, 'Chambre 8', 3, 31);
+insert into chambre(id, name, lits, prix) values (9, 'Chambre 9', 4, 64);
+insert into chambre(id, name, lits, prix) values (10, 'Chambre 10', 5, 24);
+insert into chambre(id, name, lits, prix) values (11, 'Chambre 11', 1, 26);
+insert into chambre(id, name, lits, prix) values (12, 'Chambre 12', 1, 40);
+insert into chambre(id, name, lits, prix) values (13, 'Chambre 13', 2, 38);
