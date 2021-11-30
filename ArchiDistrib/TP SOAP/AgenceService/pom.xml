@@ -4,7 +4,7 @@
   <artifactId>AgenceService</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>AgenceService</name>
-    	<!--pom.xml-->
+    	<!--pom.xml -->
 	<dependencies>
 		<dependency>
 		<groupId>org.jboss.spec</groupId>
@@ -19,4 +19,5 @@
 		<version>2.3.1</version>
 		</dependency>
 	</dependencies>
+	
 </project>
