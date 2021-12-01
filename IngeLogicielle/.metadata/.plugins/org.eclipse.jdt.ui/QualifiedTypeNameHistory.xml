@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.util.Map"/>
-    <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.lang.Object"/>
@@ -17,4 +16,16 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Disabled"/>
     <fullyQualifiedTypeName name="jeubidon.Partie"/>
     <fullyQualifiedTypeName name="jeubidon.command.RemplirBidon"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="AbstractFactory"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="JavaCompiler.JavaLexer"/>
+    <fullyQualifiedTypeName name="JavaCompiler.JavaParser"/>
+    <fullyQualifiedTypeName name="JavaCompiler.JavaGenerator"/>
+    <fullyQualifiedTypeName name="CppCompiler.CppLexer"/>
+    <fullyQualifiedTypeName name="CppCompiler.CppParser"/>
+    <fullyQualifiedTypeName name="CppCompiler.CppGenerator"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="ProgramText"/>
+    <fullyQualifiedTypeName name="java.lang.ClassCastException"/>
 </qualifiedTypeNameHistroy>
