@@ -40,7 +40,7 @@ public class HotelServicePublisher {
 		}
 		// Creation des partenaires
 		h.getPartenaires().addAll(partenaires);
-		
+		System.out.println(h);
 		// Publication
 		Endpoint.publish("http://localhost:8080/" + name, 
 				h);

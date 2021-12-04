@@ -3,7 +3,6 @@ package fr.sanchez.agenceWebService.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.sanchez.agenceWebService.hotel.Chambre;
 import fr.sanchez.agenceWebService.hotel.IHotelService;
 
 public class Agence {
@@ -25,10 +24,11 @@ public class Agence {
 			IHotelService h = hotel.getProxy();
 			
 			if (h.getAddresse().equalsIgnoreCase(ville) && h.getEtoiles() == etoiles) {
-				List<Chambre> chambres = h.rechercher(nom, mdp, date, date1, prixMin, prixMax, lits);
+				List<String> response = h.rechercher(nom, mdp, date, date1, prixMin, prixMax, lits);
 				
-				for (Chambre c : chambres) {
-					Offre o = new Offre(this, h, c);
+				for (String c : response) {
+					String[] info = c.split("/");
+					Offre o = new Offre(this, h,info[1], Integer.parseInt(info[2]));
 					ret.add(o);	
 				}
 			}

@@ -1,29 +1,36 @@
 package fr.sanchez.agenceWebService.model;
 
-import fr.sanchez.agenceWebService.hotel.Chambre;
 import fr.sanchez.agenceWebService.hotel.IHotelService;
 
 public class Offre {
 	
 	private IHotelService hotel;
-	private Chambre chambre;
+	private String chambre;
 	
 	private Integer prix;
+	private Integer reduc;
 
-	public Offre(Agence self, IHotelService hotel, Chambre chambre) {
+	public Offre(Agence self, IHotelService hotel, String chambre, int prix) {
 		super();
 		this.hotel = hotel;
 		this.chambre = chambre;
-		this.prix = hotel.getPrixChambre(chambre, hotel.getReduction(self.getNom(), self.getMdp()));
+		this.prix = prix;
+		this.reduc = hotel.getReduction(self.getNom(), self.getNom());
 	}	
-	/*@Override
-	public String toString() {
-		return "Offre [hotel=" + hotel.getNom() + ", chambre=" + chambre.getNom() + ", prix=" + prix + "]";
-	}*/
-	public Chambre getChambre() {
+	public IHotelService getHotel() {
+		return hotel;
+	}
+	public String getChambre() {
 		return chambre;
 	}
 	public Integer getPrix() {
 		return prix;
+	}
+	public Integer getReduc() {
+		return reduc;
+	}
+	@Override
+	public String toString() {
+		return "A " + hotel.getAddresse()  + " " + chambre + ", prix=" + prix + " avec une reduction de " + reduc;
 	}
 }

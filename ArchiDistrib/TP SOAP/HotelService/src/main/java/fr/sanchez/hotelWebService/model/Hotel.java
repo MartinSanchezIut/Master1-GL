@@ -25,11 +25,22 @@ public class Hotel implements IHotelService{
 		this.partenaires = new ArrayList<>();
 	}
 	
-	public String reserver(String login, String mdp, Chambre chambre, Client client, String debut, String fin) {
-		chambre.getReservation().add(new Reservation(client, debut, fin)) ;
-		return "La chambre a ete reservee";
-	}
-	
+	@Override
+	public String reserver(String login, String mdp, String nomChambre, String nom, String prenom, String carte,
+			String debut, String fin) {
+		Chambre c = null;
+		for (Chambre cha : chambres) {
+			if (cha.getNom().equalsIgnoreCase(nomChambre))
+				c = cha;
+		}
+		if (c != null) {
+			c.getReservation().add(new Reservation(new  Client(nom, prenom, carte), debut, fin)) ;
+			return "La chambre a ete reservee.\n " + nom + " " + prenom + " " + carte + " " + nomChambre;
+		}else {
+			return "Une erreur est survenue";
+		}
+	}	
+
 	public Integer getReduction(String login, String mdp) {
 		Integer reduc = 0;
 		for (Partenaire p : partenaires) {
@@ -40,14 +51,25 @@ public class Hotel implements IHotelService{
 		return reduc;
 	}
 	
-	//Date au format aaaa/mm/jj
-	public ArrayList<Chambre> rechercher(String login, String mdp, String date, String date1, int prixMin, int prixMax, int lits) {
+	public ArrayList<String> rechercher(String login, String mdp, String date, String date1, int prixMin, int prixMax, int lits) {
 		Integer reduction = 0;
 		for (Partenaire p : partenaires) {
 			if (p.getNomAgence().equalsIgnoreCase(login) && p.getMotdepasse().equals(mdp)) {
 				reduction = p.getReduction();
 			}
 		}
+		
+		ArrayList<String> ret = new ArrayList<>();
+		ArrayList<Chambre> recherche = rechercher(date, date1, prixMin, prixMax, lits, reduction);
+		for(Chambre c  : recherche) {
+			Offre o = new Offre(this, c, c.getPrix(reduction))  ;
+			ret.add(o.toString());
+		}
+		return ret;
+	}
+	
+	//Date au format aaaa/mm/jj
+	private ArrayList<Chambre> rechercher(String date, String date1, int prixMin, int prixMax, int lits, int reduction) {
 		ArrayList<Chambre> ret = new ArrayList<>();
 		for (Chambre c : chambres) {
 			if ((c.getPrix(reduction) >= prixMin) && (c.getPrix(reduction) <= prixMax) && (c.getNbLits() >= lits)) {
@@ -88,9 +110,4 @@ public class Hotel implements IHotelService{
 	public ArrayList<Partenaire> getPartenaires() {
 		return partenaires;
 	}
-
-	@Override
-	public Integer getPrixChambre(Chambre c, Integer reduc) {
-		return c.getPrix(reduc);
-	}	
 }

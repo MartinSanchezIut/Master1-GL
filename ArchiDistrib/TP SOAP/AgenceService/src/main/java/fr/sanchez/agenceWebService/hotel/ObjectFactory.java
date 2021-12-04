@@ -24,16 +24,16 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _GetNomResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getNomResponse");
     private final static QName _GetReduction_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getReduction");
     private final static QName _GetAddresse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getAddresse");
-    private final static QName _GetPrixChambreResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getPrixChambreResponse");
-    private final static QName _GetPrixChambre_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getPrixChambre");
     private final static QName _ReserverResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "reserverResponse");
     private final static QName _Reserver_QNAME = new QName("http://hotelWebService.sanchez.fr/", "reserver");
     private final static QName _GetAddresseResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getAddresseResponse");
     private final static QName _Rechercher_QNAME = new QName("http://hotelWebService.sanchez.fr/", "rechercher");
     private final static QName _RechercherResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "rechercherResponse");
     private final static QName _GetEtoiles_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getEtoiles");
+    private final static QName _GetNom_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getNom");
     private final static QName _GetEtoilesResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getEtoilesResponse");
     private final static QName _GetReductionResponse_QNAME = new QName("http://hotelWebService.sanchez.fr/", "getReductionResponse");
 
@@ -42,6 +42,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link GetNomResponse }
+     * 
+     */
+    public GetNomResponse createGetNomResponse() {
+        return new GetNomResponse();
     }
 
     /**
@@ -61,27 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetPrixChambreResponse }
-     * 
-     */
-    public GetPrixChambreResponse createGetPrixChambreResponse() {
-        return new GetPrixChambreResponse();
-    }
-
-    /**
      * Create an instance of {@link ReserverResponse }
      * 
      */
     public ReserverResponse createReserverResponse() {
         return new ReserverResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetPrixChambre }
-     * 
-     */
-    public GetPrixChambre createGetPrixChambre() {
-        return new GetPrixChambre();
     }
 
     /**
@@ -125,6 +117,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetNom }
+     * 
+     */
+    public GetNom createGetNom() {
+        return new GetNom();
+    }
+
+    /**
      * Create an instance of {@link GetEtoilesResponse }
      * 
      */
@@ -141,19 +141,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Chambre }
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetNomResponse }{@code >}}
      * 
      */
-    public Chambre createChambre() {
-        return new Chambre();
-    }
-
-    /**
-     * Create an instance of {@link Client }
-     * 
-     */
-    public Client createClient() {
-        return new Client();
+    @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getNomResponse")
+    public JAXBElement<GetNomResponse> createGetNomResponse(GetNomResponse value) {
+        return new JAXBElement<GetNomResponse>(_GetNomResponse_QNAME, GetNomResponse.class, null, value);
     }
 
     /**
@@ -172,24 +165,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getAddresse")
     public JAXBElement<GetAddresse> createGetAddresse(GetAddresse value) {
         return new JAXBElement<GetAddresse>(_GetAddresse_QNAME, GetAddresse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPrixChambreResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getPrixChambreResponse")
-    public JAXBElement<GetPrixChambreResponse> createGetPrixChambreResponse(GetPrixChambreResponse value) {
-        return new JAXBElement<GetPrixChambreResponse>(_GetPrixChambreResponse_QNAME, GetPrixChambreResponse.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link GetPrixChambre }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getPrixChambre")
-    public JAXBElement<GetPrixChambre> createGetPrixChambre(GetPrixChambre value) {
-        return new JAXBElement<GetPrixChambre>(_GetPrixChambre_QNAME, GetPrixChambre.class, null, value);
     }
 
     /**
@@ -244,6 +219,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getEtoiles")
     public JAXBElement<GetEtoiles> createGetEtoiles(GetEtoiles value) {
         return new JAXBElement<GetEtoiles>(_GetEtoiles_QNAME, GetEtoiles.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetNom }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://hotelWebService.sanchez.fr/", name = "getNom")
+    public JAXBElement<GetNom> createGetNom(GetNom value) {
+        return new JAXBElement<GetNom>(_GetNom_QNAME, GetNom.class, null, value);
     }
 
     /**

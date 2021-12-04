@@ -33,6 +33,8 @@ public interface IHotelService {
      * @param arg4
      * @param arg1
      * @param arg0
+     * @param arg7
+     * @param arg6
      * @return
      *     returns java.lang.String
      */
@@ -47,13 +49,29 @@ public interface IHotelService {
         @WebParam(name = "arg1", targetNamespace = "")
         String arg1,
         @WebParam(name = "arg2", targetNamespace = "")
-        Chambre arg2,
+        String arg2,
         @WebParam(name = "arg3", targetNamespace = "")
-        Client arg3,
+        String arg3,
         @WebParam(name = "arg4", targetNamespace = "")
         String arg4,
         @WebParam(name = "arg5", targetNamespace = "")
-        String arg5);
+        String arg5,
+        @WebParam(name = "arg6", targetNamespace = "")
+        String arg6,
+        @WebParam(name = "arg7", targetNamespace = "")
+        String arg7);
+
+    /**
+     * 
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getNom", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.GetNom")
+    @ResponseWrapper(localName = "getNomResponse", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.GetNomResponse")
+    @Action(input = "http://hotelWebService.sanchez.fr/IHotelService/getNomRequest", output = "http://hotelWebService.sanchez.fr/IHotelService/getNomResponse")
+    public String getNom();
 
     /**
      * 
@@ -83,14 +101,14 @@ public interface IHotelService {
      * @param arg0
      * @param arg6
      * @return
-     *     returns java.util.List<fr.sanchez.agenceWebService.hotel.Chambre>
+     *     returns java.util.List<java.lang.String>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "rechercher", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.Rechercher")
     @ResponseWrapper(localName = "rechercherResponse", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.RechercherResponse")
     @Action(input = "http://hotelWebService.sanchez.fr/IHotelService/rechercherRequest", output = "http://hotelWebService.sanchez.fr/IHotelService/rechercherResponse")
-    public List<Chambre> rechercher(
+    public List<String> rechercher(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,
         @WebParam(name = "arg1", targetNamespace = "")
@@ -129,23 +147,5 @@ public interface IHotelService {
     @ResponseWrapper(localName = "getEtoilesResponse", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.GetEtoilesResponse")
     @Action(input = "http://hotelWebService.sanchez.fr/IHotelService/getEtoilesRequest", output = "http://hotelWebService.sanchez.fr/IHotelService/getEtoilesResponse")
     public Integer getEtoiles();
-
-    /**
-     * 
-     * @param arg1
-     * @param arg0
-     * @return
-     *     returns java.lang.Integer
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getPrixChambre", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.GetPrixChambre")
-    @ResponseWrapper(localName = "getPrixChambreResponse", targetNamespace = "http://hotelWebService.sanchez.fr/", className = "fr.sanchez.agenceWebService.hotel.GetPrixChambreResponse")
-    @Action(input = "http://hotelWebService.sanchez.fr/IHotelService/getPrixChambreRequest", output = "http://hotelWebService.sanchez.fr/IHotelService/getPrixChambreResponse")
-    public Integer getPrixChambre(
-        @WebParam(name = "arg0", targetNamespace = "")
-        Chambre arg0,
-        @WebParam(name = "arg1", targetNamespace = "")
-        Integer arg1);
 
 }

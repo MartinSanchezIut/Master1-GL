@@ -18,10 +18,12 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="arg0" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg1" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="arg2" type="{http://hotelWebService.sanchez.fr/}chambre" minOccurs="0"/>
- *         &lt;element name="arg3" type="{http://hotelWebService.sanchez.fr/}client" minOccurs="0"/>
+ *         &lt;element name="arg2" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg3" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg4" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="arg5" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg6" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="arg7" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,16 +39,20 @@ import javax.xml.bind.annotation.XmlType;
     "arg2",
     "arg3",
     "arg4",
-    "arg5"
+    "arg5",
+    "arg6",
+    "arg7"
 })
 public class Reserver {
 
     protected String arg0;
     protected String arg1;
-    protected Chambre arg2;
-    protected Client arg3;
+    protected String arg2;
+    protected String arg3;
     protected String arg4;
     protected String arg5;
+    protected String arg6;
+    protected String arg7;
 
     /**
      * Gets the value of the arg0 property.
@@ -101,10 +107,10 @@ public class Reserver {
      * 
      * @return
      *     possible object is
-     *     {@link Chambre }
+     *     {@link String }
      *     
      */
-    public Chambre getArg2() {
+    public String getArg2() {
         return arg2;
     }
 
@@ -113,10 +119,10 @@ public class Reserver {
      * 
      * @param value
      *     allowed object is
-     *     {@link Chambre }
+     *     {@link String }
      *     
      */
-    public void setArg2(Chambre value) {
+    public void setArg2(String value) {
         this.arg2 = value;
     }
 
@@ -125,10 +131,10 @@ public class Reserver {
      * 
      * @return
      *     possible object is
-     *     {@link Client }
+     *     {@link String }
      *     
      */
-    public Client getArg3() {
+    public String getArg3() {
         return arg3;
     }
 
@@ -137,10 +143,10 @@ public class Reserver {
      * 
      * @param value
      *     allowed object is
-     *     {@link Client }
+     *     {@link String }
      *     
      */
-    public void setArg3(Client value) {
+    public void setArg3(String value) {
         this.arg3 = value;
     }
 
@@ -190,6 +196,54 @@ public class Reserver {
      */
     public void setArg5(String value) {
         this.arg5 = value;
+    }
+
+    /**
+     * Gets the value of the arg6 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg6() {
+        return arg6;
+    }
+
+    /**
+     * Sets the value of the arg6 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg6(String value) {
+        this.arg6 = value;
+    }
+
+    /**
+     * Gets the value of the arg7 property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getArg7() {
+        return arg7;
+    }
+
+    /**
+     * Sets the value of the arg7 property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setArg7(String value) {
+        this.arg7 = value;
     }
 
 }
