@@ -8,14 +8,18 @@
 #include <sys/stat.h>
 #include <string.h>
 
+
+typedef struct identificateur identificateur;
+typedef struct message message;
+
 struct identificateur{
-    char ip[16];    // 255.255.255.255
-    char port[6]; //5566xx
+    char ip[16];      // 255.255.255.255
+    char port[16];   // 5566xx
 };
 
 struct message{
     int type;
-    struct identificateur contenu;
+    identificateur contenu;
 };
 
 int main(int argc, char *argv[]) {
@@ -28,68 +32,67 @@ int main(int argc, char *argv[]) {
 		VARIABLES IMPORTANTES DU PROGRAMME
 	*/ 
 	int jeton = 0;
-    struct identificateur pere;
-    strcpy(argv[1], pere.ip) ;
-    strcpy(argv[2], pere.port) ;
+    identificateur pere;
+    strncpy(pere.ip, argv[1], sizeof(argv[1])+1) ;
+    strncpy(pere.port, argv[2], sizeof(argv[2])+1) ;
+    identificateur next;
+    strncpy(next.ip, "", 0) ;
+    strncpy(next.port, "", 0) ;
+ 	/*
+		VARIABLES IMPORTANTES DU PROGRAMME
+	*/ 
 
-    struct identificateur next;
-    strcpy("", next.ip) ;
-    strcpy("", next.port) ;
-
-
-    int sock;
-    int sock2;
-    struct message buffer;
+    int sock, sock2;
+    message bufferout;
+    message bufferin;
     struct sockaddr_in servaddr, cliaddr;
-
     int status;
 
-    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { perror("Erreur socket:"); exit(EXIT_FAILURE); }
-    
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { perror("Erreur socket:"); exit(1); }
     memset(&servaddr, 0, sizeof(servaddr)); memset(&cliaddr, 0, sizeof(cliaddr));
-    
-    servaddr.sin_family = AF_INET;
+    servaddr.sin_family = AF_INET;        
     servaddr.sin_addr.s_addr = INADDR_ANY;
-    servaddr.sin_port = htons(argv[3]);  // Ouvrir sur le port passé dans la commande
+    servaddr.sin_port = htons((short) atoi(argv[3]));     // Ouvrir sur le port passé dans la commande
 
-    if ( bind(sock, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0 ){ perror("Erreur bind"); exit(EXIT_FAILURE);}
-
-
-
+    if ( bind(sock, (const struct sockaddr *)&servaddr, sizeof(servaddr)) < 0 ){ perror("Erreur bind"); exit(1);}
+    
+    int cbRead, nbSend;
     switch(fork()) {
         case -1:
             perror("Erreur de fork\n");
             exit(1);
         case 0: // Fils
-            //printf("Je suis le thread qui attends les messages\n");
-            rcv_from() 
+            cbRead = recvfrom(sock, &bufferin, sizeof(bufferin), 0, NULL, 0);
+            if( cbRead < 0 ){perror("recvfrom() error ");exit(1);}
 
-            
-
-
-            // Ecouter sur le socket
-
-            close(sock);
+	        printf( "recvfrom()=>cbRead=%d, Message=%i, %s : %s \n", cbRead, bufferin.type,
+                                                                             bufferin.contenu.ip,
+                                                                             bufferin.contenu.port );
             break;
         default: // Pere
-
-          
-            sendto(sock,(const struct message *)buffer , MSG_CONFIRM,strlen(buffer),(const struct sockaddr *)&servaddr,sizeof(servaddr));
+            if ((sock2 = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) { perror("Erreur socket2:"); exit(1); }
 
 
-            getifaddrs() 
-            while()
+            cliaddr.sin_family = AF_INET;        
+            cliaddr.sin_addr.s_addr = inet_addr(pere.ip);
+            cliaddr.sin_port = htons((short) atoi(pere.port));  
+           // if ( bind(sock2, (const struct sockaddr *)&cliaddr, sizeof(cliaddr)) < 0 ){ perror("Erreur bind"); exit(1);}
+        
 
+            bufferout.type = 1;    
+            strcpy(bufferout.contenu.ip, "Coucou") ;
+            strcpy( bufferout.contenu.port, "cava") ;
+            
+            nbSend = sendto(sock2, &bufferout, sizeof(bufferout), 0, (struct sockaddr*) &cliaddr, sizeof(cliaddr)) ;
+            if(  nbSend == -1 ){perror("send to error ");exit(1);}
 
-
-
-
-
+	        printf( "sendto()=>cbRead=%d, Message=%i, %s : %s \n", nbSend,  bufferout.type,
+                                                                            bufferout.contenu.ip,
+                                                                            bufferout.contenu.port );
 
             wait(&status);
             break;
         }
-
-
+ //   close(sock);
 	printf("Fin du noeud\n");  
 }
