@@ -45,6 +45,8 @@
 
     (setf (get nomVM :PC) 0)
     (setf (get nomVM :LC) 0)
+
+    (printVM nomVM)
 )
 
 (defun reset-memoire (&optional (nomVM 'maVM) (tailleMem 10000))
@@ -57,11 +59,53 @@
 )
 
 (defun chargerDuCode (vm code)
-    (write "Charger")
+  (write "test")
 )
+
+;; CE TRUC EST PAS A NOUS !!!
+(defun load-machine (mv asm)
+  (let ((exp asm)
+	(inst (car asm))
+	(etiqLoc (make-hash-table :size (get-taille mv)))
+	(etiqLocNR (make-hash-table :size (get-taille mv))))
+    (set-hash etiqLocNR 'nb 0)
+    (loop while exp
+	  do
+	  (case (car inst)
+	    ('@ (case-adr mv exp inst etiqLoc etiqLocNR))
+	    ('VARG (case-varg mv exp inst))
+	    ('JSR (case-saut mv exp inst))
+	    ('FEntry (case-fonction mv exp inst))
+	    (otherwise (case-other mv exp inst etiqLoc etiqLocNR))
+	    )
+	  do (setf exp (cdr exp))
+	  do (setf inst (car exp))
+	  )
+    )
+  )
 
 (defun executer (maVM)
     (write "Executer")
 )
 
+(defun printVM (vm)
+    (write "-*-*-*-*-*-*-*-*-*-*-")
+    (format t "~%Nom : ~S " (getProp vm :nom))
+    (format t "~%R0 : ~S " (getProp vm :R0))
+    (format t "~%R1 : ~S " (getProp vm :R1))
+    (format t "~%R2 : ~S " (getProp vm :R2))
 
+    (format t "~%BP : ~S " (getProp vm :BP))
+    (format t "~%SP : ~S " (getProp vm :SP))
+    (format t "~%FP : ~S " (getProp vm :FP))
+
+    (format t "~%Max pile : ~S " (getProp vm :MAXPILE))
+
+    (format t "~%FTL : ~S " (getProp vm :FLT))
+    (format t "~%FEQ : ~S " (getProp vm :FEQ))
+    (format t "~%FGT : ~S " (getProp vm :FGT))
+
+    (format t "~%PC : ~S " (getProp vm :PC))
+    (format t "~%LC : ~S " (getProp vm :LC))
+    (format t "~%-*-*-*-*-*-*-*-*-*-*-")
+)
