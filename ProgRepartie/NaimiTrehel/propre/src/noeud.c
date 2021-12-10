@@ -11,7 +11,9 @@
 #include "../h/calcul.h"
 
 #define THREAD_CREATION_ERROR 11
+#define WAIT_MESSAGE_FAIL 12
 #define EXIT_ARGUMENT_ERROR 1
+
 #define EXIT_SUCCES 0
 
 #define TRACE 1
@@ -22,11 +24,45 @@
     Fonction liee a l'écoute sur la socket
 */
 void * ecoute (void * params){
-    struct param * args = (struct param *) params;
-    if(TRACE) {printf("     Ecoute : Je commence mon calcul !\n");}
-    calcul(2);
-    if(TRACE) {printf("     Ecoute : Je termine mon calcul !\n");}
+    param * args = (struct param *) params;
 
+    if(TRACE) {printf("     Ecoute: Thread d'écoute crée !\n");}
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+    if(TRACE){printf("Ecoute:\nJeton : %i \ncondBoucle %i\nPere : (%d) : (%d) \nNext : %d : %d\n", 
+        *args->jeton, *args->condBoucle, args->pere->sin_addr.s_addr, 
+        args->pere->sin_port, args->next->sin_addr.s_addr, args->next->sin_port);}
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+
+
+    // Creation du socket d'ecoute
+    int sock;
+    struct sockaddr_in serveraddr = getSockAddr("127.0.0.1", args->portEcoute);
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+         perror("Erreur socket ecoute:"); exit(1);}
+
+    if ( bind(sock, (const struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ){ 
+        perror("Erreur bind ecoute: "); exit(1);}
+
+    /*
+        Ici on veut boucler tant que le programe principal tourne,
+        Ecouter les messages recus, et les traiter
+    */
+    while (! *args->condBoucle){
+        message msg;
+        if (AttendreMessage(sock, &msg) < 0) {
+            perror("Erreur dans l'attente de msg: ");
+            exit(WAIT_MESSAGE_FAIL);
+        }
+        printf( "Msg recu: Message=%i, (%d) : (%d) \n", 
+            msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );
+   
+        
+        if(TRACE) {printf("     Ecoute : Je commence mon calcul !\n");}
+        calcul(2);
+        if(TRACE) {printf("     Ecoute : Je termine mon calcul !\n");}
+    }
+    
+    close(sock);
     pthread_exit(NULL);
 }
 
@@ -43,38 +79,35 @@ int main(int argc, char *argv[]) {
         printf("utilisation : client ip_serveur port_serveur mon_port\n");
         exit(EXIT_ARGUMENT_ERROR);
     }
-
     /*
 		VARIABLES IMPORTANTES DU PROGRAMME
+            https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html
 	*/ 
+    int condBoucle = 0;
 	int jeton = 0;
-
-    struct sockaddr_in test_pere = getSockAddr(argv[1], atoi(argv[2]));
-    //struct sockaddr_in test_next = getSockAddr()
-
-    // PAS DE STRING PELO  https://www.gta.ufrj.br/ensino/eel878/sockets/sockaddr_inman.html
-    identificateur pere;
-    strncpy(pere.ip, argv[1], sizeof(argv[1])+1) ;
-    strncpy(pere.port, argv[2], sizeof(argv[2])+1) ;
-    pere.ip[sizeof(argv[1])+1] = '\0';
-    pere.port[sizeof(argv[2])+1] = '\0';
-    
-    identificateur next;
-    strncpy(next.ip, "", 0) ;
-    strncpy(next.port, "", 0) ;
+    struct sockaddr_in pere = getSockAddr(argv[1], atoi(argv[2]));
+    struct sockaddr_in next ;
  	/*
 		VARIABLES IMPORTANTES DU PROGRAMME
 	*/
-    if(TRACE){printf("Jeton : %i \nPere : %s : %s \nNext : %s : %s\n", jeton, pere.ip, pere.port, next.ip, next.port);}
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+    if(TRACE){printf("Main:\nJeton : %i \nPere : %s(%d) : %s(%d) \nNext : %d : %d\n", 
+        jeton, argv[1], pere.sin_addr.s_addr, argv[2], pere.sin_port, next.sin_addr.s_addr, next.sin_port);}
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
 
 
-    param p;     p.jeton = jeton;   p.pere = pere;     p.next = next;
+    // Creation du thread d'ecoute
+    param p;     
+    p.condBoucle = &condBoucle;     
+    p.jeton = &jeton;   
+    p.pere = &pere;    
+    p.next = &next;
+    p.portEcoute = atoi(argv[3]);
     pthread_t t_ecoute;
     if (pthread_create(&t_ecoute, NULL, ecoute, (void*) &p) != 0){
         perror("Erreur creation du thread d'ecoute : ");
         exit(THREAD_CREATION_ERROR);
     }
-    if(TRACE) {printf("Thread d'écoute crée !\n");}
 
 
 
@@ -83,7 +116,7 @@ int main(int argc, char *argv[]) {
     calcul(5);
     if(TRACE) {printf("Main : Je termine mon calcul !\n");}
 
-    /*
+    /*                                         
 
     continuer;      // Du code sans importance
 
@@ -100,6 +133,10 @@ int main(int argc, char *argv[]) {
     continuer;      // Du code sans importance
     */
 
+
+
+    // Permet de mettre fin a la boucle du thread d'ecoute
+    condBoucle = 1;
     // Join ?? Ou un kill(9)
     pthread_join(t_ecoute, NULL);
     exit(EXIT_SUCCES);

@@ -1,4 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+#include <netdb.h>
 
 /*
 Définition des structures de données,
@@ -21,21 +29,40 @@ struct message{
     Type = 0 : Demande pour devenir la racine
     Type = 1 : Envoi de token, pour entrer en section critique
     */
-    identificateur contenu;
+    struct sockaddr_in contenu;
     /*
     Qui suis-je ? Mon ip, et mon port d'écoute.
     */
 };
 
 struct param{
-    int jeton;
-    identificateur pere; 
-    identificateur next; 
+    int* condBoucle;
+    int* jeton;
+    struct sockaddr_in *pere; 
+    struct sockaddr_in *next; 
+
+    int portEcoute;
 };
 
 
-struct message AttendreMessage(int socket) {
-
+int AttendreMessage(int socket, message *msg) {
+    message mess ;
+    int cbRead = recvfrom(socket, &mess, sizeof(mess), 0, NULL, 0);
+    if( cbRead < 0 ){
+        perror("recvfrom() error: ");
+        return -1;
+    }
+    msg->type = mess.type;
+    msg->contenu = mess.contenu;
+    return cbRead;
+}
+int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
+    int nbSend = sendto(socket, &msg, sizeof(msg), 0, (struct sockaddr*) &dest, sizeof(dest)) ;
+    if(nbSend < 0 ){
+        perror("sendto() error: ");
+        return -1;
+    }
+    return nbSend;
 }
 
 struct sockaddr_in getSockAddr(char ip[], int port) {
@@ -43,12 +70,6 @@ struct sockaddr_in getSockAddr(char ip[], int port) {
     myaddr.sin_family = AF_INET;
     myaddr.sin_port = htons(port);
     inet_aton(ip, &myaddr.sin_addr.s_addr); 
-
-    /*
-    int s = socket(PF_INET, SOCK_STREAM, 0);
-    bind(s, (struct sockaddr_in*) myaddr, sizeof(myaddr));
-    close(s);
-    */
     return myaddr;
 }
 
