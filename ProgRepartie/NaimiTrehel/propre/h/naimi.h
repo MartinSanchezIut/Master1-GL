@@ -64,6 +64,17 @@ int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
     }
     return nbSend;
 }
+int EnvoyerToken(int socket, struct sockaddr_in dest){
+    message msg;
+    msg.type  = 1;
+    msg.contenu = ?????;
+    int nbSend = sendto(socket, &msg, sizeof(msg), 0, (struct sockaddr*) &dest, sizeof(dest)) ;
+    if(nbSend < 0 ){
+        perror("sendto() error: ");
+        return -1;
+    }
+    return nbSend;
+}
 
 struct sockaddr_in getSockAddr(char ip[], int port) {
     struct sockaddr_in myaddr;
