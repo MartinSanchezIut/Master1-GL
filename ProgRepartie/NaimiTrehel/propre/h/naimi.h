@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pthread.h>
+#include <sys/time.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <time.h>
 #include <netdb.h>
 
 /*
@@ -14,14 +17,8 @@ Définition des structures de données,
     message représente un message envoyé sur le réseau.
     param représente les parametres a envoyer au thread d'écoute, c'est a dire les variables du programe principal
 */
-typedef struct identificateur identificateur;
 typedef struct message message;
 typedef struct param param;
-
-struct identificateur{
-    char ip[16];      // 255.255.255.255
-    char port[16];   // 5566xx    UN INT
-};
 
 struct message{
     int type;
@@ -37,7 +34,7 @@ struct message{
 
 struct param{
     int* condBoucle;
-    int* jeton;
+    pthread_mutex_t* jeton;
     struct sockaddr_in *pere; 
     struct sockaddr_in *next; 
 
@@ -64,16 +61,30 @@ int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
     }
     return nbSend;
 }
-int EnvoyerToken(int socket, struct sockaddr_in dest){
+int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
+    pthread_mutex_lock(&jeton);
     message msg;
     msg.type  = 1;
-    msg.contenu = ?????;
+    //msg.contenu = NULL;
     int nbSend = sendto(socket, &msg, sizeof(msg), 0, (struct sockaddr*) &dest, sizeof(dest)) ;
     if(nbSend < 0 ){
         perror("sendto() error: ");
         return -1;
     }
     return nbSend;
+}
+pthread_mutex_t initToken(struct sockaddr_in me, struct sockaddr_in pere) {
+    pthread_mutex_t jeton = PTHREAD_MUTEX_INITIALIZER;
+    // On va verifier si je suis la racine : pere = moi
+    if ((me.sin_port == pere.sin_port) && (me.sin_addr.s_addr == pere.sin_addr.s_addr)) {
+        pthread_mutex_unlock(&jeton);
+    }else {
+        pthread_mutex_lock(&jeton);
+    }
+    return jeton;
+}
+int attendreToken(pthread_mutex_t* jeton) {
+    pthread_mutex_lock(jeton);
 }
 
 struct sockaddr_in getSockAddr(char ip[], int port) {
@@ -84,3 +95,11 @@ struct sockaddr_in getSockAddr(char ip[], int port) {
     return myaddr;
 }
 
+const char* getTime() {
+    time_t my_time;
+    struct tm * timeinfo; 
+    time (&my_time);
+    timeinfo = localtime (&my_time);
+    char *time = timeinfo->tm_min + " : " + timeinfo->tm_sec;
+    return time;
+}
