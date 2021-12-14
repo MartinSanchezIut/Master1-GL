@@ -4,46 +4,44 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+@Entity
 public class Reservation {
 	
 	@Id
 	private Long id;
 	
 	@Column(name="chambre")
-	private Chambre chambre;
+	private int idChambre;
 	@Column(name="client")
-	private Client client;
+	private int  idClient;
 	@Column(name="debut")
 	private String debut;
 	@Column(name="fin")
 	private String fin;
 	
 	public Reservation() {}
-	
-	public Reservation(Long id, Chambre chambre, Client client, String debut, String fin) {
+
+	public Reservation(Long id, int idChambre, int idClient, String debut, String fin) {
 		super();
 		this.id = id;
-		this.chambre = chambre;
-		this.client = client;
+		this.idChambre = idChambre;
+		this.idClient = idClient;
 		this.debut = debut;
 		this.fin = fin;
 	}
-
 	public Long getId() {
 		return id;
 	}
-	public Chambre getChambre() {
-		return chambre;
+	public int getIdChambre() {
+		return idChambre;
 	}
-	public Client getClient() {
-		return client;
+	public int getIdClient() {
+		return idClient;
 	}
 	public String getDebut() {
 		return debut;
 	}
 	public String getFin() {
 		return fin;
-	}
-	
-	
+	}	
 }

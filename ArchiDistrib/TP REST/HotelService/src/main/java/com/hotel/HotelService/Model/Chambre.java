@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Entity
 public class Chambre {
 	@Id
@@ -16,7 +18,9 @@ public class Chambre {
 	private int lits;
 	@Column(name="prix")
 	private int prix;
-
+	@Column(name="hotel")
+	private int idHotel;
+	
 	private ArrayList<Reservation> reservation;
 
 	
@@ -32,10 +36,11 @@ public class Chambre {
 	}
 
 	// A supprimer plus tard
-	public Chambre(String n, int l, int p) {
+	public Chambre(String n, int l, int p, int idHotel) {
 		nom = n;
 		lits = l;
 		prix = p;
+		this.idHotel = idHotel;
 		reservation = new ArrayList<>();
 	}
 
@@ -50,5 +55,8 @@ public class Chambre {
 	}
 	public String getNom() {
 		return nom;
+	}
+	public long getIdHotel() {
+		return idHotel;
 	}
 }

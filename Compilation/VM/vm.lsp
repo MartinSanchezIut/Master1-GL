@@ -59,7 +59,21 @@
 )
 
 (defun chargerDuCode (vm code)
-  (write "test")
+  (let 
+    (etiquetes (make-hash-table :size (getProp mv :taille)))
+    (etiquetesIndef (make-hash-table :size (getProp mv :taille)))
+    (expression asm)
+    (next (car asm))
+  )
+
+  (loop (while expression) 
+
+
+
+
+    (do (setf expression (cdr expression)))
+    (do (setf next (car expression)))
+  )  
 )
 
 ;; CE TRUC EST PAS A NOUS !!!
@@ -68,6 +82,9 @@
 	(inst (car asm))
 	(etiqLoc (make-hash-table :size (get-taille mv)))
 	(etiqLocNR (make-hash-table :size (get-taille mv))))
+  
+
+
     (set-hash etiqLocNR 'nb 0)
     (loop while exp
 	  do

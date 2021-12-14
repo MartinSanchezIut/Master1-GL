@@ -62,6 +62,8 @@ int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
     return nbSend;
 }
 int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
+    // Si le destinataire = null ??????
+    
     pthread_mutex_lock(&jeton);
     message msg;
     msg.type  = 1;
@@ -95,11 +97,8 @@ struct sockaddr_in getSockAddr(char ip[], int port) {
     return myaddr;
 }
 
-const char* getTime() {
-    time_t my_time;
-    struct tm * timeinfo; 
-    time (&my_time);
-    timeinfo = localtime (&my_time);
-    char *time = timeinfo->tm_min + " : " + timeinfo->tm_sec;
-    return time;
+time_t getTime() {
+    time_t seconds;
+    time(&seconds);
+    return seconds-1639476053;
 }

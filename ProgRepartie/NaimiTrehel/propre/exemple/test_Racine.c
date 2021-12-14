@@ -16,7 +16,6 @@
 
 #define THREAD_CREATION_ERROR 11
 #define WAIT_MESSAGE_FAIL 12
-#define SOCKET_ERROR 13
 #define EXIT_ARGUMENT_ERROR 1
 
 #define EXIT_SUCCES 0
@@ -31,24 +30,21 @@
 void * ecoute (void * params){
     param * args = (struct param *) params;
 
-    struct sockaddr_in moi = getSockAddr("127.0.0.1", args->portEcoute);
-
-
     if(TRACE) {printf("     Ecoute: Thread d'écoute crée !\n");}
-    printf("-*-*-*-*-*-*-*-*-*-*-\n");
-    printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \nNext : %d : %d\n", 
-        moi.sin_addr.s_addr, moi.sin_port, 
-        args->pere->sin_addr.s_addr, args->pere->sin_port, 
-        args->next->sin_addr.s_addr, args->next->sin_port);
-    printf("-*-*-*-*-*-*-*-*-*-*-\n");
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+    if(TRACE){printf("Ecoute:\nJeton : %i \ncondBoucle %i\nPere : (%d) : (%d) \nNext : %d : %d\n", 
+        /**args->jeton*/-1, *args->condBoucle, args->pere->sin_addr.s_addr, 
+        args->pere->sin_port, args->next->sin_addr.s_addr, args->next->sin_port);}
+    if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
 
 
     // Creation du socket d'ecoute
     int sock;
+    struct sockaddr_in serveraddr = getSockAddr("127.0.0.1", args->portEcoute);
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-         perror("Erreur socket ecoute:"); exit(SOCKET_ERROR);}
-    if ( bind(sock, (const struct sockaddr *)&moi, sizeof(moi)) < 0 ){ 
-        perror("Erreur bind ecoute: "); exit(SOCKET_ERROR);}
+         perror("Erreur socket ecoute:"); exit(1);}
+    if ( bind(sock, (const struct sockaddr *)&serveraddr, sizeof(serveraddr)) < 0 ){ 
+        perror("Erreur bind ecoute: "); exit(1);}
 
     // Petit bout de code pour que "AttendreMessage" ne bloque pas infiniment, Timeout = 60sec
     struct timeval tv;
@@ -69,7 +65,7 @@ void * ecoute (void * params){
             perror("Erreur dans l'attente de msg: \n");
             exit(WAIT_MESSAGE_FAIL);
         }
-        if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
+        if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n\n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
    
         switch (msg.type)        {
         case 0:
@@ -82,20 +78,19 @@ void * ecoute (void * params){
                             envoyer le message a pere
                             pere = contenu
             */
-            if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
+            if ((serveraddr.sin_port == args->pere->sin_port) && (serveraddr.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
                 *args->next = msg.contenu ;
                 *args->pere = msg.contenu ;
             }else {
                 EnvoyerMessage(sock, *args->pere,  msg);
                 *args->pere = msg.contenu ;
             }
-            printf("    Ecoute: Demande d'acces a la racine\n") ;
-            printf("-*-*-*-*-*-*-*-*-*-*-\n");
-            printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \nNext : %d : %d\n", 
-                moi.sin_addr.s_addr, moi.sin_port, 
-                args->pere->sin_addr.s_addr, args->pere->sin_port, 
-                args->next->sin_addr.s_addr, args->next->sin_port);
-            printf("-*-*-*-*-*-*-*-*-*-*-\n");
+            if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+            if(TRACE){printf("Ecoute:\nJeton : %i \ncondBoucle %i\nPere : (%d) : (%d) \nNext : %d : %d\n", 
+                /**args->jeton*/-1, *args->condBoucle, args->pere->sin_addr.s_addr, 
+                args->pere->sin_port, args->next->sin_addr.s_addr, args->next->sin_port);}
+            if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+            printf("    Ecoute: message redirige\n\n") ;
             break;
         case 1:
             /*
@@ -136,8 +131,8 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in moi = getSockAddr("127.0.0.1", atoi(argv[3]));
 
     struct sockaddr_in pere = getSockAddr(argv[1], atoi(argv[2]));
-    struct sockaddr_in next ; memset(&next, 0, sizeof(next));
-    pthread_mutex_t jeton = initToken(moi, pere);
+    struct sockaddr_in next ;
+    pthread_mutex_t jeton = initToken(getSockAddr("127.0.0.1", atoi(argv[3])), pere);
  	/*
 		VARIABLES IMPORTANTES DU PROGRAMME
 	*/
@@ -165,20 +160,22 @@ int main(int argc, char *argv[]) {
     // Creation du socket d'envoi de messages
     int sock;
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-         perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
+         perror("Erreur socket d'envoi:"); exit(1);}
 
  
  
-        
-            // PROGRAMME PRINCIPAL :
-            calcul(1) ;
+ 
+    // PROGRAMME PRINCIPAL :
+    calcul(1);
 
 
-            attendreToken(&jeton);
-            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
-            calcul(15);
-            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
-            EnvoyerToken(&jeton, sock, next) ;
+
+
+    attendreToken(&jeton);
+    if(TRACE) {printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;}
+    calcul(5);
+    if(TRACE) {printf("%ld - Main : Je termine mon calcul !\n", getTime() );}
+    EnvoyerToken(&jeton, sock, next) ;
    
    
 

@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
         exit(1);
     }
 
-
     int sock;
     struct sockaddr_in serveraddr = getSockAddr("127.0.0.1", atoi(argv[1]));
     if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {

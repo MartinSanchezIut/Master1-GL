@@ -19,19 +19,22 @@ public class Hotel {
 	@Column(name="ville")	
 	private String ville;
 	//@OneToMany
-	private ArrayList<Chambre> chambres;
+	//private ArrayList<Chambre> chambres;
 	
 	
 	public Hotel(String n, String v, int e) {
 		nom = n;
 		etoiles = e;
 		ville = v;
-		chambres = new ArrayList<>();
+	//	chambres = new ArrayList<>();
 	}
 	
-	public ArrayList<Chambre> getChambres() {
+	
+	public Hotel() {	}
+
+	/*public ArrayList<Chambre> getChambres() {
 		return chambres;
-	}
+	}*/
 	public String getName() {
 		return nom;
 	}
