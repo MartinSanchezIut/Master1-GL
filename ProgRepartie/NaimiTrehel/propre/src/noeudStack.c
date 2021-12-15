@@ -178,24 +178,21 @@ int main(int argc, char *argv[]) {
 
  
  
- 
-    // PROGRAMME PRINCIPAL :
-    calcul(1);
+        
+            // PROGRAMME PRINCIPAL :
+            calcul(1) ;
 
-    message msg;
-    msg.type = 0;
-    msg.contenu = getSockAddr("127.0.0.1", atoi(argv[3]));
-    EnvoyerMessage(sock, pere, msg) ;
-    attendreToken(&jeton);
-    if(TRACE) {printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;}
-    calcul(5);
-    if(TRACE) {printf("%ld - Main : Je termine mon calcul !\n", getTime() );}
-    if (!isEmpty(next)) {
-        EnvoyerToken(&jeton, sock, pop(next)) ;
-    }else {
-        printf("Je n'ai pas de next ... \n");
-    }
-      
+
+            attendreToken(&jeton);
+            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
+            calcul(15);
+            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
+
+            if (!isEmpty(next)) {
+                EnvoyerToken(&jeton, sock, pop(next)) ;
+            }else {
+                printf("Je n'ai pas de next ... \n");
+            }
    
 
 

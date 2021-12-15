@@ -13,7 +13,6 @@
 
 /*
 Définition des structures de données,
-    identificateur représente une noeud, définit par son ip et son port d'écoute.
     message représente un message envoyé sur le réseau.
     param représente les parametres a envoyer au thread d'écoute, c'est a dire les variables du programe principal
 */
@@ -25,6 +24,7 @@ struct message{
     /*
     Type = 0 : Demande pour devenir la racine
     Type = 1 : Envoi de token, pour entrer en section critique
+    Type = 2 : L'ex racine me previens que je suis la nouvelle racine
     */
     struct sockaddr_in contenu;
     /*
@@ -53,6 +53,7 @@ int AttendreMessage(int socket, message *msg) {
     msg->contenu = mess.contenu;
     return cbRead;
 }
+
 int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
     int nbSend = sendto(socket, &msg, sizeof(msg), 0, (struct sockaddr*) &dest, sizeof(dest)) ;
     if(nbSend < 0 ){
@@ -61,9 +62,8 @@ int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
     }
     return nbSend;
 }
+
 int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
-    // Si le destinataire = null ??????
-    
     pthread_mutex_lock(&jeton);
     message msg;
     msg.type  = 1;
@@ -75,6 +75,7 @@ int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
     }
     return nbSend;
 }
+
 pthread_mutex_t initToken(struct sockaddr_in me, struct sockaddr_in pere) {
     pthread_mutex_t jeton = PTHREAD_MUTEX_INITIALIZER;
     // On va verifier si je suis la racine : pere = moi
@@ -85,6 +86,7 @@ pthread_mutex_t initToken(struct sockaddr_in me, struct sockaddr_in pere) {
     }
     return jeton;
 }
+
 int attendreToken(pthread_mutex_t* jeton) {
     pthread_mutex_lock(jeton);
 }

@@ -71,7 +71,7 @@ void * ecoute (void * params){
         }
         if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
    
-        switch (msg.type)        {
+        switch (msg.type){
         case 0:
             /*
                 Ici j'ai reçu une demande  pour devenir racine
@@ -85,6 +85,9 @@ void * ecoute (void * params){
             if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
                 *args->next = msg.contenu ;
                 *args->pere = msg.contenu ;
+
+                message msg1; msg1.type = 2; msg1.contenu = moi;
+                EnvoyerMessage(sock, *args->pere,  msg1);
             }else {
                 EnvoyerMessage(sock, *args->pere,  msg);
                 *args->pere = msg.contenu ;
@@ -105,6 +108,14 @@ void * ecoute (void * params){
             printf("    Ecoute: J'ai le token !\n\n");
             pthread_mutex_unlock(args->jeton);
             break;
+        case 2:
+            /*
+                Ce message permet de prévenir le demandeur de racine qu'il 
+                est la nouvelle racine
+            */
+            *args->pere = moi ;
+            printf("     Ecoute: Je suis la nouvelle racine! \n\n");
+            break; 
         default:
             printf("    Ecoute: Type de message inconnu ...\n\n") ;
             break;
