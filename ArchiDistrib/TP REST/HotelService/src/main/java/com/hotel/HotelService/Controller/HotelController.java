@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hotel.HotelService.Model.Chambre;
 import com.hotel.HotelService.Model.Hotel;
+import com.hotel.HotelService.Model.Reservation;
 import com.hotel.HotelService.Repositories.ChambreRepository;
 import com.hotel.HotelService.Repositories.HotelRepository;
+import com.hotel.HotelService.Repositories.ReservationRepository;
 
 @RestController
 public class HotelController {
@@ -21,7 +23,8 @@ public class HotelController {
 	public HotelRepository repo ;
 	@Autowired
 	public ChambreRepository chambres ;
-	
+	@Autowired
+	public ReservationRepository reserv ;	
 
 	@GetMapping("/hotel")
 	public List<Hotel> getAllHotels() {
@@ -46,7 +49,6 @@ public class HotelController {
 				}
 			}
 			return ret;
-			
 		}
 		return null;
 	}
@@ -65,15 +67,18 @@ public class HotelController {
 				int d = Integer.parseInt(date.replace("-", ""));
 				int d1 = Integer.parseInt(date1.replace("-", ""));
 				boolean valid = true;
-				/*
-				for (int i = 0; i < c.getReservation().size(); i++) {
-					int cd = Integer.parseInt(c.getReservation().get(i).getDebut().replace("/", ""));
-					int cd1 = Integer.parseInt(c.getReservation().get(i).getFin().replace("/", ""));
+				
+				List<Reservation> reservations = reserv.getReservationOfChambre(c.getId()) ;
+				for (int i = 0; i < reservations.size(); i++) {
+					int cd = Integer.parseInt(reservations.get(i).getDebut().replace("-", ""));
+					int cd1 = Integer.parseInt(reservations.get(i).getFin().replace("-", ""));
+					System.out.println(d + " > " + cd + " && " + d + " < "+ cd1);
+					System.out.println(d1 + " < " + cd1 + " && " + d1 + " > "+ cd);
+					
 					if ((d > cd && d < cd1) || (d1 < cd1 && d1 > cd)) {
 						valid = false;
 					}
 				}
-				*/
 				if (valid) {
 					ret.add(c);
 				}

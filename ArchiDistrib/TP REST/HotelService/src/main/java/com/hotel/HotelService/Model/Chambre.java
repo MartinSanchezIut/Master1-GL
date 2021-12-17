@@ -59,4 +59,7 @@ public class Chambre {
 	public long getIdHotel() {
 		return idHotel;
 	}
+	public long getId() {
+		return id;
+	}
 }
