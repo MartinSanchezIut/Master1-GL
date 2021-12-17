@@ -12,4 +12,19 @@ public interface ClientRepository extends JpaRepository<Client,Long>{
 	
 	Optional<Client> findById(Long id);
 	List<Client> findAll();
+	
+	/*
+	@Modifying
+	@Query(value = "insert into client (id, name, surname, card) values (:id, :name, :surname, :card)", nativeQuery = true)
+	public void addClient(@Param("id") Long id,
+						  @Param("name") String name,
+						  @Param("surname") String surname,
+						  @Param("card") String card) ;
+
+	@Modifying
+	@Query(value = "insert into client (name, surname, card) values (:name, :surname, :card)", nativeQuery = true)
+	public void addClient2(@Param("name") String name,
+						   @Param("surname") String surname,
+						   @Param("card") String card) ;
+	 */
 }

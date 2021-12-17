@@ -1,15 +1,14 @@
 package com.hotel.HotelService.Model;
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Hotel {
 	
-	
 	@Id
+	@GeneratedValue  
 	private Long id;
 	
 	@Column(name="name")	
@@ -18,23 +17,16 @@ public class Hotel {
 	private int etoiles;
 	@Column(name="ville")	
 	private String ville;
-	//@OneToMany
-	//private ArrayList<Chambre> chambres;
 	
-	
-	public Hotel(String n, String v, int e) {
-		nom = n;
-		etoiles = e;
-		ville = v;
-	//	chambres = new ArrayList<>();
+	public Hotel(Long id, String nom, int etoiles, String ville) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.etoiles = etoiles;
+		this.ville = ville;
 	}
-	
-	
 	public Hotel() {	}
-
-	/*public ArrayList<Chambre> getChambres() {
-		return chambres;
-	}*/
+	
 	public String getName() {
 		return nom;
 	}

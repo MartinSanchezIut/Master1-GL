@@ -2,12 +2,14 @@ package com.hotel.HotelService.Model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Reservation {
 	
 	@Id
+	@GeneratedValue  
 	private Long id;
 	
 	@Column(name="chambre")
@@ -20,7 +22,6 @@ public class Reservation {
 	private String fin;
 	
 	public Reservation() {}
-
 	public Reservation(Long id, int idChambre, int idClient, String debut, String fin) {
 		super();
 		this.id = id;

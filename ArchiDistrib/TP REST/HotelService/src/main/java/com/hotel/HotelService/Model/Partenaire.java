@@ -5,28 +5,28 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
-public class Chambre {
+@Entity 
+public class Partenaire {
+	
 	@Id
 	@GeneratedValue  
 	private Long id;
-	
-	@Column(name="name")
+	@Column(name="nom")
 	private String nom;
-	@Column(name="lits")
-	private int lits;
-	@Column(name="prix")
-	private int prix;
+	@Column(name="mdp")
+	private String mdp;
+	@Column(name="reduc")
+	private int reduc;
 	@Column(name="hotel")
 	private int idHotel;
-		
-	public Chambre() {	}
-	public Chambre(Long id, String nom, int lits, int prix, int idHotel) {
+	
+	public Partenaire() {	}
+	public Partenaire(Long id, String nom, String mdp, int reduc, int idHotel) {
 		super();
 		this.id = id;
 		this.nom = nom;
-		this.lits = lits;
-		this.prix = prix;
+		this.mdp = mdp;
+		this.reduc = reduc;
 		this.idHotel = idHotel;
 	}
 	public Long getId() {
@@ -35,13 +35,13 @@ public class Chambre {
 	public String getNom() {
 		return nom;
 	}
-	public int getLits() {
-		return lits;
+	public String getMdp() {
+		return mdp;
 	}
-	public int getPrix() {
-		return prix;
+	public int getReduc() {
+		return reduc;
 	}
 	public int getIdHotel() {
 		return idHotel;
-	}
+	}	
 }
