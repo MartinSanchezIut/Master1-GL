@@ -80,14 +80,19 @@ public class ChambreController {
 	public List<Reservation> getReservationDe(@PathVariable long id){
 		return reserv.getReservationOfChambre(id);
 	}
-	
-	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/reservation")
 	public Reservation createReservation(@RequestBody Reservation cli) {
 		return reserv.save(cli);
 	}
-	
+	@GetMapping("/chambre/{id}/client={idCli}/deb={deb}/fin={fin}")
+	public void addReservation(@PathVariable int id,
+									  @PathVariable int idCli,
+									  @PathVariable String deb,
+									  @PathVariable String fin){
+		Reservation r = new Reservation(null, id, idCli , deb, fin);
+		reserv.save(r) ;
+	}
 	
 	
 	
@@ -100,21 +105,17 @@ public class ChambreController {
 	public Optional<Client> getClient(@PathVariable long id){
 		return client.findById(id);
 	}
-	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/client")
 	public Client createClient(@RequestBody Client cli) {
 		return client.save(cli);
 	}
-	
 	@GetMapping("/client/inscription/{name}:{surname}:{card}")
 	public void addClient(@PathVariable String name,
 									  @PathVariable String surname,
 									  @PathVariable String card){
-	
 		Client c = new Client(null, name, surname, card) ;
 		client.save(c) ;
-		
 	}
 	
 	
