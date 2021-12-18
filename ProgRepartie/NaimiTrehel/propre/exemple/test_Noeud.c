@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <time.h>
-#include "../h/naimi.h"
+#include "../h/naimiStack.h"
 #include "../h/calcul.h"
 #include "../h/stack.h"
 

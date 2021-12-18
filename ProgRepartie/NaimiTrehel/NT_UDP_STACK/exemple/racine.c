@@ -180,14 +180,16 @@ int main(int argc, char *argv[]) {
  
         
             // PROGRAMME PRINCIPAL :
-            calcul(1) ;
+            // PROGRAMME PRINCIPAL :
+            calcul(1);
+
+
 
 
             attendreToken(&jeton);
-            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
-            calcul(15);
-            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
-
+            if(TRACE) {printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;}
+            calcul(5);
+            if(TRACE) {printf("%ld - Main : Je termine mon calcul !\n", getTime() );}
             if (!isEmpty(next)) {
                 EnvoyerToken(&jeton, sock, pop(next)) ;
             }else {

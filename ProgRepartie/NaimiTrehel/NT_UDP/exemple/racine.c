@@ -10,9 +10,8 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <time.h>
-#include "../h/naimiStack.h"
+#include "../h/naimi.h"
 #include "../h/calcul.h"
-#include "../h/stack.h"
 
 
 #define THREAD_CREATION_ERROR 11
@@ -37,9 +36,10 @@ void * ecoute (void * params){
 
     if(TRACE) {printf("     Ecoute: Thread d'écoute crée !\n");}
     printf("-*-*-*-*-*-*-*-*-*-*-\n");
-    printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
+    printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \nNext : %d : %d\n", 
         moi.sin_addr.s_addr, moi.sin_port, 
-        args->pere->sin_addr.s_addr, args->pere->sin_port);
+        args->pere->sin_addr.s_addr, args->pere->sin_port, 
+        args->next->sin_addr.s_addr, args->next->sin_port);
     printf("-*-*-*-*-*-*-*-*-*-*-\n");
 
 
@@ -83,7 +83,7 @@ void * ecoute (void * params){
                             pere = contenu
             */
             if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
-                push(args->next, msg.contenu);
+                *args->next = msg.contenu ;
                 *args->pere = msg.contenu ;
 
                 message msg1; msg1.type = 2; msg1.contenu = moi;
@@ -94,9 +94,10 @@ void * ecoute (void * params){
             }
             printf("    Ecoute: Demande d'acces a la racine\n") ;
             printf("-*-*-*-*-*-*-*-*-*-*-\n");
-            printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
+            printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \nNext : %d : %d\n", 
                 moi.sin_addr.s_addr, moi.sin_port, 
-                args->pere->sin_addr.s_addr, args->pere->sin_port);
+                args->pere->sin_addr.s_addr, args->pere->sin_port, 
+                args->next->sin_addr.s_addr, args->next->sin_port);
             printf("-*-*-*-*-*-*-*-*-*-*-\n");
             break;
         case 1:
@@ -146,15 +147,16 @@ int main(int argc, char *argv[]) {
     struct sockaddr_in moi = getSockAddr("127.0.0.1", atoi(argv[3]));
 
     struct sockaddr_in pere = getSockAddr(argv[1], atoi(argv[2]));
-    struct Stack *next = createStack(10) ;
+    struct sockaddr_in next ; memset(&next, 0, sizeof(next));
     pthread_mutex_t jeton = initToken(moi, pere);
  	/*
 		VARIABLES IMPORTANTES DU PROGRAMME
 	*/
     if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
-    if(TRACE){printf("Main:\nMoi : %d : %d \nPere : %s(%d) : %s(%d) \n", 
+    if(TRACE){printf("Main:\nMoi : %d : %d \nPere : %s(%d) : %s(%d) \nNext : %d : %d\n", 
         moi.sin_addr.s_addr, moi.sin_port, 
-        argv[1], pere.sin_addr.s_addr, argv[2], pere.sin_port);}
+        argv[1], pere.sin_addr.s_addr, argv[2], pere.sin_port, 
+        next.sin_addr.s_addr, next.sin_port);}
     if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
 
 
@@ -163,7 +165,7 @@ int main(int argc, char *argv[]) {
     p.condBoucle = &condBoucle;     
     p.jeton = &jeton;   
     p.pere = &pere;    
-    p.next = next;
+    p.next = &next;
     p.portEcoute = atoi(argv[3]);
     pthread_t t_ecoute;
     if (pthread_create(&t_ecoute, NULL, ecoute, (void*) &p) != 0){
@@ -180,19 +182,18 @@ int main(int argc, char *argv[]) {
  
         
             // PROGRAMME PRINCIPAL :
-            calcul(1) ;
+            calcul(1);
+
+
 
 
             attendreToken(&jeton);
-            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
-            calcul(15);
-            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
-
-            if (!isEmpty(next)) {
-                EnvoyerToken(&jeton, sock, pop(next)) ;
-            }else {
-                printf("Je n'ai pas de next ... \n");
-            }
+            if(TRACE) {printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;}
+            calcul(5);
+            if(TRACE) {printf("%ld - Main : Je termine mon calcul !\n", getTime() );}
+            EnvoyerToken(&jeton, sock, next) ;
+ 
+   
    
 
 

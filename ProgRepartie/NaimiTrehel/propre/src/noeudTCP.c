@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <time.h>
-#include "../h/naimiStack.h"
+#include "../h/naimiTCP.h"
 #include "../h/calcul.h"
 #include "../h/stack.h"
 
@@ -45,10 +45,13 @@ void * ecoute (void * params){
 
     // Creation du socket d'ecoute
     int sock;
-    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-         perror("Erreur socket ecoute:"); exit(SOCKET_ERROR);}
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+         perror("Erreur socket ecoute:"); close(sock); exit(SOCKET_ERROR);}
     if ( bind(sock, (const struct sockaddr *)&moi, sizeof(moi)) < 0 ){ 
-        perror("Erreur bind ecoute: "); exit(SOCKET_ERROR);}
+        perror("Erreur bind ecoute: "); close(sock); exit(SOCKET_ERROR); }
+	if (listen(sock, 10) < 0)	{
+		perror("Erreur listen ecoute: \n"); close(sock); exit(SOCKET_ERROR); }
+	
 
     // Petit bout de code pour que "AttendreMessage" ne bloque pas infiniment, Timeout = 60sec
     struct timeval tv;
@@ -63,61 +66,95 @@ void * ecoute (void * params){
         Ici on veut boucler tant que le programe principal tourne,
         Ecouter les messages recus, et les traiter
     */
-    while (! *args->condBoucle){
-        message msg;
-        if (AttendreMessage(sock, &msg) < 0) {
-            perror("Erreur dans l'attente de msg: \n");
-            exit(WAIT_MESSAGE_FAIL);
-        }
-        if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
-   
-        switch (msg.type){
-        case 0:
-            /*
-                Ici j'ai reçu une demande  pour devenir racine
-                A faire: si pere = moi-meme
-                            next =  contenu
-                            pere = contenu
-                         sinon 
-                            envoyer le message a pere
-                            pere = contenu
-            */
-            if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
-                push(args->next, msg.contenu);
-                *args->pere = msg.contenu ;
+    // DEBUT DU MULTIPLEXAGE
+	fd_set set ;
+	fd_set settmp ;
 
-                message msg1; msg1.type = 2; msg1.contenu = moi;
-                EnvoyerMessage(sock, *args->pere,  msg1);
-            }else {
-                EnvoyerMessage(sock, *args->pere,  msg);
-                *args->pere = msg.contenu ;
+	FD_ZERO(&set);
+	FD_SET(sock, &set);
+
+	int max = sock;
+
+    while (! *args->condBoucle){
+        settmp = set;
+		select(max+1, &settmp, NULL, NULL, NULL);
+
+        for (int df = 2; df <= max; df++){
+            if (!FD_ISSET(df, &settmp)) {
+                printf("Serveur : !ISSET\n"); 
+                continue;
             }
-            printf("    Ecoute: Demande d'acces a la racine\n") ;
-            printf("-*-*-*-*-*-*-*-*-*-*-\n");
-            printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
-                moi.sin_addr.s_addr, moi.sin_port, 
-                args->pere->sin_addr.s_addr, args->pere->sin_port);
-            printf("-*-*-*-*-*-*-*-*-*-*-\n");
-            break;
-        case 1:
-            /*
-                Ici on m'envoie le token
-                A faire: envoyer un signal sur le mutex pour debloquer le prog principal
-            */
-            printf("    Ecoute: J'ai le token !\n\n");
-            pthread_mutex_unlock(args->jeton);
-            break;
-        case 2:
-            /*
-                Ce message permet de prévenir le demandeur de racine qu'il 
-                est la nouvelle racine
-            */
-            *args->pere = moi ;
-            printf("     Ecoute: Je suis la nouvelle racine! \n\n");
-            break; 
-        default:
-            printf("    Ecoute: Type de message inconnu ...\n\n") ;
-            break;
+
+            if(df == sock) {
+				struct sockaddr_in adCv;
+				socklen_t lgCv = sizeof(struct sockaddr_in);
+
+				int dSC = accept(sock, (struct sockaddr *)&adCv, &lgCv);
+				if (dSC < 0) {perror("Erreur d'accept ecoute: ") ;continue; }
+
+				printf("Serveur : le client %s:%d est connecté  \n", inet_ntoa(adCv.sin_addr), ntohs(adCv.sin_port));
+				FD_SET(dSC, &set) ;
+				if (max < dSC) max = dSC;
+				continue;
+			} 
+
+            message msg;
+            if (AttendreMessage(df, &msg) < 0) {
+                perror("Erreur dans l'attente de msg: \n");
+                FD_CLR(df, &set);
+				close(df);
+                continue;
+            }
+            if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
+    
+            switch (msg.type){
+            case 0:
+                /*
+                    Ici j'ai reçu une demande  pour devenir racine
+                    A faire: si pere = moi-meme
+                                next =  contenu
+                                pere = contenu
+                            sinon 
+                                envoyer le message a pere
+                                pere = contenu
+                */
+                if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
+                    push(args->next, msg.contenu);
+                    *args->pere = msg.contenu ;
+
+                    message msg1; msg1.type = 2; msg1.contenu = moi;
+                    EnvoyerMessage(sock, *args->pere,  msg1);
+                }else {
+                    EnvoyerMessage(sock, *args->pere,  msg);
+                    *args->pere = msg.contenu ;
+                }
+                printf("    Ecoute: Demande d'acces a la racine\n") ;
+                printf("-*-*-*-*-*-*-*-*-*-*-\n");
+                printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
+                    moi.sin_addr.s_addr, moi.sin_port, 
+                    args->pere->sin_addr.s_addr, args->pere->sin_port);
+                printf("-*-*-*-*-*-*-*-*-*-*-\n");
+                break;
+            case 1:
+                /*
+                    Ici on m'envoie le token
+                    A faire: envoyer un signal sur le mutex pour debloquer le prog principal
+                */
+                printf("    Ecoute: J'ai le token !\n\n");
+                pthread_mutex_unlock(args->jeton);
+                break;
+            case 2:
+                /*
+                    Ce message permet de prévenir le demandeur de racine qu'il 
+                    est la nouvelle racine
+                */
+                *args->pere = moi ;
+                printf("     Ecoute: Je suis la nouvelle racine! \n\n");
+                break; 
+            default:
+                printf("    Ecoute: Type de message inconnu ...\n\n") ;
+                break;
+            }
         }
     }
     close(sock);
@@ -173,7 +210,7 @@ int main(int argc, char *argv[]) {
 
     // Creation du socket d'envoi de messages
     int sock;
-    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
          perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
 
  

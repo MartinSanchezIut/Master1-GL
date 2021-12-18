@@ -1,0 +1,2 @@
+gcc -pthread bin/calculC.o src/noeudTCP.c -o bin/noeudTCP
+gcc -pthread bin/calculC.o src/messageSenderTCP.c -o bin/senderTCP
