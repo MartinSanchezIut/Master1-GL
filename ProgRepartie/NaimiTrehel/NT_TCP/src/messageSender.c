@@ -23,6 +23,7 @@ int main(int argc, char *argv[]) {
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
          perror("Erreur socket ecoute:"); exit(1);}
 
+    //printf("\n %d : %s : %ld \n", sock, &serveraddr, sizeof(serveraddr));
     int conn = connect(sock, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
 	if (conn < 0)	{perror("Client: pb au connect :");close(sock);exit(1);}
     printf("Connecté au serveur \n");
