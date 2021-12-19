@@ -37,15 +37,6 @@ void * ecoute (void * params){
 
     struct sockaddr_in moi = getSockAddr("127.0.0.1", args->portEcoute);
 
-
-    if(TRACE) {printf("     Ecoute: Thread d'écoute crée !\n");}
-    printf("-*-*-*-*-*-*-*-*-*-*-\n");
-    printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
-        moi.sin_addr.s_addr, moi.sin_port, 
-        args->pere->sin_addr.s_addr, args->pere->sin_port);
-    printf("-*-*-*-*-*-*-*-*-*-*-\n");
-
-
     // Creation du socket d'ecoute
     int sock;
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
@@ -109,7 +100,7 @@ void * ecoute (void * params){
                 continue;
             }		
 
-            if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
+            if(TRACE) { printf("    Msg recu: Message=%i, (%s) : (%d) \n", msg.type, inet_ntoa(msg.contenu.sin_addr), ntohs(msg.contenu.sin_port));}
 
             switch (msg.type){
             case 0:
@@ -137,20 +128,23 @@ void * ecoute (void * params){
                     *args->pere = msg.contenu ;
 
                     message msg1; msg1.type = 2; msg1.contenu = moi;
-                    printf("Envoie de message pour passer la main ! \n");
+                    printf("Envoie de message pour passer la main ! ");
                     EnvoyerMessage(df, *args->pere,  msg1);
+                    printf("=> OK \n");
                 }else {
-                    printf("Envoie de message transmettre ! \n");
+                    printf("Envoie de message transmettre !");
                     EnvoyerMessage(df, *args->pere,  msg);
+                    printf("=> OK \n");
                     *args->pere = msg.contenu ;
                 }
                 printf("    Ecoute: Demande d'acces a la racine\n") ;
-                printf("-*-*-*-*-*-*-*-*-*-*-\n");
-                printf("Ecoute:\nMoi : %d : %d \nPere : (%d) : (%d) \n", 
-                    moi.sin_addr.s_addr, moi.sin_port, 
-                    args->pere->sin_addr.s_addr, args->pere->sin_port);
-                printf("-*-*-*-*-*-*-*-*-*-*-\n");
-
+                if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+                if(TRACE){printf("Ecoute:\nMoi : %s : %d \nPere : %s : %d \n", 
+                    inet_ntoa(moi.sin_addr), ntohs(moi.sin_port), 
+                    inet_ntoa(args->pere->sin_addr), ntohs(args->pere->sin_port));}
+                if(TRACE) {printf("Next: "); print_stack(args->next);}
+                if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+                
                 FD_CLR(df, &set);
 			    close(df);
                 break;
@@ -214,10 +208,16 @@ int main(int argc, char *argv[]) {
 		VARIABLES IMPORTANTES DU PROGRAMME
 	*/
     if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
-    if(TRACE){printf("Main:\nMoi : %d : %d \nPere : %s(%d) : %s(%d) \n", 
-        moi.sin_addr.s_addr, moi.sin_port, 
-        argv[1], pere.sin_addr.s_addr, argv[2], pere.sin_port);}
+    if(TRACE){printf("Main:\nMoi : %s : %d \nPere : %s : %d \n", 
+        inet_ntoa(moi.sin_addr), ntohs(moi.sin_port), 
+        inet_ntoa(pere.sin_addr), ntohs(pere.sin_port));}
+    if(TRACE) {printf("Next: "); print_stack(next);}
     if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
+
+    // Creation du socket d'envoi de messages
+    int sock;
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+         perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
 
 
     // Creation du thread d'ecoute
@@ -227,16 +227,12 @@ int main(int argc, char *argv[]) {
     p.pere = &pere;    
     p.next = next;
     p.portEcoute = atoi(argv[3]);
+    p.socketEnvoi = sock;
     pthread_t t_ecoute;
     if (pthread_create(&t_ecoute, NULL, ecoute, (void*) &p) != 0){
         perror("Erreur creation du thread d'ecoute : ");
         exit(THREAD_CREATION_ERROR);
     }
-
-    // Creation du socket d'envoi de messages
-    int sock;
-    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
-         perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
 
  
  
@@ -252,6 +248,7 @@ int main(int argc, char *argv[]) {
 
             if (!isEmpty(next)) {
                 struct sockaddr_in suivant = pop(next) ;
+                if (TRACE) {printf("     Main : mon next est %s:%d.\n", inet_ntoa(suivant.sin_addr), ntohs(suivant.sin_port));}
                 int conn = connect(sock, (struct sockaddr *)&suivant, sizeof(suivant));
                 if (conn < 0)	{
                     perror("Envoie de token: pb au connect :");

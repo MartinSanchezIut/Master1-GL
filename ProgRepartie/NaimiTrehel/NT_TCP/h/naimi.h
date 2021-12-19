@@ -40,6 +40,7 @@ struct param{
     struct Stack *next; 
 
     int portEcoute;
+    int socketEnvoi;
 };
 
 

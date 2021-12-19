@@ -48,3 +48,16 @@ void push(struct Stack* stack, struct sockaddr_in item){
 struct sockaddr_in pop(struct Stack* stack){
     return stack->array[stack->top--];
 }
+
+// Function to print a stack
+void print_stack(struct Stack* stack){
+    if (isEmpty(stack)) {
+        printf("Empty stack \n") ;
+    }else {
+        for(int i = stack->top; i >= 0; i--) {
+            struct sockaddr_in val = stack->array[i] ;
+            printf("%s : %d |", inet_ntoa(val.sin_addr), ntohs(val.sin_port) ) ;
+        }
+        printf("\n") ;
+    }
+}
