@@ -244,6 +244,16 @@ int main(int argc, char *argv[]) {
             // PROGRAMME PRINCIPAL :
             calcul(1) ;
 
+            message msg;
+            msg.type = 0;
+            msg.contenu = getSockAddr("127.0.0.1", atoi(argv[3]));
+
+            int conn = connect(sock, (struct sockaddr *)&pere, sizeof(pere));
+            if (conn < 0)	{
+                perror("Ecoute: pb au connect :");
+                exit(CONNECT_ERROR);
+            }
+            EnvoyerMessage(sock, pere, msg)  ;
 
             attendreToken(&jeton);
             printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
@@ -251,13 +261,7 @@ int main(int argc, char *argv[]) {
             printf("%ld - Main : Je termine mon calcul !\n", getTime() );
 
             if (!isEmpty(next)) {
-                struct sockaddr_in suivant = pop(next) ;
-                int conn = connect(sock, (struct sockaddr *)&suivant, sizeof(suivant));
-                if (conn < 0)	{
-                    perror("Envoie de token: pb au connect :");
-                    exit(CONNECT_ERROR);
-                }
-                EnvoyerToken(&jeton, sock, suivant) ;
+                EnvoyerToken(&jeton, sock, pop(next)) ;
             }else {
                 printf("Je n'ai pas de next ... \n");
             }

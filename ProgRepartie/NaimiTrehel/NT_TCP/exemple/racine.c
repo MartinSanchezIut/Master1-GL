@@ -109,7 +109,7 @@ void * ecoute (void * params){
             }		
 
             if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
-            int conn;
+
             switch (msg.type){
             case 0:
                 /*
@@ -120,22 +120,26 @@ void * ecoute (void * params){
                             sinon 
                                 envoyer le message a pere
                                 pere = contenu
-                */
-                conn = connect(df, (struct sockaddr *)&args->pere, sizeof(args->pere));
-	            if (conn < 0)	{
+                */     
+
+               /*
+                int conn = connect(df, (struct sockaddr *)&args->pere, sizeof(args->pere));
+                if (conn < 0)	{
                     perror("Ecoute: pb au connect :");
                     FD_CLR(df, &set);
-			        close(df);
+                    close(df);
                     continue;
                 }
-                
+               */         
                 if ((moi.sin_port == args->pere->sin_port) && (moi.sin_addr.s_addr == args->pere->sin_addr.s_addr)) {
                     push(args->next, msg.contenu);
                     *args->pere = msg.contenu ;
 
                     message msg1; msg1.type = 2; msg1.contenu = moi;
+                    printf("Envoie de message pour passer la main ! \n");
                     EnvoyerMessage(df, *args->pere,  msg1);
                 }else {
+                    printf("Envoie de message transmettre ! \n");
                     EnvoyerMessage(df, *args->pere,  msg);
                     *args->pere = msg.contenu ;
                 }

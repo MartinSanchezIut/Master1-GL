@@ -8,11 +8,13 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
+#include <sys/select.h>
 #include <netdb.h>
 #include <time.h>
-#include "../h/naimiStack.h"
+#include "../h/naimi.h"
 #include "../h/calcul.h"
 #include "../h/stack.h"
+
 
 
 #define THREAD_CREATION_ERROR 11
@@ -45,32 +47,50 @@ void * ecoute (void * params){
 
     // Creation du socket d'ecoute
     int sock;
-    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
-         perror("Erreur socket ecoute:"); exit(SOCKET_ERROR);}
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+         perror("Erreur socket ecoute:"); close(sock); exit(SOCKET_ERROR);}
     if ( bind(sock, (const struct sockaddr *)&moi, sizeof(moi)) < 0 ){ 
-        perror("Erreur bind ecoute: "); exit(SOCKET_ERROR);}
+        perror("Erreur bind ecoute: "); close(sock); exit(SOCKET_ERROR); }
+	if (listen(sock, 10) < 0)	{
+		perror("Erreur listen ecoute: \n"); close(sock); exit(SOCKET_ERROR); }
+	if(TRACE) {printf("     Ecoute: Thread d'écoute en ecoute !\n");}
+
 
     // Petit bout de code pour que "AttendreMessage" ne bloque pas infiniment, Timeout = 60sec
-    struct timeval tv;
-    tv.tv_sec = 120;
+    /*struct timeval tv;
+    tv.tv_sec = 5;
     tv.tv_usec = 0;
     if (setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO,&tv,sizeof(tv)) < 0) {
         printf("    Ecoute: delai d'attente expire\n");
         pthread_exit(NULL);
-    }
+    }*/
 
     /*
         Ici on veut boucler tant que le programe principal tourne,
         Ecouter les messages recus, et les traiter
     */
+    struct sockaddr_in adCv;
+    socklen_t lgCv = sizeof(struct sockaddr_in);
     while (! *args->condBoucle){
+        if(TRACE) {printf("     Ecoute: Attente de connexion !\n");}
+       	int dsCv = accept(sock, (struct sockaddr *)&adCv, &lgCv);
+		if (dsCv < 0){
+			perror("Serveur, probleme accept :");
+			close(sock);
+			exit(1);
+		}
+        if(TRACE) {printf("     Ecoute: Connexion acceptee !\n");}
+
+
+
         message msg;
-        if (AttendreMessage(sock, &msg) < 0) {
+        if (AttendreMessage(dsCv, &msg) < 0) {
             perror("Erreur dans l'attente de msg: \n");
-            exit(WAIT_MESSAGE_FAIL);
+            close(sock);
+            exit(1);
         }
         if(TRACE) { printf("    Msg recu: Message=%i, (%d) : (%d) \n", msg.type, msg.contenu.sin_addr.s_addr, msg.contenu.sin_port );}
-   
+
         switch (msg.type){
         case 0:
             /*
@@ -78,7 +98,7 @@ void * ecoute (void * params){
                 A faire: si pere = moi-meme
                             next =  contenu
                             pere = contenu
-                         sinon 
+                        sinon 
                             envoyer le message a pere
                             pere = contenu
             */
@@ -120,6 +140,7 @@ void * ecoute (void * params){
             break;
         }
     }
+    
     close(sock);
     pthread_exit(NULL);
 }
@@ -173,22 +194,21 @@ int main(int argc, char *argv[]) {
 
     // Creation du socket d'envoi de messages
     int sock;
-    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
          perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
 
  
  
         
             // PROGRAMME PRINCIPAL :
-            calcul(1);
-
-
+            calcul(1) ;
 
 
             attendreToken(&jeton);
-            if(TRACE) {printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;}
-            calcul(5);
-            if(TRACE) {printf("%ld - Main : Je termine mon calcul !\n", getTime() );}
+            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
+            calcul(15);
+            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
+
             if (!isEmpty(next)) {
                 EnvoyerToken(&jeton, sock, pop(next)) ;
             }else {
