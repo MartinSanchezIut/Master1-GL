@@ -1,0 +1,4 @@
+
+
+(MOVE :CONST 5 :R0)
+'ADD :CONST 7 :R0

@@ -27,6 +27,13 @@ public class Hotel {
 	}
 	public Hotel() {	}
 	
+	
+	public Long getId() {
+		return id;
+	}
+	public String getNom() {
+		return nom;
+	}
 	public String getName() {
 		return nom;
 	}
