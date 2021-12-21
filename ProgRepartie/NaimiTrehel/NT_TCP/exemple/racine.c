@@ -288,6 +288,53 @@ int main(int argc, char *argv[]) {
                 printf("Je n'ai pas de next ... \n");
             }
    
+            message msg;
+            msg.type = 0;
+            msg.contenu = getSockAddr("127.0.0.1", atoi(argv[3]));
+
+            close(sock);
+            if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+                perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
+            if (connect(sock, (struct sockaddr *)&pere, sizeof(pere)) <0) {
+                perror("connect demande racine: ");
+                close(sock); exit(CONNECT_ERROR);}
+            EnvoyerMessage(sock, pere, msg)  ;
+
+            
+
+            attendreToken(&jeton);
+            printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
+            calcul(5);
+            printf("%ld - Main : Je termine mon calcul !\n", getTime() );
+             
+            if (!isEmpty(next)) {
+                struct sockaddr_in suivant = pop(next) ;
+                if (TRACE) {printf("     Main : mon next est %s:%d.\n", inet_ntoa(suivant.sin_addr), ntohs(suivant.sin_port));}
+                
+                printf("0\n");
+
+                close(sock);
+                printf("1\n");
+                if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
+                    perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
+                
+                printf("2\n");
+ 
+                if (connect(sock, (struct sockaddr *)&suivant, sizeof(suivant)) <0) {
+                    perror("connect sendtoken: ");
+                    close(sock); exit(CONNECT_ERROR);}
+
+                printf("3\n");
+
+                EnvoyerToken(&jeton, sock, suivant);
+
+                printf("4\n");
+
+            }else {
+                printf("Je n'ai pas de next ... \n");
+            }
+
+
 
 
     // Permet de mettre fin a la boucle du thread d'ecoute
