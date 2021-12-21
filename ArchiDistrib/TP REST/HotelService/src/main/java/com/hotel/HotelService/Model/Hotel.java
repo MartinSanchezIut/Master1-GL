@@ -2,13 +2,14 @@ package com.hotel.HotelService.Model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Hotel {
 	
 	@Id
-	@GeneratedValue  
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name="name")	
@@ -30,9 +31,6 @@ public class Hotel {
 	
 	public Long getId() {
 		return id;
-	}
-	public String getNom() {
-		return nom;
 	}
 	public String getName() {
 		return nom;

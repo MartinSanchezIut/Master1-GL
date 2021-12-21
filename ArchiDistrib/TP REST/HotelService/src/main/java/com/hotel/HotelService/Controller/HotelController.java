@@ -55,7 +55,7 @@ public class HotelController {
 		
 		ArrayList<Chambre> cha = lookup(id, date, date1, prixMin, prixMax, lits) ;
 		for(Chambre c : cha) {		
-			Offre o = new Offre(hotel.findById(id).get(), c, (c.getPrix() - (c.getPrix() * reduction))) ;
+			Offre o = new Offre(hotel.findById(id).get(), c, (c.getPrix() - (c.getPrix() * reduction/100) )) ;
 			ret.add(o) ;
 		}
 		

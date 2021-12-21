@@ -34,164 +34,164 @@ public class Data {
 	private String[] villes = {"Paris", "Montpellier", "Toulouse", "Perpignan", "Pau", "Sete", "Bordeau"} ;
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
-    	h.save(new Hotel(null, "Hotel 0", 5, "Sete"));
-    	c.save(new Chambre(null, "Chambre 0", 2, 47, 0));
-    	c.save(new Chambre(null, "Chambre 1", 4, 33, 0));
-    	c.save(new Chambre(null, "Chambre 2", 2, 39, 0));
-    	c.save(new Chambre(null, "Chambre 3", 4, 55, 0));
-    	c.save(new Chambre(null, "Chambre 4", 3, 43, 0));
-    	c.save(new Chambre(null, "Chambre 5", 3, 35, 0));
-    	c.save(new Chambre(null, "Chambre 6", 3, 37, 0));
-    	c.save(new Chambre(null, "Chambre 7", 3, 28, 0));
-    	c.save(new Chambre(null, "Chambre 8", 5, 37, 0));
-    	c.save(new Chambre(null, "Chambre 9", 4, 32, 0));
-    	c.save(new Chambre(null, "Chambre 10", 2, 51, 0));
-    	c.save(new Chambre(null, "Chambre 11", 3, 62, 0));
-    	p.save(new Partenaire(null, "Agence 0", "123", 25, 0));
-    	p.save(new Partenaire(null, "Agence 1", "123", 20, 0));
+    	h.save(new Hotel(null, "Hotel 1", 3, "Pau"));
+    	c.save(new Chambre(null, "Chambre 1", 5, 53, 1));
+    	c.save(new Chambre(null, "Chambre 2", 3, 25, 1));
+    	c.save(new Chambre(null, "Chambre 3", 5, 43, 1));
+    	c.save(new Chambre(null, "Chambre 4", 4, 57, 1));
+    	c.save(new Chambre(null, "Chambre 5", 4, 45, 1));
+    	c.save(new Chambre(null, "Chambre 6", 5, 40, 1));
+    	c.save(new Chambre(null, "Chambre 7", 2, 64, 1));
+    	c.save(new Chambre(null, "Chambre 8", 3, 44, 1));
+    	c.save(new Chambre(null, "Chambre 9", 3, 61, 1));
+    	c.save(new Chambre(null, "Chambre 10", 3, 37, 1));
+    	c.save(new Chambre(null, "Chambre 11", 4, 64, 1));
+    	c.save(new Chambre(null, "Chambre 12", 3, 37, 1));
+    	p.save(new Partenaire(null, "Agence 1", "123", 35, 1));
+    	p.save(new Partenaire(null, "Agence 2", "123", 47, 1));
 
 
-    	h.save(new Hotel(null, "Hotel 1", 3, "Bordeau"));
-    	c.save(new Chambre(null, "Chambre 0", 5, 44, 1));
-    	c.save(new Chambre(null, "Chambre 1", 4, 25, 1));
-    	c.save(new Chambre(null, "Chambre 2", 3, 60, 1));
-    	c.save(new Chambre(null, "Chambre 3", 5, 58, 1));
-    	c.save(new Chambre(null, "Chambre 4", 3, 23, 1));
-    	c.save(new Chambre(null, "Chambre 5", 3, 50, 1));
-    	c.save(new Chambre(null, "Chambre 6", 3, 23, 1));
-    	c.save(new Chambre(null, "Chambre 7", 2, 54, 1));
-    	c.save(new Chambre(null, "Chambre 8", 4, 51, 1));
-    	c.save(new Chambre(null, "Chambre 9", 3, 44, 1));
-    	c.save(new Chambre(null, "Chambre 10", 4, 44, 1));
-    	c.save(new Chambre(null, "Chambre 11", 3, 33, 1));
-    	p.save(new Partenaire(null, "Agence 0", "123", 73, 1));
-    	p.save(new Partenaire(null, "Agence 1", "123", 22, 1));
+    	h.save(new Hotel(null, "Hotel 2", 3, "Montpellier"));
+    	c.save(new Chambre(null, "Chambre 1", 5, 29, 2));
+    	c.save(new Chambre(null, "Chambre 2", 2, 41, 2));
+    	c.save(new Chambre(null, "Chambre 3", 5, 28, 2));
+    	c.save(new Chambre(null, "Chambre 4", 4, 62, 2));
+    	c.save(new Chambre(null, "Chambre 5", 4, 35, 2));
+    	c.save(new Chambre(null, "Chambre 6", 3, 46, 2));
+    	c.save(new Chambre(null, "Chambre 7", 5, 32, 2));
+    	c.save(new Chambre(null, "Chambre 8", 2, 45, 2));
+    	c.save(new Chambre(null, "Chambre 9", 4, 58, 2));
+    	c.save(new Chambre(null, "Chambre 10", 4, 59, 2));
+    	c.save(new Chambre(null, "Chambre 11", 5, 61, 2));
+    	c.save(new Chambre(null, "Chambre 12", 3, 29, 2));
+    	p.save(new Partenaire(null, "Agence 1", "123", 79, 2));
+    	p.save(new Partenaire(null, "Agence 2", "123", 52, 2));
 
 
-    	h.save(new Hotel(null, "Hotel 2", 2, "Perpignan"));
-    	c.save(new Chambre(null, "Chambre 0", 4, 38, 2));
-    	c.save(new Chambre(null, "Chambre 1", 3, 50, 2));
-    	c.save(new Chambre(null, "Chambre 2", 4, 34, 2));
-    	c.save(new Chambre(null, "Chambre 3", 4, 52, 2));
-    	c.save(new Chambre(null, "Chambre 4", 3, 56, 2));
-    	c.save(new Chambre(null, "Chambre 5", 5, 45, 2));
-    	c.save(new Chambre(null, "Chambre 6", 2, 42, 2));
-    	c.save(new Chambre(null, "Chambre 7", 4, 57, 2));
-    	c.save(new Chambre(null, "Chambre 8", 3, 45, 2));
-    	c.save(new Chambre(null, "Chambre 9", 3, 53, 2));
-    	c.save(new Chambre(null, "Chambre 10", 5, 57, 2));
-    	c.save(new Chambre(null, "Chambre 11", 2, 51, 2));
-    	p.save(new Partenaire(null, "Agence 0", "123", 75, 2));
-    	p.save(new Partenaire(null, "Agence 1", "123", 40, 2));
+    	h.save(new Hotel(null, "Hotel 3", 1, "Perpignan"));
+    	c.save(new Chambre(null, "Chambre 1", 3, 27, 3));
+    	c.save(new Chambre(null, "Chambre 2", 2, 29, 3));
+    	c.save(new Chambre(null, "Chambre 3", 2, 31, 3));
+    	c.save(new Chambre(null, "Chambre 4", 5, 29, 3));
+    	c.save(new Chambre(null, "Chambre 5", 3, 44, 3));
+    	c.save(new Chambre(null, "Chambre 6", 4, 37, 3));
+    	c.save(new Chambre(null, "Chambre 7", 3, 52, 3));
+    	c.save(new Chambre(null, "Chambre 8", 4, 49, 3));
+    	c.save(new Chambre(null, "Chambre 9", 3, 65, 3));
+    	c.save(new Chambre(null, "Chambre 10", 3, 63, 3));
+    	c.save(new Chambre(null, "Chambre 11", 3, 64, 3));
+    	c.save(new Chambre(null, "Chambre 12", 2, 33, 3));
+    	p.save(new Partenaire(null, "Agence 1", "123", 35, 3));
+    	p.save(new Partenaire(null, "Agence 2", "123", 65, 3));
 
 
-    	h.save(new Hotel(null, "Hotel 3", 0, "Paris"));
-    	c.save(new Chambre(null, "Chambre 0", 5, 51, 3));
-    	c.save(new Chambre(null, "Chambre 1", 5, 29, 3));
-    	c.save(new Chambre(null, "Chambre 2", 4, 38, 3));
-    	c.save(new Chambre(null, "Chambre 3", 2, 60, 3));
-    	c.save(new Chambre(null, "Chambre 4", 4, 53, 3));
-    	c.save(new Chambre(null, "Chambre 5", 3, 28, 3));
-    	c.save(new Chambre(null, "Chambre 6", 4, 63, 3));
-    	c.save(new Chambre(null, "Chambre 7", 3, 33, 3));
-    	c.save(new Chambre(null, "Chambre 8", 5, 64, 3));
-    	c.save(new Chambre(null, "Chambre 9", 4, 48, 3));
-    	c.save(new Chambre(null, "Chambre 10", 5, 50, 3));
-    	c.save(new Chambre(null, "Chambre 11", 5, 36, 3));
-    	p.save(new Partenaire(null, "Agence 0", "123", 47, 3));
-    	p.save(new Partenaire(null, "Agence 1", "123", 40, 3));
+    	h.save(new Hotel(null, "Hotel 4", 1, "Bordeau"));
+    	c.save(new Chambre(null, "Chambre 1", 4, 62, 4));
+    	c.save(new Chambre(null, "Chambre 2", 3, 56, 4));
+    	c.save(new Chambre(null, "Chambre 3", 4, 22, 4));
+    	c.save(new Chambre(null, "Chambre 4", 4, 33, 4));
+    	c.save(new Chambre(null, "Chambre 5", 5, 40, 4));
+    	c.save(new Chambre(null, "Chambre 6", 2, 35, 4));
+    	c.save(new Chambre(null, "Chambre 7", 4, 44, 4));
+    	c.save(new Chambre(null, "Chambre 8", 4, 26, 4));
+    	c.save(new Chambre(null, "Chambre 9", 3, 28, 4));
+    	c.save(new Chambre(null, "Chambre 10", 5, 53, 4));
+    	c.save(new Chambre(null, "Chambre 11", 3, 61, 4));
+    	c.save(new Chambre(null, "Chambre 12", 5, 45, 4));
+    	p.save(new Partenaire(null, "Agence 1", "123", 15, 4));
+    	p.save(new Partenaire(null, "Agence 2", "123", 45, 4));
 
 
-    	h.save(new Hotel(null, "Hotel 4", 5, "Paris"));
-    	c.save(new Chambre(null, "Chambre 0", 5, 38, 4));
-    	c.save(new Chambre(null, "Chambre 1", 5, 28, 4));
-    	c.save(new Chambre(null, "Chambre 2", 2, 60, 4));
-    	c.save(new Chambre(null, "Chambre 3", 4, 65, 4));
-    	c.save(new Chambre(null, "Chambre 4", 3, 26, 4));
-    	c.save(new Chambre(null, "Chambre 5", 4, 45, 4));
-    	c.save(new Chambre(null, "Chambre 6", 3, 64, 4));
-    	c.save(new Chambre(null, "Chambre 7", 5, 27, 4));
-    	c.save(new Chambre(null, "Chambre 8", 4, 60, 4));
-    	c.save(new Chambre(null, "Chambre 9", 4, 22, 4));
-    	c.save(new Chambre(null, "Chambre 10", 3, 33, 4));
-    	c.save(new Chambre(null, "Chambre 11", 4, 22, 4));
-    	p.save(new Partenaire(null, "Agence 0", "123", 79, 4));
-    	p.save(new Partenaire(null, "Agence 1", "123", 22, 4));
+    	h.save(new Hotel(null, "Hotel 5", 4, "Paris"));
+    	c.save(new Chambre(null, "Chambre 1", 3, 22, 5));
+    	c.save(new Chambre(null, "Chambre 2", 4, 46, 5));
+    	c.save(new Chambre(null, "Chambre 3", 4, 62, 5));
+    	c.save(new Chambre(null, "Chambre 4", 5, 44, 5));
+    	c.save(new Chambre(null, "Chambre 5", 5, 43, 5));
+    	c.save(new Chambre(null, "Chambre 6", 5, 44, 5));
+    	c.save(new Chambre(null, "Chambre 7", 2, 38, 5));
+    	c.save(new Chambre(null, "Chambre 8", 3, 42, 5));
+    	c.save(new Chambre(null, "Chambre 9", 4, 64, 5));
+    	c.save(new Chambre(null, "Chambre 10", 5, 46, 5));
+    	c.save(new Chambre(null, "Chambre 11", 5, 32, 5));
+    	c.save(new Chambre(null, "Chambre 12", 2, 35, 5));
+    	p.save(new Partenaire(null, "Agence 1", "123", 75, 5));
+    	p.save(new Partenaire(null, "Agence 2", "123", 33, 5));
 
 
-    	h.save(new Hotel(null, "Hotel 5", 2, "Paris"));
-    	c.save(new Chambre(null, "Chambre 0", 4, 59, 5));
-    	c.save(new Chambre(null, "Chambre 1", 5, 62, 5));
-    	c.save(new Chambre(null, "Chambre 2", 5, 59, 5));
-    	c.save(new Chambre(null, "Chambre 3", 5, 31, 5));
-    	c.save(new Chambre(null, "Chambre 4", 3, 25, 5));
-    	c.save(new Chambre(null, "Chambre 5", 5, 59, 5));
-    	c.save(new Chambre(null, "Chambre 6", 2, 62, 5));
-    	c.save(new Chambre(null, "Chambre 7", 2, 62, 5));
-    	c.save(new Chambre(null, "Chambre 8", 4, 58, 5));
-    	c.save(new Chambre(null, "Chambre 9", 3, 55, 5));
-    	c.save(new Chambre(null, "Chambre 10", 3, 23, 5));
-    	c.save(new Chambre(null, "Chambre 11", 4, 53, 5));
-    	p.save(new Partenaire(null, "Agence 0", "123", 77, 5));
-    	p.save(new Partenaire(null, "Agence 1", "123", 30, 5));
+    	h.save(new Hotel(null, "Hotel 6", 1, "Sete"));
+    	c.save(new Chambre(null, "Chambre 1", 4, 52, 6));
+    	c.save(new Chambre(null, "Chambre 2", 3, 39, 6));
+    	c.save(new Chambre(null, "Chambre 3", 5, 48, 6));
+    	c.save(new Chambre(null, "Chambre 4", 5, 49, 6));
+    	c.save(new Chambre(null, "Chambre 5", 4, 24, 6));
+    	c.save(new Chambre(null, "Chambre 6", 3, 37, 6));
+    	c.save(new Chambre(null, "Chambre 7", 4, 39, 6));
+    	c.save(new Chambre(null, "Chambre 8", 4, 60, 6));
+    	c.save(new Chambre(null, "Chambre 9", 5, 47, 6));
+    	c.save(new Chambre(null, "Chambre 10", 4, 57, 6));
+    	c.save(new Chambre(null, "Chambre 11", 5, 31, 6));
+    	c.save(new Chambre(null, "Chambre 12", 4, 60, 6));
+    	p.save(new Partenaire(null, "Agence 1", "123", 76, 6));
+    	p.save(new Partenaire(null, "Agence 2", "123", 71, 6));
 
 
-    	h.save(new Hotel(null, "Hotel 6", 4, "Bordeau"));
-    	c.save(new Chambre(null, "Chambre 0", 3, 27, 6));
-    	c.save(new Chambre(null, "Chambre 1", 4, 26, 6));
-    	c.save(new Chambre(null, "Chambre 2", 4, 59, 6));
-    	c.save(new Chambre(null, "Chambre 3", 4, 25, 6));
-    	c.save(new Chambre(null, "Chambre 4", 2, 63, 6));
-    	c.save(new Chambre(null, "Chambre 5", 3, 56, 6));
-    	c.save(new Chambre(null, "Chambre 6", 4, 52, 6));
-    	c.save(new Chambre(null, "Chambre 7", 3, 26, 6));
-    	c.save(new Chambre(null, "Chambre 8", 3, 36, 6));
-    	c.save(new Chambre(null, "Chambre 9", 5, 40, 6));
-    	c.save(new Chambre(null, "Chambre 10", 4, 64, 6));
-    	c.save(new Chambre(null, "Chambre 11", 5, 44, 6));
-    	p.save(new Partenaire(null, "Agence 0", "123", 21, 6));
-    	p.save(new Partenaire(null, "Agence 1", "123", 22, 6));
+    	h.save(new Hotel(null, "Hotel 7", 3, "Toulouse"));
+    	c.save(new Chambre(null, "Chambre 1", 2, 34, 7));
+    	c.save(new Chambre(null, "Chambre 2", 3, 59, 7));
+    	c.save(new Chambre(null, "Chambre 3", 3, 32, 7));
+    	c.save(new Chambre(null, "Chambre 4", 5, 30, 7));
+    	c.save(new Chambre(null, "Chambre 5", 3, 31, 7));
+    	c.save(new Chambre(null, "Chambre 6", 3, 41, 7));
+    	c.save(new Chambre(null, "Chambre 7", 3, 46, 7));
+    	c.save(new Chambre(null, "Chambre 8", 3, 49, 7));
+    	c.save(new Chambre(null, "Chambre 9", 3, 38, 7));
+    	c.save(new Chambre(null, "Chambre 10", 4, 61, 7));
+    	c.save(new Chambre(null, "Chambre 11", 2, 29, 7));
+    	c.save(new Chambre(null, "Chambre 12", 5, 64, 7));
+    	p.save(new Partenaire(null, "Agence 1", "123", 52, 7));
+    	p.save(new Partenaire(null, "Agence 2", "123", 55, 7));
 
 
-    	cli.save(new Client(null, "Yvain", "Paul", "81216"));
-    	r.save(new Reservation(null, 7, 0, "20-1-1", "20-1-1"));
-    	r.save(new Reservation(null, 4, 0, "16-1-1", "21-1-1"));
-    	r.save(new Reservation(null, 41, 0, "7-1-1", "20-1-1"));
+    	cli.save(new Client(null, "Calogronan", "Piere", "79652"));
+    	r.save(new Reservation(null, 36, 1, "6-1-1", "20-1-1"));
+    	r.save(new Reservation(null, 5, 1, "20-1-1", "23-1-1"));
+    	r.save(new Reservation(null, 63, 1, "7-1-1", "21-1-1"));
 
 
-    	cli.save(new Client(null, "Caradoc", "Christophe", "87956"));
-    	r.save(new Reservation(null, 28, 1, "6-1-1", "22-1-1"));
-    	r.save(new Reservation(null, 65, 1, "6-1-1", "23-1-1"));
-    	r.save(new Reservation(null, 26, 1, "8-1-1", "20-1-1"));
+    	cli.save(new Client(null, "Yvain", "Virginie", "77866"));
+    	r.save(new Reservation(null, 62, 2, "10-1-1", "23-1-1"));
+    	r.save(new Reservation(null, 51, 2, "12-1-1", "22-1-1"));
+    	r.save(new Reservation(null, 50, 2, "7-1-1", "23-1-1"));
 
 
-    	cli.save(new Client(null, "Gauvin", "Jean", "70249"));
-    	r.save(new Reservation(null, 59, 2, "5-1-1", "21-1-1"));
-    	r.save(new Reservation(null, 64, 2, "18-1-1", "20-1-1"));
-    	r.save(new Reservation(null, 15, 2, "1-1-1", "24-1-1"));
+    	cli.save(new Client(null, "Guenievre", "Jean", "68334"));
+    	r.save(new Reservation(null, 63, 3, "12-1-1", "23-1-1"));
+    	r.save(new Reservation(null, 45, 3, "10-1-1", "20-1-1"));
+    	r.save(new Reservation(null, 1, 3, "8-1-1", "24-1-1"));
 
 
-    	cli.save(new Client(null, "Guenievre", "Paul", "95565"));
-    	r.save(new Reservation(null, 65, 3, "19-1-1", "23-1-1"));
-    	r.save(new Reservation(null, 60, 3, "10-1-1", "24-1-1"));
-    	r.save(new Reservation(null, 67, 3, "5-1-1", "22-1-1"));
+    	cli.save(new Client(null, "Guenievre", "Christophe", "93303"));
+    	r.save(new Reservation(null, 59, 4, "5-1-1", "23-1-1"));
+    	r.save(new Reservation(null, 72, 4, "14-1-1", "20-1-1"));
+    	r.save(new Reservation(null, 16, 4, "6-1-1", "20-1-1"));
 
 
-    	cli.save(new Client(null, "Perceval", "Estelle", "92277"));
-    	r.save(new Reservation(null, 26, 4, "16-1-1", "21-1-1"));
-    	r.save(new Reservation(null, 75, 4, "12-1-1", "22-1-1"));
-    	r.save(new Reservation(null, 83, 4, "9-1-1", "23-1-1"));
+    	cli.save(new Client(null, "Gauvin", "Jean", "86175"));
+    	r.save(new Reservation(null, 37, 5, "4-1-1", "21-1-1"));
+    	r.save(new Reservation(null, 34, 5, "20-1-1", "23-1-1"));
+    	r.save(new Reservation(null, 76, 5, "14-1-1", "22-1-1"));
 
 
-    	cli.save(new Client(null, "Provencal", "Jacques", "81656"));
-    	r.save(new Reservation(null, 81, 5, "17-1-1", "22-1-1"));
-    	r.save(new Reservation(null, 47, 5, "15-1-1", "21-1-1"));
-    	r.save(new Reservation(null, 49, 5, "8-1-1", "20-1-1"));
+    	cli.save(new Client(null, "Guenievre", "Paul", "81990"));
+    	r.save(new Reservation(null, 82, 6, "12-1-1", "24-1-1"));
+    	r.save(new Reservation(null, 54, 6, "10-1-1", "21-1-1"));
+    	r.save(new Reservation(null, 45, 6, "5-1-1", "24-1-1"));
 
 
-    	cli.save(new Client(null, "Caradoc", "Jean", "75459"));
-    	r.save(new Reservation(null, 20, 6, "12-1-1", "24-1-1"));
-    	r.save(new Reservation(null, 41, 6, "15-1-1", "21-1-1"));
-    	r.save(new Reservation(null, 40, 6, "17-1-1", "22-1-1"));
+    	cli.save(new Client(null, "Caradoc", "Paul", "84226"));
+    	r.save(new Reservation(null, 72, 7, "10-1-1", "21-1-1"));
+    	r.save(new Reservation(null, 4, 7, "13-1-1", "24-1-1"));
+    	r.save(new Reservation(null, 9, 7, "10-1-1", "21-1-1"));
     	}
 }
