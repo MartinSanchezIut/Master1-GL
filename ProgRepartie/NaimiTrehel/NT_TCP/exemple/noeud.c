@@ -121,8 +121,6 @@ void * ecoute (void * params){
                     message msg1; msg1.type = 2; msg1.contenu = moi;
                     //printf("\n %d : %s : %ld \n", args->socketEnvoi, args->pere, sizeof(*args->pere));
                     
-                    
-                    printf("Envoie de message pour passer la main ! ");
                     close(args->socketEnvoi);
                     if ((args->socketEnvoi = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
                         perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);close(sock);}
@@ -131,12 +129,11 @@ void * ecoute (void * params){
                         close(sock); close(args->socketEnvoi); exit(CONNECT_ERROR);}
 
                     EnvoyerMessage(args->socketEnvoi, *args->pere,  msg1);
-                    printf("=> OK \n");
+                    printf("     Ecoute: Je passe la racine \n");
                 }else {
                     //printf("\n %d : %s : %ld \n", args->socketEnvoi, args->pere, sizeof(*args->pere));
 
                     
-                    printf("Envoie de message transmettre !");
                     close(args->socketEnvoi);
                     if ((args->socketEnvoi = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
                         perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);close(sock);}
@@ -145,11 +142,11 @@ void * ecoute (void * params){
                         close(sock); close(args->socketEnvoi); exit(CONNECT_ERROR);}
 
                     EnvoyerMessage(args->socketEnvoi, *args->pere,  msg);
-                    printf("=> OK \n");
+                    printf("     Ecoute: Transmet le message \n");
                     *args->pere = msg.contenu ;
                 }
 
-                printf("    Ecoute: Demande d'acces a la racine\n") ;
+                printf("     Ecoute: Demande d'acces a la racine\n") ;
                 if(TRACE) {printf("-*-*-*-*-*-*-*-*-*-*-\n");}
                 if(TRACE){printf("Ecoute:\nMoi : %s : %d \nPere : %s : %d \n", 
                     inet_ntoa(moi.sin_addr), ntohs(moi.sin_port), 
@@ -241,7 +238,7 @@ int main(int argc, char *argv[]) {
  
         
             // PROGRAMME PRINCIPAL :
-            calcul(1) ;
+            calcul(2) ;
 
             
 
@@ -261,21 +258,32 @@ int main(int argc, char *argv[]) {
 
             attendreToken(&jeton);
             printf("%ld - Main : Je commence mon calcul !\n", getTime() ) ;
-            calcul(15);
+            calcul(5);
             printf("%ld - Main : Je termine mon calcul !\n", getTime() );
-
+             
             if (!isEmpty(next)) {
                 struct sockaddr_in suivant = pop(next) ;
                 if (TRACE) {printf("     Main : mon next est %s:%d.\n", inet_ntoa(suivant.sin_addr), ntohs(suivant.sin_port));}
                 
-                
+                printf("0\n");
+
                 close(sock);
+                printf("1\n");
                 if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0 ) {
                     perror("Erreur socket d'envoi:"); exit(SOCKET_ERROR);}
+                
+                printf("2\n");
+ 
                 if (connect(sock, (struct sockaddr *)&suivant, sizeof(suivant)) <0) {
                     perror("connect sendtoken: ");
                     close(sock); exit(CONNECT_ERROR);}
-                EnvoyerToken(&jeton, sock, suivant) ;
+
+                printf("3\n");
+
+                EnvoyerToken(&jeton, sock, suivant);
+
+                printf("4\n");
+
             }else {
                 printf("Je n'ai pas de next ... \n");
             }

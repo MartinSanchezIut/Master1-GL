@@ -96,8 +96,8 @@ int EnvoyerMessage(int socket, struct sockaddr_in dest, message msg){
 }
 
 int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
-    pthread_mutex_lock(&jeton);
-    message msg;
+    pthread_mutex_unlock(jeton);
+    message msg; memset(&msg, 0, sizeof(msg));
     msg.type  = 1;
     //msg.contenu = NULL;
     int nbSend = sendTCP(socket, &msg, sizeof(msg)) ;
@@ -105,6 +105,9 @@ int EnvoyerToken(pthread_mutex_t* jeton, int socket, struct sockaddr_in dest){
         perror("sendto() error: ");
         return -1;
     }
+    // A VERIFIER !!!!
+    pthread_mutex_lock(jeton);
+
     return nbSend;
 }
 
@@ -119,7 +122,7 @@ pthread_mutex_t initToken(struct sockaddr_in me, struct sockaddr_in pere) {
     return jeton;
 }
 
-int attendreToken(pthread_mutex_t* jeton) {
+void attendreToken(pthread_mutex_t* jeton) {
     pthread_mutex_lock(jeton);
 }
 
@@ -136,5 +139,5 @@ struct sockaddr_in getSockAddr(char ip[], int port) {
 time_t getTime() {
     time_t seconds;
     time(&seconds);
-    return seconds-1639476053;
+    return seconds-1639476053-616814;
 }
