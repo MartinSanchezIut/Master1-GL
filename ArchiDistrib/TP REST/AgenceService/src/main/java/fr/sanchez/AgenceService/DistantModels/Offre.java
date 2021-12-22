@@ -26,7 +26,7 @@ public class Offre {
 	}
 	@Override
 	public String toString() {
-		return "Offre dans l'hotel " + hotel.getName() + " a " + hotel.getVille() + ": " + chambre.getNom() + " " +prix ;
+		return "Offre dans l'hotel \'" + hotel.getName() + "\' a \'" + hotel.getVille() + "\': " + chambre.getNom() + " " +prix+"e" ;
 	}
 	
 	

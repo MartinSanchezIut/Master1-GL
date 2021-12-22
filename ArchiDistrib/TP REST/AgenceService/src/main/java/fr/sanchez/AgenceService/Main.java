@@ -9,7 +9,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import fr.sanchez.AgenceService.DistantModels.ClientD;
 import fr.sanchez.AgenceService.DistantModels.Offre;
+import fr.sanchez.AgenceService.DistantModels.ReservationD;
 import fr.sanchez.AgenceService.Model.Agence;
 import fr.sanchez.AgenceService.Model.Hotel;
 import fr.sanchez.AgenceService.Repositories.AgenceRepository;
@@ -29,7 +31,7 @@ public class Main {
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
     	makeData() ;
-    	
+       	
     	runCLI() ;
     }
     
@@ -88,12 +90,11 @@ public class Main {
 		// /agence/1/lookup/ville=Montpellier,etoiles=3,from=0-0-0,to=1000-0-0,priceMin=30,priceMax=50,beds=3
 		String url = "http://localhost:8081/agence/" + agence.getId() + "/lookup/ville="+ville + ",etoiles="+etoiles
 					 + ",from="+date + ",to="+date1 + ",priceMin="+prixMin + ",priceMax="+prixMax + ",beds="+lits;
-		System.out.println(url);
 		
 		Offre[] response = proxy.getForObject(url, Offre[].class);
 		//List<Offre> response = agence.rechercher(ville, date, date1, prixMin, prixMax, etoiles, lits);
 		for(int i = 0; i < response.length; i++) {
-			System.out.println(" - " + i + " " + response[i].toString());
+			System.out.println(" - " + i + " : " + response[i].toString());
 		}
 		if (response.length == 0) {
 			System.out.println("Rien trouve");
@@ -119,16 +120,20 @@ public class Main {
 			carte = sc.nextLine();
 		}while (carte.equals(""));
 		
-		/*System.out.println(response.get(idCham).getHotel().reserver(
-				agence.getNom(), 
-				agence.getMdp(),
-				response.get(idCham).getChambre(),
-				nom,
-				prenom,
-				carte,
-				date,
-				date1));*/
-		System.out.println("C'est réservé.");		
+		ClientD cli = new ClientD(nom, prenom, carte);
+
+		url = "http://localhost:8080/client";
+		ClientD creationClient = proxy.postForObject(url, cli, ClientD.class);
+
+		
+		
+		ReservationD resa = new ReservationD(response[idCham].getChambre().getId().intValue(),
+				creationClient.getId().intValue(), date, date1);
+				
+		url = "http://localhost:8080/reservation";
+		ReservationD creationResa = proxy.postForObject(url, resa, ReservationD.class);
+
+		System.out.println("C'est réservé. (" + creationResa.getId() + ")");		
 		sc.close();
 	}
     
