@@ -1,7 +1,14 @@
 package fr.sanchez.AgenceService;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
@@ -28,10 +35,12 @@ public class Main {
 	@Autowired
 	RestTemplate proxy;	
 	
+	String img_path = "src/main/resources/ImgDdl/" ;
+
     @EventListener
     public void appReady(ApplicationReadyEvent event) {
     	makeData() ;
-       	
+    	
     	runCLI() ;
     }
     
@@ -133,7 +142,25 @@ public class Main {
 		url = "http://localhost:8080/reservation";
 		ReservationD creationResa = proxy.postForObject(url, resa, ReservationD.class);
 
-		System.out.println("C'est réservé. (" + creationResa.getId() + ")");		
+		System.out.println("C'est réservé. (" + creationResa.getId() + ")");	
+		System.out.println("Telechargement de l'image ...");
+        	
+		try {
+			BufferedImage bi = ImageIO.read(response[idCham].getChambre().getImg());
+			ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	        ImageIO.write(bi, "jpg", bos);
+	        
+	        byte [] data = bos.toByteArray();
+	        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+	        BufferedImage bImage2 = ImageIO.read(bis);
+	        File file = new File(img_path+ response[idCham].getChambre().getNom() + "-output.jpg");
+	        if (file.exists()) { file.delete();}
+	        file.createNewFile() ;
+	        ImageIO.write(bImage2, "jpg", file );
+	        System.out.println("Image crée : " + file.getAbsolutePath());	        
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		sc.close();
 	}
     

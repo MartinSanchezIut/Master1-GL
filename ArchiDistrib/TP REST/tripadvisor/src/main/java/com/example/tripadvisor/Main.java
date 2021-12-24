@@ -1,6 +1,10 @@
 package com.example.tripadvisor;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -8,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -36,6 +42,8 @@ public class Main extends AbstractMain implements CommandLineRunner {
 	
 	private IntegerInputProcessor inputProcessor;
 	
+	String img_path = "src/main/resources/ImgDdl/" ;
+
 	
 	/* METHODS */
 	@Override
@@ -250,7 +258,26 @@ public class Main extends AbstractMain implements CommandLineRunner {
 					String url_creation_reservation = "http://localhost:8080/reservation";
 					ReservationD creationResa = proxy.postForObject(url_creation_reservation, resa, ReservationD.class);
 
-					System.out.println("C'est réservé. (" + creationResa.getId() + ")");		
+					System.out.println("C'est réservé. (" + creationResa.getId() + ")");	
+					
+					System.out.println("Telechargement de l'image ...");
+		        	
+					try {
+						BufferedImage bi = ImageIO.read(finalList.get(idCham).getChambre().getImg());
+						ByteArrayOutputStream bos = new ByteArrayOutputStream();
+				        ImageIO.write(bi, "jpg", bos);
+				        
+				        byte [] data = bos.toByteArray();
+				        ByteArrayInputStream bis = new ByteArrayInputStream(data);
+				        BufferedImage bImage2 = ImageIO.read(bis);
+				        File file = new File(img_path+ finalList.get(idCham).getChambre().getNom() + "-output.jpg");
+				        if (file.exists()) { file.delete();}
+				        file.createNewFile() ;
+				        ImageIO.write(bImage2, "jpg", file );
+				        System.out.println("Image crée : " + file.getAbsolutePath());	        
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					
 					break;
 				
